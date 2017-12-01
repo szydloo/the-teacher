@@ -1,0 +1,8 @@
+C:\Users\Maciej\Documents\repos\TheTeacher\TheTeacher.Core\bin\Debug\netcoreapp2.0\TheTeacher.Core.deps.json
+C:\Users\Maciej\Documents\repos\TheTeacher\TheTeacher.Core\bin\Debug\netcoreapp2.0\TheTeacher.Core.dll
+C:\Users\Maciej\Documents\repos\TheTeacher\TheTeacher.Core\bin\Debug\netcoreapp2.0\TheTeacher.Core.pdb
+C:\Users\Maciej\Documents\repos\TheTeacher\TheTeacher.Core\obj\Debug\netcoreapp2.0\TheTeacher.Core.csproj.CoreCompileInputs.cache
+C:\Users\Maciej\Documents\repos\TheTeacher\TheTeacher.Core\obj\Debug\netcoreapp2.0\TheTeacher.Core.AssemblyInfoInputs.cache
+C:\Users\Maciej\Documents\repos\TheTeacher\TheTeacher.Core\obj\Debug\netcoreapp2.0\TheTeacher.Core.AssemblyInfo.cs
+C:\Users\Maciej\Documents\repos\TheTeacher\TheTeacher.Core\obj\Debug\netcoreapp2.0\TheTeacher.Core.dll
+C:\Users\Maciej\Documents\repos\TheTeacher\TheTeacher.Core\obj\Debug\netcoreapp2.0\TheTeacher.Core.pdb
