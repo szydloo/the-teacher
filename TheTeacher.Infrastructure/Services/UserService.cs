@@ -13,6 +13,10 @@ namespace TheTeacher.Infrastructure.Services
         public IUserRepository _userRepository;
         public IMapper _mapper;
 
+        protected UserService()
+        {
+        }
+        
         public UserService(IMapper mapper, IUserRepository userRepository)
         {
             _mapper = mapper;
