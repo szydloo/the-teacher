@@ -9,7 +9,7 @@ namespace TheTeacher.Infrastructure.Repositories
     {
         Task<User> GetAsync(Guid userId);
         Task<User> GetAsync(string email);
-        Task<IEnumerable<User>> BrowseAllAsync();
+        Task<IEnumerable<User>> GetAllAsync();
         Task RemoveAsync(Guid userId);
         Task AddAsync(User user);
         Task UpdateAsync(User user);

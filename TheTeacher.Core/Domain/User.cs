@@ -10,18 +10,21 @@ namespace TheTeacher.Core.Domain
         public string Password { get; protected set; }
         public string Fullname { get; protected set; }
         public string Role { get; protected set; }
+        public DateTime UpdatedAt { get; protected set; }
         
         protected User()
         {
-
         }
-        public User(string username,string email, string password, string role, string fullname)
+        
+        public User(string email, string password, string username, string fullname, string role)
         {
+            UserId = Guid.NewGuid();
             SetName(username);
             SetEmail(email);
             SetPassword(password);
             SetFullname(fullname);
             Role = role;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         private void SetEmail(string email)
@@ -36,9 +39,11 @@ namespace TheTeacher.Core.Domain
             }
             else if( email.Length < 5 || !email.Contains("@"))
             {
-                throw new Exception("Invalid email format")
+                throw new Exception("Invalid email format");
             }
             Email = email;
+            UpdatedAt = DateTime.UtcNow;
+            
         }
 
         private void SetPassword(string password)
@@ -55,10 +60,8 @@ namespace TheTeacher.Core.Domain
             {
                 return;
             }
-            else 
-            {
-                Password = password;
-            }
+            Password = password;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         private void SetName(string name)
@@ -75,10 +78,9 @@ namespace TheTeacher.Core.Domain
             {
                 return;
             }
-            else 
-            {
-                Username = name;
-            }
+
+            Username = name;
+            UpdatedAt = DateTime.UtcNow;            
         }
 
         public void SetFullname(string fullname)
@@ -95,10 +97,9 @@ namespace TheTeacher.Core.Domain
             {
                 return;
             }
-            else 
-            {
-                Fullname = fullname;
-            }
+
+            Fullname = fullname;
+            UpdatedAt = DateTime.UtcNow;
         }
     }
 }

@@ -9,8 +9,9 @@ namespace TheTeacher.Infrastructure.Mapper
         public static IMapper Initialize()
             => new MapperConfiguration( cfg =>
             {
-                cfg.CreateMap<TeacherDTO,Teacher>(),
-
-            }).CreateMapper();
+                cfg.CreateMap<UserDTO,User>();                
+                cfg.CreateMap<TeacherDTO,User>();
+            })
+            .CreateMapper();
     }
 }

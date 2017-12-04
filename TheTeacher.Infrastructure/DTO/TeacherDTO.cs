@@ -6,9 +6,10 @@ namespace TheTeacher.Infrastructure.DTO
 {
     public class TeacherDTO
     {
-        public Guid UserID { get; protected set; }
-        public IEnumerable<Subject> Subjects { get; protected set; }
-        public string Adress { get; protected set; }
+        public Guid UserID { get; set; }
+        public IEnumerable<Subject> Subjects { get; set; }
+        public string Adress { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
     }
 }

@@ -16,7 +16,7 @@ namespace TheTeacher.Infrastructure.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task<IEnumerable<Teacher>> BrowseAllAsync()
+        public async Task<IEnumerable<Teacher>> GetAllAsync()
             => await Task.FromResult(_teachers);
 
         public async Task<Teacher> GetAsync(Guid userId)

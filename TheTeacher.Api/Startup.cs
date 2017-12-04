@@ -8,7 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TheTeacher.Infrastructure.Mapper;
 using TheTeacher.Infrastructure.Repositories;
+using TheTeacher.Infrastructure.Services;
 
 namespace TheTeacher.Api
 {
@@ -24,6 +26,9 @@ namespace TheTeacher.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, InMemoryUserRepository>();            
+            services.AddSingleton(AutoMapperConfig.Initialize());
             services.AddMvc();
         }
 
@@ -36,6 +41,7 @@ namespace TheTeacher.Api
             }
 
             app.UseMvc();
+
         }
     }
 }
