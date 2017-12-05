@@ -14,7 +14,6 @@ namespace TheTeacher.Infrastructure.IoC.Modules
 
             builder.RegisterAssemblyTypes(assembly)
                    .AsClosedTypesOf(typeof(ICommandHandler<>))
-                   .AsImplementedInterfaces()
                    .InstancePerLifetimeScope();
 
             builder.RegisterType<CommandDispatcher>()

@@ -34,14 +34,15 @@ namespace TheTeacher.Api
         {
             services.AddMvc()
                     .AddJsonOptions( jsonOpt => jsonOpt.SerializerSettings.Formatting = Formatting.Indented);
-            
+
+            // Autofac setup
             var builder = new ContainerBuilder();
             builder.Populate(services);
             builder.RegisterModule(new ContainerModule(Configuration));
 
-            var container = builder.Build();
+            ApplicationContainer = builder.Build();
 
-            return container.Resolve<IServiceProvider>();
+            return new AutofacServiceProvider(ApplicationContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

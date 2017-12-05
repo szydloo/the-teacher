@@ -1,5 +1,5 @@
-$Projects = @("TheTeacher.Tests", ".TheTeacher.Tests.EndToEnd")
+$Projects = @("TheTeacher.Tests", "TheTeacher.Tests.EndToEnd")
 foreach($Project in $Projects)
 {
-    dotnet test $Project.$Project.csproj
+    dotnet test $Project/$Project.csproj
 }

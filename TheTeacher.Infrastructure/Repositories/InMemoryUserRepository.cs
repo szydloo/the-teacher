@@ -8,7 +8,7 @@ namespace TheTeacher.Infrastructure.Repositories
 {
     public class InMemoryUserRepository : IUserRepository
     {
-        public static ISet<User> _users = new HashSet<User>
+        private static ISet<User> _users = new HashSet<User>
             {
                 new User("email@email.com","secret","username1","MarkRoberts","user"),
             };

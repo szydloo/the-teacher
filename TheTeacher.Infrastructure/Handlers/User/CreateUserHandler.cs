@@ -7,7 +7,7 @@ namespace TheTeacher.Infrastructure.Handlers.User
 {
     public class CreateUserHandler : ICommandHandler<CreateUser>
     {
-        IUserService _userService;
+        private readonly IUserService _userService;
 
         public CreateUserHandler(IUserService userService)
         {
