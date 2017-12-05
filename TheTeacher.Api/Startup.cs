@@ -37,10 +37,11 @@ namespace TheTeacher.Api
             
             var builder = new ContainerBuilder();
             builder.Populate(services);
-            builder.RegisterModule(new ContainerModule());
-            ApplicationContainer = builder.Build();
+            builder.RegisterModule(new ContainerModule(Configuration));
 
-            return new AutofacServiceProvider(ApplicationContainer);
+            var container = builder.Build();
+
+            return container.Resolve<IServiceProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

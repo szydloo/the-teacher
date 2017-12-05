@@ -15,11 +15,11 @@
           "lib/netstandard1.1/Autofac.dll": {}
         }
       },
-      "Autofac.Extensions.DependencyInjection/4.0.0": {
+      "Autofac.Extensions.DependencyInjection/4.2.0": {
         "type": "package",
         "dependencies": {
           "Autofac": "4.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
           "NETStandard.Library": "1.6.0"
         },
         "compile": {
@@ -4781,7 +4781,7 @@
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
           "Autofac": "4.6.2",
-          "Autofac.Extensions.DependencyInjection": "4.0.0",
+          "Autofac.Extensions.DependencyInjection": "4.2.0",
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.AspNetCore.Mvc": "2.0.0",
           "Microsoft.AspNetCore.Routing": "2.0.0",
@@ -4850,12 +4850,12 @@
         "lib/netstandard1.1/Autofac.xml"
       ]
     },
-    "Autofac.Extensions.DependencyInjection/4.0.0": {
-      "sha512": "UQP+CkHs6wfjWhisuhSFoG8CNrG8fmYOclFwx/aYNc+He1Qoi8s9UDTSzcPncJ2JOtmZmFRWSLT0jhtT6KmYJg==",
+    "Autofac.Extensions.DependencyInjection/4.2.0": {
+      "sha512": "cqBmgg9y7ahGbt7CPdvZFL6bA0PEwFyhIofUoUxEteZc+d0yNnE6ZvIWxHEM2F2HPJlC9SRnHWiZQq8r53moAw==",
       "type": "package",
-      "path": "autofac.extensions.dependencyinjection/4.0.0",
+      "path": "autofac.extensions.dependencyinjection/4.2.0",
       "files": [
-        "autofac.extensions.dependencyinjection.4.0.0.nupkg.sha512",
+        "autofac.extensions.dependencyinjection.4.2.0.nupkg.sha512",
         "autofac.extensions.dependencyinjection.nuspec",
         "lib/netstandard1.1/Autofac.Extensions.DependencyInjection.dll",
         "lib/netstandard1.1/Autofac.Extensions.DependencyInjection.xml"

@@ -8,7 +8,7 @@ namespace TheTeacher.Infrastructure.IoC.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            var assembly = typeof(ContainerBuilder).GetTypeInfo().Assembly;
+            var assembly = typeof(RepositoryModule).GetTypeInfo().Assembly;
 
             builder.RegisterAssemblyTypes(assembly)
                    .Where(x => x.IsAssignableTo<IRepository>())

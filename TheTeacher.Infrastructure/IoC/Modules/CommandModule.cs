@@ -8,7 +8,9 @@ namespace TheTeacher.Infrastructure.IoC.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            var assembly = typeof(ContainerBuilder).GetTypeInfo().Assembly;
+            var assembly = typeof(CommandModule)
+                .GetTypeInfo()
+                .Assembly;
 
             builder.RegisterAssemblyTypes(assembly)
                    .AsClosedTypesOf(typeof(ICommandHandler<>))

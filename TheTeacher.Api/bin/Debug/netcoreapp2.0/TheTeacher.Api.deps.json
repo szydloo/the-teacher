@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "6a4be23eb67794fe591c2dfdcd92c81a10ffe656"
+    "signature": "c400bfb154e08f6fbb3db5d13cc50d6e717baab7"
   },
   "compilationOptions": {
     "defines": [
@@ -24,7 +24,7 @@
       "TheTeacher.Api/1.0.0": {
         "dependencies": {
           "Autofac": "4.6.2",
-          "Autofac.Extensions.DependencyInjection": "4.0.0",
+          "Autofac.Extensions.DependencyInjection": "4.2.0",
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.AspNetCore.Mvc": "2.0.0",
           "Microsoft.AspNetCore.Routing": "2.0.0",
@@ -63,7 +63,7 @@
           "lib/netstandard1.1/Autofac.dll": {}
         }
       },
-      "Autofac.Extensions.DependencyInjection/4.0.0": {
+      "Autofac.Extensions.DependencyInjection/4.2.0": {
         "dependencies": {
           "Autofac": "4.6.2",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0",
@@ -4051,12 +4051,12 @@
       "path": "autofac/4.6.2",
       "hashPath": "autofac.4.6.2.nupkg.sha512"
     },
-    "Autofac.Extensions.DependencyInjection/4.0.0": {
+    "Autofac.Extensions.DependencyInjection/4.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-UQP+CkHs6wfjWhisuhSFoG8CNrG8fmYOclFwx/aYNc+He1Qoi8s9UDTSzcPncJ2JOtmZmFRWSLT0jhtT6KmYJg==",
-      "path": "autofac.extensions.dependencyinjection/4.0.0",
-      "hashPath": "autofac.extensions.dependencyinjection.4.0.0.nupkg.sha512"
+      "sha512": "sha512-cqBmgg9y7ahGbt7CPdvZFL6bA0PEwFyhIofUoUxEteZc+d0yNnE6ZvIWxHEM2F2HPJlC9SRnHWiZQq8r53moAw==",
+      "path": "autofac.extensions.dependencyinjection/4.2.0",
+      "hashPath": "autofac.extensions.dependencyinjection.4.2.0.nupkg.sha512"
     },
     "AutoMapper/6.2.1": {
       "type": "package",
