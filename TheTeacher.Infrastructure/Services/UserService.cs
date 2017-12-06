@@ -5,6 +5,7 @@ using AutoMapper;
 using TheTeacher.Core.Domain;
 using TheTeacher.Infrastructure.DTO;
 using TheTeacher.Infrastructure.Repositories;
+using TheTeacher.Infrastructure.Settings;
 
 namespace TheTeacher.Infrastructure.Services
 {
@@ -17,11 +18,10 @@ namespace TheTeacher.Infrastructure.Services
         {
         }
         
-        public UserService(IMapper mapper, IUserRepository userRepository)
+        public UserService(IMapper mapper, IUserRepository userRepository )
         {
             _mapper = mapper;
             _userRepository = userRepository;
-            
         }
         public async Task<UserDTO> GetAsync(string email)
         {

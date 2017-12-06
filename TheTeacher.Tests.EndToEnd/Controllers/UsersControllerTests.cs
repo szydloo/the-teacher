@@ -62,8 +62,25 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             Func<Task> act = Client.Awaiting( async x => await x.PostAsync("users", payload));
             act.ShouldThrow<Exception>().And
                 .Message.Contains("Invalid email format");
+        }
 
+        [Test]
+        public void registering_user_with_already_existing_email_should_throw_exception()
+        {
+            var command = new CreateUser
+            {
+                Email = "email@email.com",
+                Username = "username",
+                Password = "secret",
+                Fullname = "Full Name",
+                Role = "user"
+            };
             
+            var payload = GetPayload(command);
+            Func<Task> act = Client.Awaiting( async x => await x.PostAsync("users", payload));
+            act.ShouldThrow<Exception>().And
+                .Message.Contains($"User with this email: {command.Email}");
+
         }
 
         [Test]
@@ -73,7 +90,6 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             var response = await Client.GetAsync($"users/{email}");
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NotFound);
-            
         }
 
         public async Task<UserDTO> GetUserAsync(string email)

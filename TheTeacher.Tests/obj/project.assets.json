@@ -5362,6 +5362,7 @@
           "AutoMapper": "6.2.1",
           "Autofac": "4.6.2",
           "Microsoft.Extensions.Configuration": "2.0.0",
+          "Microsoft.Extensions.Configuration.Binder": "2.0.0",
           "TheTeacher.Core": "1.0.0"
         },
         "compile": {

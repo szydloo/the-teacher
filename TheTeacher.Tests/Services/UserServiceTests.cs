@@ -9,6 +9,7 @@ using TheTeacher.Infrastructure.Repositories;
 using TheTeacher.Infrastructure.Services;
 using System.Collections.Generic;
 using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Settings;
 
 namespace TheTeacher.Tests.Services
 {
@@ -24,9 +25,6 @@ namespace TheTeacher.Tests.Services
         {
             userRepositoryMock = new Mock<IUserRepository>();
             mapperMock = new Mock<IMapper>();
-
-            userService = new UserService(mapperMock.Object, userRepositoryMock.Object);
-            
         }
 
         [Test]

@@ -14,6 +14,7 @@ namespace TheTeacher.Infrastructure.IoC
         }
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterModule(new SettingsModule(_configuration));
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<ServiceModule>();
             builder.RegisterModule<CommandModule>();

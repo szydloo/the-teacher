@@ -41,6 +41,7 @@ namespace TheTeacher.Core.Domain
             {
                 throw new Exception("Invalid email format");
             }
+
             Email = email;
             UpdatedAt = DateTime.UtcNow;
             
@@ -60,6 +61,7 @@ namespace TheTeacher.Core.Domain
             {
                 return;
             }
+            
             Password = password;
             UpdatedAt = DateTime.UtcNow;
         }

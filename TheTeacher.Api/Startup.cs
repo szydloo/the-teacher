@@ -15,6 +15,8 @@ using TheTeacher.Infrastructure.Mapper;
 using TheTeacher.Infrastructure.Repositories;
 using TheTeacher.Infrastructure.Services;
 using TheTeacher.Infrastructure.IoC;
+using TheTeacher.Infrastructure.Settings;
+using TheTeacher.Infrastructure.Extensions;
 
 namespace TheTeacher.Api
 {
@@ -39,6 +41,7 @@ namespace TheTeacher.Api
             var builder = new ContainerBuilder();
             builder.Populate(services);
             builder.RegisterModule(new ContainerModule(Configuration));
+            builder.RegisterInstance(Configuration.GetSettings<GeneralSettings>());
 
             ApplicationContainer = builder.Build();
 

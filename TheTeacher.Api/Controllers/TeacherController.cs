@@ -5,7 +5,7 @@ namespace TheTeacher.Api.Controllers
 {
     public class TeacherController : ApiControllerBase
     {
-        ITeacherService _teacherService;
+        // ITeacherService _teacherService;
         protected TeacherController(ICommandDispatcher commandDispatcher) : base(commandDispatcher)
         {
 
