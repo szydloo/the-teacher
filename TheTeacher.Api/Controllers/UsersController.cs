@@ -41,5 +41,28 @@ namespace TheTeacher.Api.Controllers
 
             return Created($"/users/{command.Email}", null);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody]ChangeUserPassword command)
+        {
+            await DispatchAsync(command);
+
+            return NoContent(); // HTTP specification
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody]ChangeUserUsername command)
+        {
+            await DispatchAsync(command);
+
+            return NoContent(); // HTTP specification
+        }
+
+        [HttpDelete("me")] // TODO authorization
+        public async Task<IActionResult> Delete([FromBody]DeleteUser command)
+        {
+            await DispatchAsync(command);
+            return NoContent();
+        }
     }
 }       

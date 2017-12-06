@@ -34,9 +34,16 @@ namespace TheTeacher.Infrastructure.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task UpdateAsync(User user)
+        public async Task UpdateAsync(Guid userId, string currentPassword, string newPassword)
         {
-            await Task.CompletedTask;
+            var user = await GetAsync(userId);
+            // TODO
+        }
+
+        public async Task UpdateAsync(Guid userId, string newUsername)
+        {
+            var user = await GetAsync(userId);
+            // TODOu
         }
 
     }
