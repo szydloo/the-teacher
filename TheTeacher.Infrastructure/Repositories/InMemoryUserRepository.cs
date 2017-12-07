@@ -10,7 +10,7 @@ namespace TheTeacher.Infrastructure.Repositories
     {
         private static ISet<User> _users = new HashSet<User>
             {
-                new User("email@email.com","secret","username1","MarkRoberts","user"),
+                new User("email@email.com","secret","salt","username1","MarkRoberts","user"),
             };
         
         public async Task<IEnumerable<User>> GetAllAsync()

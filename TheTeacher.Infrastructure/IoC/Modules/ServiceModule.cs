@@ -17,6 +17,9 @@ namespace TheTeacher.Infrastructure.IoC.Modules
                    .AsImplementedInterfaces()
                    .InstancePerLifetimeScope();
 
+            builder.RegisterType<Encrypter>()
+                    .As<IEncrypter>()
+                    .SingleInstance();
                    
         }
     }

@@ -16,6 +16,8 @@ namespace TheTeacher.Infrastructure.IoC.Modules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterInstance(_configuration.GetSettings<GeneralSettings>());
+            builder.RegisterInstance(_configuration.GetSettings<JwtSettings>());
+            
         }
     }
 }

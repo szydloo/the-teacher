@@ -9,6 +9,7 @@ namespace TheTeacher.Infrastructure.Services
     {
         Task<UserDTO> GetAsync(string email);
         Task RegisterAsync(string email, string password, string username, string fullname, string role);        
+        Task LoginAsync(string email, string password);
         Task<IEnumerable<UserDTO>> BrowseAsync();        
         Task DeleteAsync(Guid userId);
         Task ChangeUsernameAsync(Guid userId, string newUsername);

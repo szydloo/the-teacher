@@ -10,6 +10,7 @@ using TheTeacher.Infrastructure.Services;
 using System.Collections.Generic;
 using TheTeacher.Infrastructure.DTO;
 using TheTeacher.Infrastructure.Settings;
+using System;
 
 namespace TheTeacher.Tests.Services
 {
@@ -18,6 +19,7 @@ namespace TheTeacher.Tests.Services
     {
         Mock<IMapper> mapperMock;
         Mock<IUserRepository> userRepositoryMock;
+        Encrypter encrypter;
         IUserService userService;
 
         [SetUp]
@@ -25,6 +27,9 @@ namespace TheTeacher.Tests.Services
         {
             userRepositoryMock = new Mock<IUserRepository>();
             mapperMock = new Mock<IMapper>();
+            encrypter = new Encrypter();
+
+            userService = new UserService(mapperMock.Object, userRepositoryMock.Object, encrypter);
         }
 
         [Test]

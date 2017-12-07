@@ -34,6 +34,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
                 Fullname = "Markitto Robertto",
                 Role = "user"
             };
+            
             var payload = GetPayload(command);
             var response = await Client.PostAsync($"users",payload);
 
@@ -92,6 +93,31 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NotFound);
         }
 
+        [Test]
+        public async Task changing_existing_user_password_should_return_no_content()
+        {
+            var user = await GetUserAsync("email@email.com");
+            var newPassword = "secret420";
+            var command = new ChangeUserPassword
+            {
+                UserId = user.UserId,
+                CurrentPassword = user.Password,
+                NewPassword = newPassword
+            };
+            var payload = GetPayload(command);
+            var response = await Client.PutAsync($"users/{command.UserId}/password", payload);
+
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
+        }
+
+        [Test]
+        public async Task deleteing_user_should_return_no_content()
+        {
+            var response = await Client.DeleteAsync("users/me");
+
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
+
+        }
         public async Task<UserDTO> GetUserAsync(string email)
         {
             var response = await Client.GetAsync($"users/{email}");

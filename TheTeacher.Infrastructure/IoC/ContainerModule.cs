@@ -2,6 +2,7 @@ using Autofac;
 using Microsoft.Extensions.Configuration;
 using TheTeacher.Infrastructure.IoC.Modules;
 using TheTeacher.Infrastructure.Mapper;
+using TheTeacher.Infrastructure.Services;
 
 namespace TheTeacher.Infrastructure.IoC
 {
@@ -19,6 +20,7 @@ namespace TheTeacher.Infrastructure.IoC
             builder.RegisterModule<ServiceModule>();
             builder.RegisterModule<CommandModule>();
             builder.RegisterInstance(AutoMapperConfig.Initialize()).SingleInstance();
+
         }
     }
 }

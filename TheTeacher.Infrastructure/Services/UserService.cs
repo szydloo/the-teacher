@@ -11,16 +11,17 @@ namespace TheTeacher.Infrastructure.Services
 {
     public class UserService : IUserService
     {
-        public IUserRepository _userRepository;
-        public IMapper _mapper;
-
+        private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
+        private readonly IEncrypter _encrypter;
         protected UserService()
         {
         }
         
-        public UserService(IMapper mapper, IUserRepository userRepository )
+        public UserService(IMapper mapper, IEncrypter encrypter, IUserRepository userRepository)
         {
             _mapper = mapper;
+            _encrypter = encrypter;
             _userRepository = userRepository;
         }
 
@@ -30,6 +31,21 @@ namespace TheTeacher.Infrastructure.Services
             return _mapper.Map<UserDTO>(user);
         }
 
+        public async Task LoginAsync(string email, string password)
+        {
+            var user = await _userRepository.GetAsync(email);
+            if(user == null)
+            {
+                throw new Exception($"Invalid credentials.");
+            }
+            var salt = user.Salt;
+            var logingHash = _encrypter.GetHash(password, salt);
+            if(user.Password != logingHash)
+            {
+                throw new Exception($"Invalid credentials.");
+            }
+        }
+
         public async Task RegisterAsync(string email, string password, string username, string fullname, string role) // TODO Password encryption
         {
             var user = await _userRepository.GetAsync(email);
@@ -37,7 +53,13 @@ namespace TheTeacher.Infrastructure.Services
             {
                 throw new Exception($"User with this email: '{email}' already exists");
             }
-            await _userRepository.AddAsync(new User(email, password, username, fullname, role));
+            if (password.Length < 6 )
+            {
+                throw new Exception("Password has to have at least 6 characters.");
+            }
+            string salt = _encrypter.GetSalt();
+            string hash = _encrypter.GetHash(password, salt);
+            await _userRepository.AddAsync(new User(email, hash, salt, username, fullname, role));
         }
 
         public async Task<IEnumerable<UserDTO>> BrowseAsync()
@@ -55,7 +77,7 @@ namespace TheTeacher.Infrastructure.Services
         public async Task ChangePasswordAsync(Guid userId, string currentPassword, string newPassword)
         {
             var user = await _userRepository.GetAsync(userId);
-            
+
             if(user == null)
             {
                 throw new Exception("User does not exist.");
@@ -69,7 +91,7 @@ namespace TheTeacher.Infrastructure.Services
                 throw new Exception("New password must be different fro old one.");
             }
 
-            await _userRepository.UpdateAsync(userId,currentPassword,newPassword);
+            await _userRepository.UpdateAsync(userId, currentPassword, newPassword);
         }
 
         public async Task ChangeUsernameAsync(Guid userId, string newUsername)

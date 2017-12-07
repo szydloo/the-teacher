@@ -43,6 +43,7 @@ namespace TheTeacher.Api.Controllers
         }
 
         [HttpPut]
+        [Route("{ChangeUserUsername.UserId}/password")] // TODO might want to change
         public async Task<IActionResult> Put([FromBody]ChangeUserPassword command)
         {
             await DispatchAsync(command);
@@ -51,6 +52,7 @@ namespace TheTeacher.Api.Controllers
         }
 
         [HttpPut]
+        [Route("{ChangeUserUsername.UserId}/username")] // TODO might want to change
         public async Task<IActionResult> Put([FromBody]ChangeUserUsername command)
         {
             await DispatchAsync(command);
@@ -59,9 +61,10 @@ namespace TheTeacher.Api.Controllers
         }
 
         [HttpDelete("me")] // TODO authorization
-        public async Task<IActionResult> Delete([FromBody]DeleteUser command)
+        public async Task<IActionResult> Delete()
         {
-            await DispatchAsync(command);
+            await DispatchAsync(new DeleteUser());
+            
             return NoContent();
         }
     }

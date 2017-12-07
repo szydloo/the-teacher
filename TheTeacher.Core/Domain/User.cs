@@ -8,15 +8,17 @@ namespace TheTeacher.Core.Domain
         public string Email { get; protected set; }
         public string Username { get; protected set; }
         public string Password { get; protected set; }
+        public string Salt { get; protected set; }
         public string Fullname { get; protected set; }
         public string Role { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
+        public DateTime CreatedAt { get; protected set; }
         
         protected User()
         {
         }
         
-        public User(string email, string password, string username, string fullname, string role)
+        public User(string email, string password, string salt, string username, string fullname, string role)
         {
             UserId = Guid.NewGuid();
             SetName(username);
@@ -25,6 +27,7 @@ namespace TheTeacher.Core.Domain
             SetFullname(fullname);
             Role = role;
             UpdatedAt = DateTime.UtcNow;
+            CreatedAt = DateTime.UtcNow;
         }
 
         private void SetEmail(string email)
@@ -52,10 +55,6 @@ namespace TheTeacher.Core.Domain
             if( String.IsNullOrWhiteSpace(password))
             {
                 throw new Exception("Password cannot be empty.");
-            }
-            else if (password.Length < 6 )
-            {
-                throw new Exception("Password has to have at least 6 characters.");
             }
             else if( password == Password)
             {
