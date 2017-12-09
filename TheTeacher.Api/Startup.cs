@@ -20,21 +20,21 @@ using TheTeacher.Infrastructure.Services;
 using TheTeacher.Infrastructure.IoC;
 using TheTeacher.Infrastructure.Settings;
 using TheTeacher.Infrastructure.Extensions;
-
+using System.Text;
 
 namespace TheTeacher.Api
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        
         public IContainer ApplicationContainer { get; private set; }
-        // public JwtSettings JwtSettings { get; set; }
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public JwtSettings JwtSettings { get; private set; }
+        
+        public Startup(IConfiguration configuration, IHostingEnvironment env, JwtSettings jwtSettings)
         
         {
             Configuration = configuration;
-            // JwtSettings = jwtSettings;
+            JwtSettings = jwtSettings;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -43,15 +43,16 @@ namespace TheTeacher.Api
             services.AddMvc()
                     .AddJsonOptions( jsonOpt => jsonOpt.SerializerSettings.Formatting = Formatting.Indented);
             
-            // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //         .AddJwtBearer( opt =>
-            //         {
-                        
-            //             opt.TokenValidationParameters = new TokenValidationParameters
-            //             {
-            //                 ValidIssuer = JwtSettings.Issuer
-            //             };
-            //         });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer( opt =>
+                    {
+                        opt.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidIssuer = JwtSettings.Issuer,
+                            ValidateAudience = false,
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings.Key))
+                        };
+                    });
 
             // Autofac setup
             var builder = new ContainerBuilder();

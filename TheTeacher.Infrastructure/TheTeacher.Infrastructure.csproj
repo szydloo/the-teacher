@@ -3,12 +3,13 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TheTeacher.Core\TheTeacher.Core.csproj"/>
+    <ProjectReference Include="..\TheTeacher.Core\TheTeacher.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="6.2.1"/>
-    <PackageReference Include="Autofac" Version="4.6.2"/>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.0"/>
+    <PackageReference Include="AutoMapper" Version="6.2.1" />
+    <PackageReference Include="Autofac" Version="4.6.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.1.5" />
   </ItemGroup>
 </Project>

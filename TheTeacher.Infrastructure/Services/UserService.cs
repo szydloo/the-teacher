@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using TheTeacher.Core.Domain;
 using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Extensions;
 using TheTeacher.Infrastructure.Repositories;
 using TheTeacher.Infrastructure.Settings;
 
@@ -76,13 +77,9 @@ namespace TheTeacher.Infrastructure.Services
 
         public async Task ChangePasswordAsync(Guid userId, string currentPassword, string newPassword)
         {
-            var user = await _userRepository.GetAsync(userId);
+            var user = await _userRepository.GetOrFailAsync(userId);
 
-            if(user == null)
-            {
-                throw new Exception("User does not exist.");
-            }
-            else if(currentPassword != user.Password)
+            if(currentPassword != user.Password)
             {
                 throw new Exception("Invalid data please try again.");
             }
@@ -96,11 +93,7 @@ namespace TheTeacher.Infrastructure.Services
 
         public async Task ChangeUsernameAsync(Guid userId, string newUsername)
         {
-            var user = await _userRepository.GetAsync(userId);
-            if(user == null)
-            {
-                throw new Exception("User does not exist.");
-            }
+            var user = await _userRepository.GetOrFailAsync(userId);
             await _userRepository.UpdateAsync(userId,newUsername);
         }
     }

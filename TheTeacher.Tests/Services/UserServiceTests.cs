@@ -29,7 +29,7 @@ namespace TheTeacher.Tests.Services
             mapperMock = new Mock<IMapper>();
             encrypter = new Encrypter();
 
-            userService = new UserService(mapperMock.Object, userRepositoryMock.Object, encrypter);
+            userService = new UserService(mapperMock.Object, encrypter, userRepositoryMock.Object);
         }
 
         [Test]

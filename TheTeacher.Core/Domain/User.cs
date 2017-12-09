@@ -1,4 +1,5 @@
 using System;
+using System.Net.Mail;
 
 namespace TheTeacher.Core.Domain
 {
@@ -30,24 +31,28 @@ namespace TheTeacher.Core.Domain
             CreatedAt = DateTime.UtcNow;
         }
 
+        public bool IsValid(string email)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(email);
+
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+
         private void SetEmail(string email)
         {
-            if(String.IsNullOrWhiteSpace(email))
+            if(IsValid(email))
             {
-                throw new Exception("Email cannot be empty");
+                Email = email;
+                UpdatedAt = DateTime.UtcNow;
             }
-            else if (email == Email)
-            {
-                return;
-            }
-            else if( email.Length < 5 || !email.Contains("@"))
-            {
-                throw new Exception("Invalid email format");
-            }
-
-            Email = email;
-            UpdatedAt = DateTime.UtcNow;
-            
+            else throw new Exception("Invalid email adress.");
         }
 
         private void SetPassword(string password)
