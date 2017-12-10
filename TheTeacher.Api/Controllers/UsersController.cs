@@ -18,17 +18,7 @@ namespace TheTeacher.Api.Controllers
             _userService = userService;
             _jwtHandler = jwtHandler;
         }
-
-        [HttpGet]
-        [Route("token/{email}")]
-        public async Task<IActionResult> GetAuth(string email)
-        {
-            var user = await _userService.GetAsync(email);
-            var jwt = _jwtHandler.CreateToken(email, user.Role);
-
-            return Json(jwt);
-        }
-
+        
         [HttpGet]
         public async Task<IActionResult> Get()
         {

@@ -26,6 +26,7 @@ namespace TheTeacher.Core.Domain
             SetEmail(email);
             SetPassword(password);
             SetFullname(fullname);
+            Salt = salt;
             Role = role;
             UpdatedAt = DateTime.UtcNow;
             CreatedAt = DateTime.UtcNow;

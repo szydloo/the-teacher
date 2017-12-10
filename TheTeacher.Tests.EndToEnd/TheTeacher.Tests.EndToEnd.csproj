@@ -3,7 +3,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="C:/Users/Maciej/Documents/repos/TheTeacher/TheTeacher.Tests.EndToEnd/appsettings.json" CopyToOutputDirectory="PreserveNewest"/>
+    <Content Include="appsettings.Development.json" CopyToOutputDirectory="PreserveNewest"/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TheTeacher.Api\TheTeacher.Api.csproj"/>

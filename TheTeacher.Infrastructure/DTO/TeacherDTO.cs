@@ -9,7 +9,6 @@ namespace TheTeacher.Infrastructure.DTO
         public Guid UserID { get; set; }
         public IEnumerable<Subject> Subjects { get; set; }
         public string Adress { get; set; }
-        public DateTime UpdatedAt { get; set; }
 
     }
 }

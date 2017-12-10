@@ -42,7 +42,8 @@ namespace TheTeacher.Api
             
             services.AddMvc()
                     .AddJsonOptions( jsonOpt => jsonOpt.SerializerSettings.Formatting = Formatting.Indented);
-            
+            services.AddMemoryCache();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer( opt =>
                     {
@@ -72,9 +73,17 @@ namespace TheTeacher.Api
 
             app.UseAuthentication();
             JwtSettings = app.ApplicationServices.GetService<JwtSettings>();
+            var generalSettings  = app.ApplicationServices.GetService<GeneralSettings>();
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            
+            if(generalSettings.SeedData)
+            {
+                var dataInitializer = app.ApplicationServices.GetService<IDataInitializer>();
+                dataInitializer.SeedAsync();
             }
 
             app.UseMvc();

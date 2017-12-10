@@ -8,10 +8,7 @@ namespace TheTeacher.Infrastructure.Repositories
 {
     public class InMemoryUserRepository : IUserRepository
     {
-        private static ISet<User> _users = new HashSet<User>
-            {
-                new User("email@email.com","secret","salt","username1","MarkRoberts","user"),
-            };
+        private static ISet<User> _users = new HashSet<User>();
         
         public async Task<IEnumerable<User>> GetAllAsync()
             => await Task.FromResult(_users);
