@@ -1,4 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="C:/Users/Maciej/Documents/repos/TheTeacher/TheTeacher.Tests.EndToEnd/appsettings.json" CopyToOutputDirectory="PreserveNewest"/>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TheTeacher.Api\TheTeacher.Api.csproj"/>
     <ProjectReference Include="..\TheTeacher.Infrastructure\TheTeacher.Infrastructure.csproj"/>
@@ -13,8 +19,6 @@
     <PackageReference Include="NUnit.Runners" Version="3.7.0"/>
     <PackageReference Include="NUnit3TestAdapter" Version="3.9.0"/>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3"/>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
   </ItemGroup>
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-  </PropertyGroup>
 </Project>

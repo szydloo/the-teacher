@@ -12,10 +12,16 @@ namespace TheTeacher.Infrastructure.Services
     public class JwtHandler : IJwtHandler
     {
         private readonly JwtSettings _jwtSettings;
+
         public JwtHandler(JwtSettings jwtSettings)
         {
             _jwtSettings = jwtSettings;
         }
+
+        protected JwtHandler()
+        {
+        }
+
         public JwtDTO CreateToken(string email, string role)
         {
             var now = DateTime.UtcNow;

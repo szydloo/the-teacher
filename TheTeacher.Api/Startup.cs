@@ -30,16 +30,16 @@ namespace TheTeacher.Api
         public IContainer ApplicationContainer { get; private set; }
         public JwtSettings JwtSettings { get; private set; }
         
-        public Startup(IConfiguration configuration, IHostingEnvironment env, JwtSettings jwtSettings)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         
         {
             Configuration = configuration;
-            JwtSettings = jwtSettings;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            
             services.AddMvc()
                     .AddJsonOptions( jsonOpt => jsonOpt.SerializerSettings.Formatting = Formatting.Indented);
             
@@ -71,7 +71,7 @@ namespace TheTeacher.Api
             loggerFactory.AddDebug();
 
             app.UseAuthentication();
-
+            JwtSettings = app.ApplicationServices.GetService<JwtSettings>();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

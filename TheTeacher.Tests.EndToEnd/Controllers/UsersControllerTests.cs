@@ -90,7 +90,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             var email = "emailRandom@gmail.com";
             var response = await Client.GetAsync($"users/{email}");
 
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NotFound);
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Unauthorized);
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             var payload = GetPayload(command);
             var response = await Client.PutAsync($"users/{command.UserId}/password", payload);
 
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Unauthorized);
         }
 
         [Test]
@@ -115,7 +115,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
         {
             var response = await Client.DeleteAsync("users/me");
 
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Unauthorized);
 
         }
         public async Task<UserDTO> GetUserAsync(string email)

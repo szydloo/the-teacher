@@ -15,6 +15,7 @@ namespace TheTeacher.Infrastructure.Services
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly IEncrypter _encrypter;
+
         protected UserService()
         {
         }
@@ -47,7 +48,7 @@ namespace TheTeacher.Infrastructure.Services
             }
         }
 
-        public async Task RegisterAsync(string email, string password, string username, string fullname, string role) // TODO Password encryption
+        public async Task RegisterAsync(string email, string password, string username, string fullname, string role)
         {
             var user = await _userRepository.GetAsync(email);
             if(user != null)
@@ -94,7 +95,7 @@ namespace TheTeacher.Infrastructure.Services
         public async Task ChangeUsernameAsync(Guid userId, string newUsername)
         {
             var user = await _userRepository.GetOrFailAsync(userId);
-            await _userRepository.UpdateAsync(userId,newUsername);
+            await _userRepository.UpdateAsync(userId, newUsername);
         }
     }
 }

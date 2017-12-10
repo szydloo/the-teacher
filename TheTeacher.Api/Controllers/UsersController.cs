@@ -5,15 +5,28 @@ using TheTeacher.Infrastructure.Commands.User;
 using TheTeacher.Infrastructure.DTO;
 using TheTeacher.Infrastructure.Services;
 using TheTeacher.Infrastructure.Commands;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TheTeacher.Api.Controllers
 {
     public class UsersController : ApiControllerBase
     {
         private readonly IUserService _userService;
-        public UsersController(IUserService userService, ICommandDispatcher commandDispatcher) : base(commandDispatcher)
+        private readonly IJwtHandler _jwtHandler;
+        public UsersController(IUserService userService, ICommandDispatcher commandDispatcher, IJwtHandler jwtHandler) : base(commandDispatcher)
         {
             _userService = userService;
+            _jwtHandler = jwtHandler;
+        }
+
+        [HttpGet]
+        [Route("token/{email}")]
+        public async Task<IActionResult> GetAuth(string email)
+        {
+            var user = await _userService.GetAsync(email);
+            var jwt = _jwtHandler.CreateToken(email, user.Role);
+
+            return Json(jwt);
         }
 
         [HttpGet]
@@ -22,7 +35,8 @@ namespace TheTeacher.Api.Controllers
             var users = await _userService.BrowseAsync();
             return Json(users);
         }
-
+        
+        [Authorize]
         [HttpGet("{email}")]
         public async Task<IActionResult> Get(string email)
         {
@@ -42,8 +56,9 @@ namespace TheTeacher.Api.Controllers
             return Created($"/users/{command.Email}", null);
         }
 
+        [Authorize]
         [HttpPut]
-        [Route("{ChangeUserUsername.UserId}/password")] // TODO might want to change
+        [Route("password")] // TODO might want to change
         public async Task<IActionResult> Put([FromBody]ChangeUserPassword command)
         {
             await DispatchAsync(command);
@@ -51,8 +66,9 @@ namespace TheTeacher.Api.Controllers
             return NoContent(); // HTTP specification
         }
 
+        [Authorize]
         [HttpPut]
-        [Route("{ChangeUserUsername.UserId}/username")] // TODO might want to change
+        [Route("username")] // TODO might want to change
         public async Task<IActionResult> Put([FromBody]ChangeUserUsername command)
         {
             await DispatchAsync(command);
@@ -60,6 +76,7 @@ namespace TheTeacher.Api.Controllers
             return NoContent(); // HTTP specification
         }
 
+        [Authorize]
         [HttpDelete("me")] // TODO authorization
         public async Task<IActionResult> Delete()
         {
