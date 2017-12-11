@@ -16,5 +16,15 @@ namespace TheTeacher.Infrastructure.Extensions
             }
             return user;
         }
+
+        public static async Task<Teacher> GetOrFailAsync(this ITeacherRepository teacherRepository, Guid userId)
+        {
+            var teacher = await teacherRepository.GetAsync(userId);
+            if(teacher == null)
+            {
+                throw new Exception($"Teacher with id '{userId}' does not exist.");
+            }
+            return teacher;
+        }
     }
 }

@@ -13,8 +13,6 @@ namespace TheTeacher.Infrastructure.Handlers.User
         private readonly IJwtHandler _jwtHandler;
         private readonly IMemoryCache _cache;
 
-        public IMemoryCache Cache => _cache;
-
         public LoginUserHandler(IUserService userService, IJwtHandler jwtHandler, IMemoryCache cache)
         {
             _userService = userService;
@@ -25,7 +23,7 @@ namespace TheTeacher.Infrastructure.Handlers.User
         {
             await _userService.LoginAsync(command.Email, command.Password);
             var user = await _userService.GetAsync(command.Email);
-            var jwt = _jwtHandler.CreateToken(command.Email, user.Role);
+            var jwt = _jwtHandler.CreateToken(user.UserId, user.Role);
             _cache.SetJwt(command.TokenId, jwt);
         }
     }

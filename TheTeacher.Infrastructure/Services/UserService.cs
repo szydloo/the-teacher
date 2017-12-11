@@ -86,7 +86,7 @@ namespace TheTeacher.Infrastructure.Services
             }
             else if(user.Password == newPassword)
             {
-                throw new Exception("New password must be different fro old one.");
+                throw new Exception("New password must be different from the old one.");
             }
 
             await _userRepository.UpdateAsync(userId, currentPassword, newPassword);

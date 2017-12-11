@@ -1,10 +1,11 @@
+using System;
 using TheTeacher.Infrastructure.DTO;
 
 namespace TheTeacher.Infrastructure.Services
 {
     public interface IJwtHandler : IService
     {
-        JwtDTO CreateToken(string email, string role);
+        JwtDTO CreateToken(Guid userId, string role);
 
     }
 }
