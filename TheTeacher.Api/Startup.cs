@@ -31,7 +31,6 @@ namespace TheTeacher.Api
         public JwtSettings JwtSettings { get; private set; }
         
         public Startup(IConfiguration configuration, IHostingEnvironment env)
-        
         {
             Configuration = configuration;
         }

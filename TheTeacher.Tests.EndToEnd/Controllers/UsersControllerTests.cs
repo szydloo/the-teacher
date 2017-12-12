@@ -16,7 +16,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
         [Test]
         public async Task given_valid_email_user_should_exist()
         {
-            var email = "email@email.com";
+            var email = "test1@email.com";
             var response = await Client.GetAsync($"users/{email}");
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
@@ -46,7 +46,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
         }
 
         [Test]
-        public void registering_user_with_email_witout_at_should_throw_exception()
+        public void registering_user_with_email_without_at_should_throw_exception()
         {
             var command = new CreateUser
             {
@@ -70,7 +70,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
         {
             var command = new CreateUser
             {
-                Email = "email@email.com",
+                Email = "test1@email.com",
                 Username = "username",
                 Password = "secret",
                 Fullname = "Full Name",
@@ -81,22 +81,21 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             Func<Task> act = Client.Awaiting( async x => await x.PostAsync("users", payload));
             act.ShouldThrow<Exception>().And
                 .Message.Contains($"User with this email: {command.Email}");
-
         }
 
         [Test]
-        public async Task getting_user_that_does_not_exist_should_return_null()
+        public async Task getting_user_that_does_not_exist_should_return_not_found()
         {
             var email = "emailRandom@gmail.com";
             var response = await Client.GetAsync($"users/{email}");
 
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Unauthorized);
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NotFound);
         }
 
         [Test]
-        public async Task changing_existing_user_password_should_return_no_content()
+        public async Task changing_existing_user_password_without_token_should_return_unauthorized()
         {
-            var user = await GetUserAsync("email@email.com");
+            var user = await GetUserAsync("test1@email.com");
             var newPassword = "secret420";
             var command = new ChangeUserPassword
             {
@@ -105,18 +104,57 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
                 NewPassword = newPassword
             };
             var payload = GetPayload(command);
-            var response = await Client.PutAsync($"users/{command.UserId}/password", payload);
+            var response = await Client.PutAsync($"users/password", payload);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Unauthorized);
         }
 
+        // [Test]
+        // public async Task changing_existing_user_password_with_token_should_return_nocontent()
+        // {
+        //     var email = "test1@email.com";
+        //     var password = "secret1";
+        //     var user = await GetUserAsync(email);
+        //     var token = await GetTokenAsync(email, password);
+
+        //     var newPassword = "secret420";
+
+        //     var command = new ChangeUserPassword
+        //     {
+        //         UserId = user.UserId,
+        //         CurrentPassword = user.Password,
+        //         NewPassword = newPassword
+        //     };
+        //     var payload = GetPayload(command);
+        
+        //     var request = new HttpRequestMessage()
+        //     var response = await Client;
+
+        //     response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
+        // }
+
         [Test]
-        public async Task deleteing_user_should_return_no_content()
+        public async Task deleteing_user_without_token_should_return_unauthorized()
         {
             var response = await Client.DeleteAsync("users/me");
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Unauthorized);
+        }
 
+        public async Task<string> GetTokenAsync(string email, string password)
+        {
+            var command = new LoginUser
+            {
+                Email = email,
+                Password = password
+            };
+
+            var logPayload = GetPayload(command);
+            var response = await Client.PostAsync("/login", logPayload);
+            var contentMessage = await response.Content.ReadAsStringAsync();
+            var splitedMessage = contentMessage.Split('"'); 
+            return splitedMessage[3];         
+            
         }
         public async Task<UserDTO> GetUserAsync(string email)
         {

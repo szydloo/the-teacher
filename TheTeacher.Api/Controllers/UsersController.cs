@@ -26,7 +26,6 @@ namespace TheTeacher.Api.Controllers
             return Json(users);
         }
         
-        [Authorize]
         [HttpGet("{email}")]
         public async Task<IActionResult> Get(string email)
         {

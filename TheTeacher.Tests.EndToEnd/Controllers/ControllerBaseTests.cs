@@ -2,6 +2,7 @@ using System.Net.Http;
 using System.Text;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using TheTeacher.Api;
@@ -16,8 +17,14 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
         [SetUp]
         public void Setup()
         {
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
             Server = new TestServer( new WebHostBuilder()
-                        .UseStartup<Startup>());
+                        .UseStartup<Startup>()
+                        .UseConfiguration(configuration));
+            
             Client = Server.CreateClient();
         }
 
