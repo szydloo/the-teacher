@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using TheTeacher.Infrastructure.Commands.User;
@@ -109,29 +111,54 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Unauthorized);
         }
 
-        // [Test]
-        // public async Task changing_existing_user_password_with_token_should_return_nocontent()
-        // {
-        //     var email = "test1@email.com";
-        //     var password = "secret1";
-        //     var user = await GetUserAsync(email);
-        //     var token = await GetTokenAsync(email, password);
+        [Test]
+        public async Task changing_existing_user_password_with_token_should_return_nocontent()
+        {
+            var email = "test1@email.com";
+            var password = "secret1";
+            var user = await GetUserAsync(email);
+            var token = await GetTokenAsync(email, password);
 
-        //     var newPassword = "secret420";
+            var newPassword = "secret420";
 
-        //     var command = new ChangeUserPassword
-        //     {
-        //         UserId = user.UserId,
-        //         CurrentPassword = user.Password,
-        //         NewPassword = newPassword
-        //     };
-        //     var payload = GetPayload(command);
-        
-        //     var request = new HttpRequestMessage()
-        //     var response = await Client;
+            var command = new ChangeUserPassword
+            {
+                UserId = user.UserId,
+                CurrentPassword = user.Password,
+                NewPassword = newPassword
+            };
+            var payload = GetPayload(command);
 
-        //     response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
-        // }
+            var request = CreateRequest("http://localhost:5000/users/password", payload,
+                new Dictionary<string,string>
+                {
+                    { "Authorization", $"Bearer {token}" },
+                    { "Content-type", $"application/json" }
+                }
+            );
+            var response = await request.SendAsync("PUT");
+
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
+        }
+
+
+        [Test]
+        public async Task loging_with_correct_data_should_return_token()
+        {
+            var email = "test1@email.com";
+            var password = "secret1";
+
+            var command = new LoginUser
+            {
+                Email = email,
+                Password = password
+            };
+
+            var payload = GetPayload(command);
+            var response = await Client.PostAsync("/login", payload);
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.Content.ReadAsStringAsync().Result.Length.Should().BeGreaterOrEqualTo(300); //TODO create proper validity of token pressence
+        }
 
         [Test]
         public async Task deleteing_user_without_token_should_return_unauthorized()
@@ -141,27 +168,5 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Unauthorized);
         }
 
-        public async Task<string> GetTokenAsync(string email, string password)
-        {
-            var command = new LoginUser
-            {
-                Email = email,
-                Password = password
-            };
-
-            var logPayload = GetPayload(command);
-            var response = await Client.PostAsync("/login", logPayload);
-            var contentMessage = await response.Content.ReadAsStringAsync();
-            var splitedMessage = contentMessage.Split('"'); 
-            return splitedMessage[3];         
-            
-        }
-        public async Task<UserDTO> GetUserAsync(string email)
-        {
-            var response = await Client.GetAsync($"users/{email}");
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            return JsonConvert.DeserializeObject<UserDTO>(responseString);
-        }
     }
 }

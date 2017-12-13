@@ -7,7 +7,7 @@ namespace TheTeacher.Core.Domain
 {
     public class Teacher
     {
-        private ISet<Subject> _subjects = new HashSet<Subject>();
+        public ISet<Subject> _subjects = new HashSet<Subject>();
         public Guid UserID { get; protected set; }
         public string Address { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }

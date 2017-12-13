@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,9 +7,12 @@ namespace TheTeacher.Infrastructure.Services
     public class DataInitializer : IDataInitializer
     {
         private readonly IUserService _userService;
-        public DataInitializer(IUserService userService)
+        private readonly ITeacherService _teacherService;
+        
+        public DataInitializer(IUserService userService, ITeacherService teacherService)
         {
             _userService = userService;
+            _teacherService = teacherService;
         }
         public async Task SeedAsync()
         {
@@ -21,7 +25,17 @@ namespace TheTeacher.Infrastructure.Services
             {
                 Tasks.Add(_userService.RegisterAsync($"testadmin{i}@email.com", $"secretAdmin", $"usernameAdmin{i}",$"AdminAdmin{i}", "admin"));
             }
-            await Task.WhenAll(Tasks);            
+            await Task.WhenAll(Tasks);    
+
+            
+            for(int i = 1; i <= 5; i++)
+            {
+                var user = await _userService.GetAsync($"test{i}@email.com");
+                Tasks.Add(_teacherService.CreateAsync(user.UserId, $"randomAdress{i}"));
+            }        
+            await Task.WhenAll(Tasks);
+
+            Console.WriteLine(Tasks.ToString());
         }
 
     }

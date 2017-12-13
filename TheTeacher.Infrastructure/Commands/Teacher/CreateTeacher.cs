@@ -4,6 +4,6 @@ namespace TheTeacher.Infrastructure.Commands.Teacher
 {
     public class CreateTeacher : AuthenticatedCommandBase
     {
-        public string Address { get; protected set; }
+        public string Address { get; set; }
     }
 }

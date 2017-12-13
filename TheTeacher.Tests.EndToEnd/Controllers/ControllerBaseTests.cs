@@ -1,11 +1,15 @@
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using TheTeacher.Api;
+using TheTeacher.Infrastructure.Commands.User;
+using TheTeacher.Infrastructure.DTO;
 
 namespace TheTeacher.Tests.EndToEnd.Controllers
 {
@@ -32,6 +36,41 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
         {
             var json = JsonConvert.SerializeObject(data);
             return new StringContent(json, Encoding.UTF8, "application/json");
+        }
+
+        protected async Task<UserDTO> GetUserAsync(string email)
+        {
+            var response = await Client.GetAsync($"users/{email}");
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<UserDTO>(responseString);
+        }
+
+        protected async Task<string> GetTokenAsync(string email, string password)
+        {
+            var command = new LoginUser
+            {
+                Email = email,
+                Password = password
+            };
+
+            var payload = GetPayload(command);
+            var response = await Client.PostAsync("/login", payload);
+            var responseMessage = await response.Content.ReadAsStringAsync();
+            var splitedMessage = responseMessage.Split('"'); 
+
+            return splitedMessage[3];    // TODO change the way to retrive tokens     
+        }        
+        
+        public RequestBuilder CreateRequest(string urlPath, StringContent payload, IDictionary<string,string> headers)
+        {
+            var request = Server.CreateRequest(urlPath);
+            foreach(var pair in headers)
+            {
+                request.AddHeader(pair.Key,pair.Value);
+            }
+            request.And(x => x.Content = payload);
+            return request;
         }
     }
 }

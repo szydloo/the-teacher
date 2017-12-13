@@ -10,7 +10,7 @@ namespace TheTeacher.Infrastructure.Mapper
             => new MapperConfiguration( cfg =>
             {
                 cfg.CreateMap<UserDTO,User>();                
-                cfg.CreateMap<TeacherDTO,User>();
+                cfg.CreateMap<TeacherDTO,Teacher>();
             })
             .CreateMapper();
     }
