@@ -48,7 +48,36 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
 
             var response = await Client.GetAsync($"/teachers/{user.UserId}");
             response.StatusCode.Should().Be(HttpStatusCode.OK);
+        }
 
+        [Test]
+        public async Task adding_lesson_async_should_return_no_content()
+        {
+            var email = "test1@email.com";
+            var password = "secret1";
+            var user = await GetUserAsync(email);
+            var token = await GetTokenAsync(email, password);
+
+            var command = new AddLesson
+            {
+                Name = "Biology",
+                Category = "Science",
+                PricePerHour = 5M,
+                Grade = "Elementary"
+            };
+
+            var payload = GetPayload(command);
+
+            var request = CreateRequest("http://localhost:5000/teachers/lesson", payload,
+                new Dictionary<string,string>
+                {
+                    { "Authorization", $"Bearer {token}" },
+                    { "Content-type", $"application/json" }
+                }
+            );
+
+            var response = await request.SendAsync("PUT");
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
         }
     }
 }

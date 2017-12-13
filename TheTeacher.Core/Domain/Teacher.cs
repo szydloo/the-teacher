@@ -1,49 +1,51 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static TheTeacher.Core.Domain.Subject;
+using static TheTeacher.Core.Domain.Lesson;
 
 namespace TheTeacher.Core.Domain
 {
     public class Teacher
     {
-        public ISet<Subject> _subjects = new HashSet<Subject>();
+        public ISet<Lesson> Lessons = new HashSet<Lesson>();
         public Guid UserID { get; protected set; }
+        public string Name { get; protected set; }
         public string Address { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         
-
         // TODO AvailableDays    
+
         protected Teacher()
         {
         }
 
-        public Teacher(Guid userId, string address)
+        public Teacher(User user, string address)
         {
-            UserID = userId;
+            UserID = user.UserId;
+            Name = user.Fullname;
             Address = address;
             UpdatedAt = DateTime.UtcNow;
             CreatedAt = DateTime.UtcNow;
         }
 
-        public void AddSubject(string name, decimal pricePerHour, ExperienceLevel experience)
-            => _subjects.Add(new Subject(name,pricePerHour,experience));
+        public void AddLesson(Subject subject, string grade, decimal pricePerHour)
+            => Lessons.Add(Lesson.Create(subject, grade, pricePerHour));
 
-        public void AddSubject(Subject subject)
-            => _subjects.Add(subject);
+        public void AddLesson(Lesson lesson)
+            => Lessons.Add(lesson);
         
-        public void RemoveSubject(Subject subject)
-            => _subjects.Remove(subject);
+        public void RemoveLesson(Lesson lesson)
+            => Lessons.Remove(lesson);
 
-        public void RemoveSubject(string name)
+        public void RemoveLesson(string name)
         {
-            var subject = _subjects.SingleOrDefault(x => x.Name == name);
-            if(subject == null)
+            var lesson = Lessons.SingleOrDefault(x => x.Subject.Name == name);
+            if(lesson == null)
             {
                 throw new Exception($"Subject with name {name} does not exist.");
             }
-            RemoveSubject(subject);
+            RemoveLesson(lesson);
 
         }
     }

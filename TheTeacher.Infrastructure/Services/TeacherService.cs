@@ -12,11 +12,15 @@ namespace TheTeacher.Infrastructure.Services
     public class TeacherService : ITeacherService
     {
         private readonly ITeacherRepository _teacherRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly ISubjectProvider _subjectProvider;
         private readonly IMapper _mapper;
 
-        public TeacherService(ITeacherRepository teacherRepository, IMapper mapper)
+        public TeacherService(ITeacherRepository teacherRepository, IUserRepository userRepository, ISubjectProvider subjectProvider, IMapper mapper)
         {
             _teacherRepository = teacherRepository;
+            _userRepository = userRepository;
+            _subjectProvider = subjectProvider;
             _mapper = mapper;
         }
 
@@ -35,12 +39,13 @@ namespace TheTeacher.Infrastructure.Services
 
         public async Task CreateAsync(Guid userId, string address)
         {
+            var user = await _userRepository.GetOrFailAsync(userId);
             var teacher = await _teacherRepository.GetAsync(userId);
             if(teacher != null)
             {
                 throw new Exception($"Teacher with id '{userId}' already exists");
             }
-            await _teacherRepository.AddAsync(new Teacher(userId, address));
+            await _teacherRepository.AddAsync(new Teacher(user, address));
 
         }
 
@@ -56,7 +61,18 @@ namespace TheTeacher.Infrastructure.Services
             var teacher = await _teacherRepository.GetOrFailAsync(userId);
     
             await _teacherRepository.UpdateAsync(teacher); // TODO implement proper logic
+        }
 
+        public async Task AddLessonAsync(Guid userId, string name, string category, string grade, decimal pricePerHour)
+        {
+            var teacher = await _teacherRepository.GetAsync(userId);
+            if(teacher == null)
+            {
+                throw new Exception($"Teacher with id '{userId}' was not found");
+            }
+            var subjectDetails = await _subjectProvider.GetAsync(name,category);
+            var subject = Subject.Create(subjectDetails.Name, subjectDetails.Category);
+            teacher.AddLesson(subject, grade, pricePerHour);
         }
     }
 }

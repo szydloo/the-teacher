@@ -4,17 +4,17 @@ namespace TheTeacher.Core.Domain
 {
     public class Subject
     {
-        public enum ExperienceLevel { Basic, Undergraduate, Graduate, Experienced, Master} // TODO ???
-
-        public string Name { get; protected set; }
-        public decimal PricePerHour { get; protected set; }
-        public ExperienceLevel Experience { get; protected set; }
-
-        public Subject(string name, decimal pricePerHour, ExperienceLevel experience)
+        public string Name { get; protected set; }                
+        public string Category { get; protected set; }
+        
+        protected Subject()
+        {
+            
+        }
+        protected Subject(string name, string category)
         {
             SetName(name);
-            SetPricePerHour(pricePerHour);
-            Experience = experience;   
+            SetCategory(category);
         }
 
         private void SetName(string name)
@@ -32,20 +32,27 @@ namespace TheTeacher.Core.Domain
                 return;
             }
             Name = name;
-            
         }
 
-        private void SetPricePerHour(decimal pricePerHour)
+        private void SetCategory(string category)
         {
-            if(pricePerHour < 0)
+            if(String.IsNullOrWhiteSpace(category))
             {
-                throw new Exception("Price cannot have negatice value");
+                throw new Exception("Category can not be empty.");
             }
-            else if(pricePerHour == PricePerHour)
+            else if(category.Length < 3)
+            {
+                throw new Exception("Category name has to be longer than 3 characters.");
+            }
+            else if(Category == category)
             {
                 return;
             }
-            PricePerHour = pricePerHour;
+            Category = category;
         }
+        
+        public static Subject Create(string name, string category)
+            => new Subject(name, category);
     }
+    
 }

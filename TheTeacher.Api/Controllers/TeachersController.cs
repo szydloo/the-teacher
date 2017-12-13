@@ -38,6 +38,15 @@ namespace TheTeacher.Api.Controllers
         }
 
         [Authorize]
+        [HttpPut]
+        [Route("lesson")]
+        public async Task<IActionResult> Put([FromBody]AddLesson command)
+        {
+            await DispatchAsync(command);
+            return NoContent();
+        }
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateTeacher command)
         {

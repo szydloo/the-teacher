@@ -11,6 +11,7 @@ namespace TheTeacher.Infrastructure.Mapper
             {
                 cfg.CreateMap<UserDTO,User>();                
                 cfg.CreateMap<TeacherDTO,Teacher>();
+                cfg.CreateMap<SubjectDTO,Lesson>();
             })
             .CreateMapper();
     }

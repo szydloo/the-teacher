@@ -12,11 +12,9 @@ namespace TheTeacher.Api.Controllers
     public class UsersController : ApiControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IJwtHandler _jwtHandler;
         public UsersController(IUserService userService, ICommandDispatcher commandDispatcher, IJwtHandler jwtHandler) : base(commandDispatcher)
         {
             _userService = userService;
-            _jwtHandler = jwtHandler;
         }
         
         [HttpGet]

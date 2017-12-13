@@ -13,5 +13,7 @@ namespace TheTeacher.Infrastructure.Services
         Task DeleteAsync(Guid userId);
         Task UpdateAddressAsync(Guid userId, string address);
         Task CreateAsync(Guid userId, string address);
+        Task AddLessonAsync(Guid userId, string name, string category, string grade, decimal pricePerHour);
+
     }
 }
