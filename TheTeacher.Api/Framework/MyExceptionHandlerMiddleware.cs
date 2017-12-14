@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using TheTeacher.Core.Exceptions;
 using TheTeacher.Infrastructure.Exceptions;
 
 namespace TheTeacher.Api.Framework
@@ -40,7 +41,17 @@ namespace TheTeacher.Api.Framework
                     statusCode = HttpStatusCode.Unauthorized;
                     break;
 
+                case DomainException e when exceptionType == typeof(DomainException):
+                    statusCode = HttpStatusCode.BadRequest;
+                    errorCode = e.Code;
+                    break;
+
                 case ServiceException e when exceptionType == typeof(ServiceException):
+                    statusCode = HttpStatusCode.BadRequest;
+                    errorCode = e.Code;
+                    break;
+
+                case TheTeacherException e when exceptionType == typeof(TheTeacherException):
                     statusCode = HttpStatusCode.BadRequest;
                     errorCode = e.Code;
                     break;

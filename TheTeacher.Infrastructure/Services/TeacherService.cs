@@ -66,11 +66,7 @@ namespace TheTeacher.Infrastructure.Services
 
         public async Task AddLessonAsync(Guid userId, string name, string category, string grade, decimal pricePerHour)
         {
-            var teacher = await _teacherRepository.GetAsync(userId);
-            if(teacher == null)
-            {
-                throw new ServiceException(ServiceErrorCodes.TeacherNotFound, $"Teacher with id '{userId}' was not found");
-            }
+            var teacher = await _teacherRepository.GetOrFailAsync(userId);
             var subjectDetails = await _subjectProvider.GetAsync(name,category);
             var subject = Subject.Create(subjectDetails.Name, subjectDetails.Category);
             teacher.AddLesson(subject, grade, pricePerHour);

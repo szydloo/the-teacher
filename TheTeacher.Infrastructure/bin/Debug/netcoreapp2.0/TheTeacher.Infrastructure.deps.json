@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "b975ca891b9dc4cceb9446e3fe553a4d08e15d92"
+    "signature": "e5099ca211e49a147eba5ae3299414179da3321d"
   },
   "compilationOptions": {},
   "targets": {
@@ -13,6 +13,7 @@
           "Microsoft.Extensions.Caching.Memory": "2.0.0",
           "Microsoft.Extensions.Configuration": "2.0.0",
           "Microsoft.Extensions.Configuration.Binder": "2.0.0",
+          "NLog": "4.5.0-rc03",
           "System.IdentityModel.Tokens.Jwt": "5.1.5",
           "TheTeacher.Core": "1.0.0"
         },
@@ -189,6 +190,11 @@
         },
         "runtime": {
           "lib/netstandard1.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "NLog/4.5.0-rc03": {
+        "runtime": {
+          "lib/netstandard2.0/NLog.dll": {}
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -1039,6 +1045,13 @@
       "sha512": "sha512-U82mHQSKaIk+lpSVCbWYKNavmNH1i5xrExDEquU1i6I5pV6UMOqRnJRSlKO3cMPfcpp0RgDY+8jUXHdQ4IfXvw==",
       "path": "newtonsoft.json/9.0.1",
       "hashPath": "newtonsoft.json.9.0.1.nupkg.sha512"
+    },
+    "NLog/4.5.0-rc03": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PPS9vixLnvaqNMRi4R4BXkz28wyKSMMOpkGNBLib47W8jvjV9FJnD/9d0ZOTawkbu5oIj0XFYWSJqOieSIPrLw==",
+      "path": "nlog/4.5.0-rc03",
+      "hashPath": "nlog.4.5.0-rc03.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",

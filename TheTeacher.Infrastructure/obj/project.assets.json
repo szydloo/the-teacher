@@ -437,6 +437,15 @@
           "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         }
       },
+      "NLog/4.5.0-rc03": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/NLog.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NLog.dll": {}
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
         "type": "package",
         "runtimeTargets": {
@@ -2248,6 +2257,37 @@
         "newtonsoft.json.9.0.1.nupkg.sha512",
         "newtonsoft.json.nuspec",
         "tools/install.ps1"
+      ]
+    },
+    "NLog/4.5.0-rc03": {
+      "sha512": "PPS9vixLnvaqNMRi4R4BXkz28wyKSMMOpkGNBLib47W8jvjV9FJnD/9d0ZOTawkbu5oIj0XFYWSJqOieSIPrLw==",
+      "type": "package",
+      "path": "nlog/4.5.0-rc03",
+      "files": [
+        "lib/monoandroid44/NLog.dll",
+        "lib/monoandroid44/NLog.xml",
+        "lib/net35/NLog.dll",
+        "lib/net35/NLog.xml",
+        "lib/net40-client/NLog.dll",
+        "lib/net40-client/NLog.xml",
+        "lib/net45/NLog.dll",
+        "lib/net45/NLog.xml",
+        "lib/netstandard1.5/NLog.dll",
+        "lib/netstandard1.5/NLog.xml",
+        "lib/netstandard2.0/NLog.dll",
+        "lib/netstandard2.0/NLog.xml",
+        "lib/sl4/NLog.dll",
+        "lib/sl4/NLog.xml",
+        "lib/sl5/NLog.dll",
+        "lib/sl5/NLog.xml",
+        "lib/uap10.0/NLog.dll",
+        "lib/uap10.0/NLog.xml",
+        "lib/wp8/NLog.dll",
+        "lib/wp8/NLog.xml",
+        "lib/xamarinios10/NLog.dll",
+        "lib/xamarinios10/NLog.xml",
+        "nlog.4.5.0-rc03.nupkg.sha512",
+        "nlog.nuspec"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -5375,6 +5415,7 @@
       "Microsoft.Extensions.Configuration >= 2.0.0",
       "Microsoft.Extensions.Configuration.Binder >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
+      "NLog >= 4.5.0-rc03",
       "System.IdentityModel.Tokens.Jwt >= 5.1.5",
       "TheTeacher.Core >= 1.0.0"
     ]
@@ -5453,6 +5494,10 @@
           "Microsoft.Extensions.Caching.Memory": {
             "target": "Package",
             "version": "2.0.0"
+          },
+          "NLog": {
+            "target": "Package",
+            "version": "4.5.0-rc03"
           }
         },
         "imports": [

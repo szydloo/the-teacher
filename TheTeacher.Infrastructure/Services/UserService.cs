@@ -54,7 +54,7 @@ namespace TheTeacher.Infrastructure.Services
             var user = await _userRepository.GetAsync(email);
             if(user != null)
             {
-                throw new ServiceException(ServiceErrorCodes.EmailInUse, $"User with this email: '{email}' already exists");
+                throw new ServiceException(ServiceErrorCodes.EmailInUse, $"User with this email: '{email}' already exists.");
             }
 
             string salt = _encrypter.GetSalt();

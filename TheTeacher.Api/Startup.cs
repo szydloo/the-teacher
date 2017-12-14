@@ -22,6 +22,8 @@ using TheTeacher.Infrastructure.Settings;
 using TheTeacher.Infrastructure.Extensions;
 using TheTeacher.Api.Framework;
 using System.Text;
+using NLog.Extensions.Logging;
+using NLog.Web;
 
 namespace TheTeacher.Api
 {
@@ -68,8 +70,8 @@ namespace TheTeacher.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            // loggerFactory.AddDebug();
 
             app.UseAuthentication();
             app.UseMyExceptionMiddleware();

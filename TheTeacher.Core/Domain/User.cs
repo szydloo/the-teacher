@@ -54,7 +54,7 @@ namespace TheTeacher.Core.Domain
                 Email = email;
                 UpdatedAt = DateTime.UtcNow;
             }
-            else throw new DomainException(DomainErrorCodes.InvalidEmail, "Invalid email adress.");
+            else throw new DomainException(DomainErrorCodes.InvalidEmail, "Invalid email address.");
         }
 
         private void SetPassword(string password)

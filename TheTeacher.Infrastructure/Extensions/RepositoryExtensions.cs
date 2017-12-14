@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using TheTeacher.Core.Domain;
+using TheTeacher.Infrastructure.Exceptions;
 using TheTeacher.Infrastructure.Repositories;
 
 namespace TheTeacher.Infrastructure.Extensions
@@ -12,7 +13,7 @@ namespace TheTeacher.Infrastructure.Extensions
             var user = await userRepository.GetAsync(userId);
             if(user == null)
             {
-                throw new Exception($"User with id '{userId}' does not exist.");
+                throw new ServiceException(ServiceErrorCodes.UserNotFound, $"User with id '{userId}' does not exist.");
             }
             return user;
         }
@@ -22,7 +23,7 @@ namespace TheTeacher.Infrastructure.Extensions
             var teacher = await teacherRepository.GetAsync(userId);
             if(teacher == null)
             {
-                throw new Exception($"Teacher with id '{userId}' does not exist.");
+                throw new ServiceException(ServiceErrorCodes.TeacherNotFound, $"Teacher with id '{userId}' does not exist."); 
             }
             return teacher;
         }

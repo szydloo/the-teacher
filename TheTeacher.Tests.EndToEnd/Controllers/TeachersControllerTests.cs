@@ -26,7 +26,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             var response = await Client.GetAsync($"/teachers/{user.UserId}");
             var responseMessage = await GetExceptionCodeAndMessageAsync(response);
 
-            // TODO: Is okey but dotnet test says no / 'run tes' says yes          
+            // TODO: should be okey, but dotnet test says no / 'run test' says yes          
             //responseMessage.Item1.Should().Be(ServiceErrorCodes.TeacherNotFound); 
             
         }

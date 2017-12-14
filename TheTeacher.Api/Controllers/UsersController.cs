@@ -7,11 +7,13 @@ using TheTeacher.Infrastructure.Services;
 using TheTeacher.Infrastructure.Commands;
 using Microsoft.AspNetCore.Authorization;
 using System;
+using NLog;
 
 namespace TheTeacher.Api.Controllers
 {
     public class UsersController : ApiControllerBase
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IUserService _userService;
         public UsersController(IUserService userService, ICommandDispatcher commandDispatcher, IJwtHandler jwtHandler) : base(commandDispatcher)
         {

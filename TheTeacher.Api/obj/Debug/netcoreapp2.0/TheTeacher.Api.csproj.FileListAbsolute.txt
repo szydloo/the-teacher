@@ -12,3 +12,4 @@ C:\Users\Maciej\Documents\repos\TheTeacher\TheTeacher.Api\obj\Debug\netcoreapp2.
 C:\Users\Maciej\Documents\repos\TheTeacher\TheTeacher.Api\obj\Debug\netcoreapp2.0\TheTeacher.Api.AssemblyInfo.cs
 C:\Users\Maciej\Documents\repos\TheTeacher\TheTeacher.Api\obj\Debug\netcoreapp2.0\TheTeacher.Api.dll
 C:\Users\Maciej\Documents\repos\TheTeacher\TheTeacher.Api\obj\Debug\netcoreapp2.0\TheTeacher.Api.pdb
+C:\Users\Maciej\Documents\repos\TheTeacher\TheTeacher.Api\bin\Debug\netcoreapp2.0\nlog.config
