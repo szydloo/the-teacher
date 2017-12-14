@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using TheTeacher.Core.Exceptions;
 using TheTeacher.Infrastructure.Commands.User;
 using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Exceptions;
 
 namespace TheTeacher.Tests.EndToEnd.Controllers
 {
@@ -48,7 +50,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
         }
 
         [Test]
-        public void registering_user_with_email_without_at_should_throw_exception()
+        public async Task registering_user_with_email_without_at_should_contain_proper_code_and_message()
         {
             var command = new CreateUser
             {
@@ -60,15 +62,17 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             };
 
             var payload = GetPayload(command);
-
-            // Fluent assertions exceptions
-            Func<Task> act = Client.Awaiting( async x => await x.PostAsync("users", payload));
-            act.ShouldThrow<Exception>().And
-                .Message.Contains("Invalid email format");
+            
+            var response = await Client.PostAsync("users", payload);
+            var exceptionMessage = await GetExceptionCodeAndMessageAsync(response);
+            
+            exceptionMessage.Item1.ShouldBeEquivalentTo(DomainErrorCodes.InvalidEmail);
+            exceptionMessage.Item2.ShouldBeEquivalentTo("Invalid email address.");
+        
         }
 
         [Test]
-        public void registering_user_with_already_existing_email_should_throw_exception()
+        public async Task registering_user_with_already_existing_email_should_contain_proper_code_and_message()
         {
             var command = new CreateUser
             {
@@ -80,9 +84,11 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             };
             
             var payload = GetPayload(command);
-            Func<Task> act = Client.Awaiting( async x => await x.PostAsync("users", payload));
-            act.ShouldThrow<Exception>().And
-                .Message.Contains($"User with this email: {command.Email}");
+            var response = await Client.PostAsync("users",payload);
+            var exceptionMessage = await GetExceptionCodeAndMessageAsync(response);
+            exceptionMessage.Item1.ShouldBeEquivalentTo(ServiceErrorCodes.EmailInUse);
+            exceptionMessage.Item2.ShouldBeEquivalentTo($"User with this email: '{command.Email}' already exists.");
+
         }
 
         [Test]

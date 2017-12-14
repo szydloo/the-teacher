@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -62,7 +63,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             return jwt.Token;  
         }        
         
-        public RequestBuilder CreateRequest(string path, StringContent payload, IDictionary<string,string> headers)
+        protected RequestBuilder CreateRequest(string path, StringContent payload, IDictionary<string,string> headers)
         {
             var request = Server.CreateRequest(path);
             foreach(var pair in headers)
@@ -71,6 +72,16 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             }
             request.And(x => x.Content = payload);
             return request;
+        }
+
+        // Returns a Tuple<string, string> with Item1 being error code and Item2 message
+        protected async Task<Tuple<string,string>> GetExceptionCodeAndMessageAsync(HttpResponseMessage response) 
+        {
+
+            var definition = new { code = "", message = "" };
+            var responseString = await response.Content.ReadAsStringAsync();
+            var exceptionMessage = JsonConvert.DeserializeAnonymousType(responseString, definition);
+            return new Tuple<string,string>(exceptionMessage.code,exceptionMessage.message);
         }
     }
 }
