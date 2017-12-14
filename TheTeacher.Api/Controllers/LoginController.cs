@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -22,9 +23,7 @@ namespace TheTeacher.Api.Controllers
             command.TokenId = Guid.NewGuid();
             await DispatchAsync(command);
             var jwt = _cache.GetJwt(command.TokenId);
-
             return Json(jwt);
-
         }
     }
 }

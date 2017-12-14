@@ -1,5 +1,6 @@
 using System;
 using System.Net.Mail;
+using TheTeacher.Core.Exceptions;
 
 namespace TheTeacher.Core.Domain
 {
@@ -53,14 +54,14 @@ namespace TheTeacher.Core.Domain
                 Email = email;
                 UpdatedAt = DateTime.UtcNow;
             }
-            else throw new Exception("Invalid email adress.");
+            else throw new DomainException(DomainErrorCodes.InvalidEmail, "Invalid email adress.");
         }
 
         private void SetPassword(string password)
         {
             if( String.IsNullOrWhiteSpace(password))
             {
-                throw new Exception("Password cannot be empty.");
+                throw new DomainException(DomainErrorCodes.InvalidPassword, "Password cannot be empty.");
             }
             else if( password == Password)
             {
@@ -75,11 +76,11 @@ namespace TheTeacher.Core.Domain
         {
             if( String.IsNullOrWhiteSpace(name))
             {
-                throw new Exception("Username cannot be empty.");
+                throw new DomainException(DomainErrorCodes.InvalidUsername, "Username cannot be empty.");
             }
             else if (name.Length < 2)
             {
-                throw new Exception("Username has to have at least 2 characters.");
+                throw new DomainException(DomainErrorCodes.InvalidUsername, "Username has to have at least 2 characters.");
             }
             else if( name == Username)
             {
@@ -94,11 +95,11 @@ namespace TheTeacher.Core.Domain
         {
             if( String.IsNullOrWhiteSpace(fullname))
             {
-                throw new Exception("Fullname cannot be empty.");
+                throw new DomainException(DomainErrorCodes.InvalidName, "Fullname cannot be empty.");
             }
             else if (fullname.Length < 2)
             {
-                throw new Exception("Fullname has to have at least 2 characters.");
+                throw new DomainException(DomainErrorCodes.InvalidName, "Fullname has to have at least 2 characters.");
             }
             else if( fullname == Fullname)
             {

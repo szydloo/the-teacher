@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TheTeacher.Core.Exceptions;
 using static TheTeacher.Core.Domain.Lesson;
 
 namespace TheTeacher.Core.Domain
@@ -43,7 +44,7 @@ namespace TheTeacher.Core.Domain
             var lesson = Lessons.SingleOrDefault(x => x.Subject.Name == name);
             if(lesson == null)
             {
-                throw new Exception($"Subject with name {name} does not exist.");
+                throw new DomainException(DomainErrorCodes.InvalidName, $"Subject with name {name} does not exist.");
             }
             RemoveLesson(lesson);
 

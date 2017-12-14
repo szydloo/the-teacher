@@ -56,15 +56,15 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
 
             var payload = GetPayload(command);
             var response = await Client.PostAsync("/login", payload);
-            var responseMessage = await response.Content.ReadAsStringAsync();
-            var splitedMessage = responseMessage.Split('"'); 
+            var responseString = await response.Content.ReadAsStringAsync();
+            var jwt = JsonConvert.DeserializeObject<JwtDTO>(responseString);
 
-            return splitedMessage[3];    // TODO change the way to retrive tokens     
+            return jwt.Token;  
         }        
         
-        public RequestBuilder CreateRequest(string urlPath, StringContent payload, IDictionary<string,string> headers)
+        public RequestBuilder CreateRequest(string path, StringContent payload, IDictionary<string,string> headers)
         {
-            var request = Server.CreateRequest(urlPath);
+            var request = Server.CreateRequest(path);
             foreach(var pair in headers)
             {
                 request.AddHeader(pair.Key,pair.Value);

@@ -1,4 +1,5 @@
 using System;
+using TheTeacher.Core.Exceptions;
 
 namespace TheTeacher.Core.Domain
 {
@@ -26,7 +27,7 @@ namespace TheTeacher.Core.Domain
         {
             if(pricePerHour < 0)
             {
-                throw new Exception("Price per hour cannot be less than zero.");
+                throw new DomainException(DomainErrorCodes.InvalidPrice, "Price per hour cannot be less than zero.");
             }
             else if(PricePerHour == pricePerHour)
             {
@@ -40,11 +41,11 @@ namespace TheTeacher.Core.Domain
         {
             if( String.IsNullOrWhiteSpace(grade))
             {
-                throw new Exception("Grade name cannot be empty.");
+                throw new DomainException(DomainErrorCodes.InvalidGrade, "Grade name cannot be empty.");
             }
             else if (grade.Length < 2 )
             {
-                throw new Exception("Grade name has to have at least 2 characters.");
+                throw new DomainException(DomainErrorCodes.InvalidGrade, "Grade name has to have at least 2 characters.");
             }
             else if( grade == Grade)
             {

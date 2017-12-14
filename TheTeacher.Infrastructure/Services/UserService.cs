@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using TheTeacher.Core.Domain;
 using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Exceptions;
 using TheTeacher.Infrastructure.Extensions;
 using TheTeacher.Infrastructure.Repositories;
 using TheTeacher.Infrastructure.Settings;
@@ -38,13 +39,13 @@ namespace TheTeacher.Infrastructure.Services
             var user = await _userRepository.GetAsync(email);
             if(user == null)
             {
-                throw new Exception($"Invalid credentials.");
+                throw new ServiceException(ServiceErrorCodes.InvalidCredentials ,$"Invalid credentials.");
             }
             var salt = user.Salt;
             var logingHash = _encrypter.GetHash(password, salt);
             if(user.Password != logingHash)
             {
-                throw new Exception($"Invalid credentials.");
+                throw new ServiceException(ServiceErrorCodes.InvalidCredentials, $"Invalid credentials.");
             }
         }
 
@@ -53,12 +54,9 @@ namespace TheTeacher.Infrastructure.Services
             var user = await _userRepository.GetAsync(email);
             if(user != null)
             {
-                throw new Exception($"User with this email: '{email}' already exists");
+                throw new ServiceException(ServiceErrorCodes.EmailInUse, $"User with this email: '{email}' already exists");
             }
-            if (password.Length < 6 )
-            {
-                throw new Exception("Password has to have at least 6 characters.");
-            }
+
             string salt = _encrypter.GetSalt();
             string hash = _encrypter.GetHash(password, salt);
             await _userRepository.AddAsync(new User(email, hash, salt, username, fullname, role));
@@ -82,11 +80,11 @@ namespace TheTeacher.Infrastructure.Services
 
             if(currentPassword != user.Password)
             {
-                throw new Exception("Invalid data please try again.");
+                throw new ServiceException("Invalid data please try again.");
             }
             else if(user.Password == newPassword)
             {
-                throw new Exception("New password must be different from the old one.");
+                throw new ServiceException("New password must be different from the old one.");
             }
 
             await _userRepository.UpdateAsync(userId, currentPassword, newPassword);

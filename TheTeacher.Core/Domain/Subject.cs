@@ -1,4 +1,5 @@
 using System;
+using TheTeacher.Core.Exceptions;
 
 namespace TheTeacher.Core.Domain
 {
@@ -21,11 +22,11 @@ namespace TheTeacher.Core.Domain
         {
             if( String.IsNullOrWhiteSpace(name))
             {
-                throw new Exception("Subject name cannot be empty.");
+                throw new DomainException(DomainErrorCodes.InvalidName, "Subject name cannot be empty.");
             }
             else if (name.Length < 2 )
             {
-                throw new Exception("Subject name has to have at least 2 characters.");
+                throw new DomainException(DomainErrorCodes.InvalidName, "Subject name has to have at least 2 characters.");
             }
             else if( name == Name)
             {
@@ -38,11 +39,11 @@ namespace TheTeacher.Core.Domain
         {
             if(String.IsNullOrWhiteSpace(category))
             {
-                throw new Exception("Category can not be empty.");
+                throw new DomainException(DomainErrorCodes.InvalidName, "Category can not be empty.");
             }
             else if(category.Length < 3)
             {
-                throw new Exception("Category name has to be longer than 3 characters.");
+                throw new DomainException(DomainErrorCodes.InvalidName, "Category name has to be longer than 3 characters.");
             }
             else if(Category == category)
             {

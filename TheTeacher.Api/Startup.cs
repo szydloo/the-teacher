@@ -20,6 +20,7 @@ using TheTeacher.Infrastructure.Services;
 using TheTeacher.Infrastructure.IoC;
 using TheTeacher.Infrastructure.Settings;
 using TheTeacher.Infrastructure.Extensions;
+using TheTeacher.Api.Framework;
 using System.Text;
 
 namespace TheTeacher.Api
@@ -71,6 +72,7 @@ namespace TheTeacher.Api
             loggerFactory.AddDebug();
 
             app.UseAuthentication();
+            app.UseMyExceptionMiddleware();
             JwtSettings = app.ApplicationServices.GetService<JwtSettings>();
             var generalSettings  = app.ApplicationServices.GetService<GeneralSettings>();
             

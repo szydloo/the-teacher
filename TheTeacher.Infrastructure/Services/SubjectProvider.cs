@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using TheTeacher.Core.Domain;
 using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Exceptions;
 
 namespace TheTeacher.Infrastructure.Services
 {
@@ -66,13 +67,13 @@ namespace TheTeacher.Infrastructure.Services
         {
             if(!availableSubjects.ContainsKey(category))
             {
-                throw new Exception($"Category {category} is not available.");
+                throw new ServiceException(ServiceErrorCodes.InvalidSubjectDetails ,$"Category {category} is not available.");
             }
             var subjects = availableSubjects[category];
             var subject = subjects.SingleOrDefault(x => x.ToLowerInvariant() == name.ToLowerInvariant());
             if(subject == null)
             {
-                throw new Exception($"Subject '{name}' is not available.");
+                throw new ServiceException(ServiceErrorCodes.InvalidSubjectDetails, $"Subject '{name}' is not available.");
             }
             
             return await Task.FromResult(new SubjectDTO
@@ -80,15 +81,6 @@ namespace TheTeacher.Infrastructure.Services
                 Name = subject,
                 Category = category
             });
-        }
-
-        private class SubjectDetails
-        {
-            public string Name { get; }
-            public SubjectDetails(string name)
-            {
-                name = Name;
-            }
         }
     }
 }

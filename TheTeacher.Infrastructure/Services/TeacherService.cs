@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using TheTeacher.Core.Domain;
 using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Exceptions;
 using TheTeacher.Infrastructure.Extensions;
 using TheTeacher.Infrastructure.Repositories;
 
@@ -43,7 +44,7 @@ namespace TheTeacher.Infrastructure.Services
             var teacher = await _teacherRepository.GetAsync(userId);
             if(teacher != null)
             {
-                throw new Exception($"Teacher with id '{userId}' already exists");
+                throw new ServiceException(ServiceErrorCodes.UserAlreadyExists, $"Teacher with id '{userId}' already exists");
             }
             await _teacherRepository.AddAsync(new Teacher(user, address));
 
@@ -68,7 +69,7 @@ namespace TheTeacher.Infrastructure.Services
             var teacher = await _teacherRepository.GetAsync(userId);
             if(teacher == null)
             {
-                throw new Exception($"Teacher with id '{userId}' was not found");
+                throw new ServiceException(ServiceErrorCodes.TeacherNotFound, $"Teacher with id '{userId}' was not found");
             }
             var subjectDetails = await _subjectProvider.GetAsync(name,category);
             var subject = Subject.Create(subjectDetails.Name, subjectDetails.Category);

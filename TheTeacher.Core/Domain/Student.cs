@@ -1,4 +1,5 @@
 using System;
+using TheTeacher.Core.Exceptions;
 
 namespace TheTeacher.Core.Domain
 {
@@ -18,7 +19,7 @@ namespace TheTeacher.Core.Domain
         {
             if(String.IsNullOrWhiteSpace(address))
             {
-                throw new Exception("Address cannot be empty.");
+                throw new DomainException(DomainErrorCodes.InvalidAddress, "Address cannot be empty.");
             }
             else if(address == Address)
             {
