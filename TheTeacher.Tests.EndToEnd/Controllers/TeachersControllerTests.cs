@@ -23,7 +23,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             string email = "test6@email.com";
             var user = await GetUserAsync(email);
 
-            var response = await Client.GetAsync($"/teachers/{user.UserId}");
+            var response = await Client.GetAsync($"/teachers/{user.Id}");
             var responseMessage = await GetExceptionCodeAndMessageAsync(response);
 
             // TODO: should be okey, but dotnet test says no / 'run test' says yes          
@@ -53,7 +53,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
 
             var response = await request.PostAsync();
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.Created);
-            response.Headers.Location.ShouldBeEquivalentTo($"/teachers/{user.UserId}");
+            response.Headers.Location.ShouldBeEquivalentTo($"/teachers/{user.Id}");
         }
 
         [Test]
@@ -62,7 +62,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             string email = "test1@email.com";
             var user = await GetUserAsync(email);
 
-            var response = await Client.GetAsync($"/teachers/{user.UserId}");
+            var response = await Client.GetAsync($"/teachers/{user.Id}");
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 

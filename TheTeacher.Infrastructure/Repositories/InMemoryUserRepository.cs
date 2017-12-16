@@ -14,7 +14,7 @@ namespace TheTeacher.Infrastructure.Repositories
             => await Task.FromResult(_users);
 
         public async Task<User> GetAsync(Guid userId)
-            => await Task.FromResult(_users.SingleOrDefault(x => x.UserId == userId));
+            => await Task.FromResult(_users.SingleOrDefault(x => x.Id == userId));
         public async Task<User> GetAsync(string email)
             => await Task.FromResult(_users.SingleOrDefault(x => x.Email == email));
         

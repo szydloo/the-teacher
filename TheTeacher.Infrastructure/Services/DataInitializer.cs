@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace TheTeacher.Infrastructure.Services
@@ -16,14 +17,25 @@ namespace TheTeacher.Infrastructure.Services
         }
         public async Task SeedAsync()
         {
+            var users = await _userService.BrowseAsync();
+            if(users.Any())
+            {
+                return;
+            }
+
+
             var Tasks = new List<Task>(); 
             for(int i = 1; i <= 10; i++)
             {
-                Tasks.Add(_userService.RegisterAsync($"test{i}@email.com",$"secret{i}",$"username{i}",$"TestTest{i}","user"));
+                Guid userId = Guid.NewGuid();
+                
+                Tasks.Add(_userService.RegisterAsync(userId,$"test{i}@email.com",$"secret{i}",$"username{i}",$"TestTest{i}","user"));
             }
             for(int i = 1; i <= 3; i++)
             {
-                Tasks.Add(_userService.RegisterAsync($"testadmin{i}@email.com", $"secretAdmin", $"usernameAdmin{i}",$"AdminAdmin{i}", "admin"));
+                Guid userIdADmin = Guid.NewGuid();
+                
+                Tasks.Add(_userService.RegisterAsync(userIdADmin, $"testadmin{i}@email.com", $"secretAdmin", $"usernameAdmin{i}",$"AdminAdmin{i}", "admin"));
             }
             await Task.WhenAll(Tasks);    
 
@@ -31,7 +43,7 @@ namespace TheTeacher.Infrastructure.Services
             for(int i = 1; i <= 5; i++)
             {
                 var user = await _userService.GetAsync($"test{i}@email.com");
-                Tasks.Add(_teacherService.CreateAsync(user.UserId, $"randomAdress{i}"));
+                Tasks.Add(_teacherService.CreateAsync(user.Id, $"randomAdress{i}"));
             }        
             await Task.WhenAll(Tasks);
 

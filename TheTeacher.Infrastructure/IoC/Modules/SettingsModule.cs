@@ -1,6 +1,7 @@
 using Autofac;
 using Microsoft.Extensions.Configuration;
 using TheTeacher.Infrastructure.Extensions;
+using TheTeacher.Infrastructure.Mongo;
 using TheTeacher.Infrastructure.Settings;
 
 namespace TheTeacher.Infrastructure.IoC.Modules
@@ -16,8 +17,9 @@ namespace TheTeacher.Infrastructure.IoC.Modules
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterInstance(_configuration.GetSettings<GeneralSettings>());
-            builder.RegisterInstance(_configuration.GetSettings<JwtSettings>());
+            builder.RegisterInstance(_configuration.GetSettings<GeneralSettings>()).SingleInstance();
+            builder.RegisterInstance(_configuration.GetSettings<JwtSettings>()).SingleInstance();
+            builder.RegisterInstance(_configuration.GetSettings<MongoSettings>()).SingleInstance();            
             
         }
     }

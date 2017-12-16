@@ -23,7 +23,7 @@ namespace TheTeacher.Core.Domain
 
         public Teacher(User user, string address)
         {
-            UserID = user.UserId;
+            UserID = user.Id;
             Name = user.Fullname;
             Address = address;
             UpdatedAt = DateTime.UtcNow;

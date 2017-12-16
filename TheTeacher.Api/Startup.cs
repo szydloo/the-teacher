@@ -24,6 +24,7 @@ using TheTeacher.Api.Framework;
 using System.Text;
 using NLog.Extensions.Logging;
 using NLog.Web;
+using TheTeacher.Infrastructure.Mongo;
 
 namespace TheTeacher.Api
 {
@@ -88,7 +89,7 @@ namespace TheTeacher.Api
                 var dataInitializer = app.ApplicationServices.GetService<IDataInitializer>();
                 dataInitializer.SeedAsync();
             }
-
+            MongoConfigurator.Initiaize();
             app.UseMvc();
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
 

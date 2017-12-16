@@ -107,7 +107,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             var newPassword = "secret420";
             var command = new ChangeUserPassword
             {
-                UserId = user.UserId,
+                UserId = user.Id,
                 CurrentPassword = user.Password,
                 NewPassword = newPassword
             };
@@ -129,7 +129,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
 
             var command = new ChangeUserPassword
             {
-                UserId = user.UserId,
+                UserId = user.Id,
                 CurrentPassword = user.Password,
                 NewPassword = newPassword
             };

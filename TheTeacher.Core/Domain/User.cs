@@ -6,7 +6,7 @@ namespace TheTeacher.Core.Domain
 {
     public class User
     {
-        public Guid UserId { get; protected set; }
+        public Guid Id { get; protected set; }
         public string Email { get; protected set; }
         public string Username { get; protected set; }
         public string Password { get; protected set; }
@@ -20,9 +20,9 @@ namespace TheTeacher.Core.Domain
         {
         }
         
-        public User(string email, string password, string salt, string username, string fullname, string role)
+        public User(Guid id, string email, string password, string salt, string username, string fullname, string role)
         {
-            UserId = Guid.NewGuid();
+            Id = id;
             SetName(username);
             SetEmail(email);
             SetPassword(password);

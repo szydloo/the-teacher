@@ -5,8 +5,8 @@
   <ItemGroup>
     <Folder Include="wwwroot\"/>
   </ItemGroup>
-    <ItemGroup>
-    <Content Update="nlog.config" CopyToOutputDirectory="PreserveNewest" />
+  <ItemGroup>
+    <Content Update="nlog.config" CopyToOutputDirectory="PreserveNewest"/>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.0"/>

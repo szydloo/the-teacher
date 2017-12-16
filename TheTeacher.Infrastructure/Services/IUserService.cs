@@ -8,7 +8,7 @@ namespace TheTeacher.Infrastructure.Services
     public interface IUserService : IService
     {
         Task<UserDTO> GetAsync(string email);
-        Task RegisterAsync(string email, string password, string username, string fullname, string role);        
+        Task RegisterAsync(Guid id, string email, string password, string username, string fullname, string role);        
         Task LoginAsync(string email, string password);
         Task<IEnumerable<UserDTO>> BrowseAsync();        
         Task DeleteAsync(Guid userId);

@@ -16,9 +16,10 @@ namespace TheTeacher.Infrastructure.IoC
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterModule(new SettingsModule(_configuration));
+            builder.RegisterModule<CommandModule>();            
             builder.RegisterModule<RepositoryModule>();
+            builder.RegisterModule<MongoModule>();
             builder.RegisterModule<ServiceModule>();
-            builder.RegisterModule<CommandModule>();
             builder.RegisterInstance(AutoMapperConfig.Initialize()).SingleInstance();
 
         }
