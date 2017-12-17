@@ -10,7 +10,8 @@ namespace TheTeacher.Infrastructure.IoC.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            var assembly = typeof(RepositoryModule).GetTypeInfo().Assembly;
+            var assembly = typeof(MongoModule).GetTypeInfo().Assembly;
+            
             // Registering MongoClient
             builder.Register( (c, p) => 
             {
