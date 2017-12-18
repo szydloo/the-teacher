@@ -14,7 +14,7 @@ using System;
 
 namespace TheTeacher.Tests.Services
 {
-    
+    [TestFixture]
     public class UserServiceTests
     {
         Mock<IMapper> mapperMock;

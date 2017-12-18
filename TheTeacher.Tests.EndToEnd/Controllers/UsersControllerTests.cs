@@ -15,8 +15,10 @@ using TheTeacher.Infrastructure.Exceptions;
 
 namespace TheTeacher.Tests.EndToEnd.Controllers
 {
+    [TestFixture]
     public class UsersControllerTests : ControllerBaseTests
     {
+
         [Test]
         public async Task given_valid_email_user_should_exist()
         {

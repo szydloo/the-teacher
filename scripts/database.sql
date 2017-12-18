@@ -14,4 +14,9 @@ CREATE TABLE Users (
     CreatedAt  datetime not null
 )
 
-SELECT * FROM USERS
+-- Basic queries
+SELECT Id, Email, Username FROM Users
+        WHERE Users.Role LIKE 'admin'
+        ORDER BY Username DESC
+
+SELECT * FROM Users

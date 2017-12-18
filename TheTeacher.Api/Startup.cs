@@ -25,6 +25,7 @@ using System.Text;
 using NLog.Extensions.Logging;
 using NLog.Web;
 using TheTeacher.Infrastructure.Mongo;
+using TheTeacher.Infrastructure.EntityFramework;
 
 namespace TheTeacher.Api
 {
@@ -47,6 +48,9 @@ namespace TheTeacher.Api
                     .AddJsonOptions( jsonOpt => jsonOpt.SerializerSettings.Formatting = Formatting.Indented);
             services.AddMemoryCache();
 
+            services.AddEntityFrameworkSqlServer()
+                    .AddEntityFrameworkInMemoryDatabase()
+                    .AddDbContext<TheTeacherContext>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer( opt =>
                     {

@@ -14,6 +14,7 @@ using TheTeacher.Infrastructure.DTO;
 
 namespace TheTeacher.Tests.EndToEnd.Controllers
 {
+    [TestFixture]
     public abstract class ControllerBaseTests
     {
         protected TestServer Server;

@@ -20,34 +20,37 @@ namespace TheTeacher.Infrastructure.Services
             var users = await _userService.BrowseAsync();
             if(users.Any())
             {
-                return;
+                goto TeachersIni;
             }
 
 
-            var Tasks = new List<Task>(); 
             for(int i = 1; i <= 10; i++)
             {
                 Guid userId = Guid.NewGuid();
                 
-                Tasks.Add(_userService.RegisterAsync(userId,$"test{i}@email.com",$"secret{i}",$"username{i}",$"TestTest{i}","user"));
+                await _userService.RegisterAsync(userId,$"test{i}@email.com",$"secret{i}",$"username{i}",$"TestTest{i}","user");
             }
             for(int i = 1; i <= 3; i++)
             {
                 Guid userIdADmin = Guid.NewGuid();
                 
-                Tasks.Add(_userService.RegisterAsync(userIdADmin, $"testadmin{i}@email.com", $"secretAdmin", $"usernameAdmin{i}",$"AdminAdmin{i}", "admin"));
+                await _userService.RegisterAsync(userIdADmin, $"testadmin{i}@email.com", $"secretAdmin", $"usernameAdmin{i}",$"AdminAdmin{i}", "admin");
             }
-            await Task.WhenAll(Tasks);    
 
-            
+        TeachersIni:
+
+            var teachers = await _teacherService.BrowseAsync();
+            if(teachers.Any())
+            {
+                return;
+            }
+        
+
             for(int i = 1; i <= 5; i++)
             {
                 var user = await _userService.GetAsync($"test{i}@email.com");
-                Tasks.Add(_teacherService.CreateAsync(user.Id, $"randomAdress{i}"));
+                await _teacherService.CreateAsync(user.Id, $"randomAdress{i}");
             }        
-            await Task.WhenAll(Tasks);
-
-            Console.WriteLine(Tasks.ToString());
         }
 
     }
