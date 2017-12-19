@@ -37,8 +37,8 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
                 Email = "test@email.com",
                 Password = "secretto",
                 Username = "usernemmo",
-                Fullname = "Markitto Robertto",
-                Role = "user"
+                Role = "user",
+                Fullname = "Markitto Robertto"                
             };
             
             var payload = GetPayload(command);
@@ -59,8 +59,8 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
                 Email = "testinvalid.com",
                 Password = "secret",
                 Username = "usernemmo",
-                Fullname = "Markitto Robertto",
-                Role = "user"
+                Role = "user",
+                Fullname = "Markitto Robertto"
             };
 
             var payload = GetPayload(command);

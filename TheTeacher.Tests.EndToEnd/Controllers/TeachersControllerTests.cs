@@ -7,7 +7,8 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using TheTeacher.Infrastructure.Commands.Lesson;
+using TheTeacher.Infrastructure.Commands.LessonCom;
+using TheTeacher.Infrastructure.Commands.Teacher;
 using TheTeacher.Infrastructure.Commands.User;
 using TheTeacher.Infrastructure.DTO;
 using TheTeacher.Infrastructure.Exceptions;
@@ -20,7 +21,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
         [Test]
         public async Task getting_teacher_with_invalid_email_should_not_found()
         {
-            string email = "test6@email.com";
+            string email = "test14@email.com";
             var user = await GetUserAsync(email);
 
             var response = await Client.GetAsync($"/teachers/{user.Id}");
@@ -34,8 +35,8 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
         [Test]
         public async Task creating_teacher_given_valid_credentials_should_return_no_content()
         {
-            string email = "test6@email.com";
-            string password = "secret6";
+            string email = "test15@email.com";
+            string password = "secret15";
             var user = await GetUserAsync(email);
             var token = await GetTokenAsync(email, password);
             var command = new CreateTeacher
@@ -70,8 +71,8 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
         [Test]
         public async Task adding_lesson_async_should_return_no_content()
         {
-            var email = "test1@email.com";
-            var password = "secret1";
+            var email = "test4@email.com";
+            var password = "secret4";
             var user = await GetUserAsync(email);
             var token = await GetTokenAsync(email, password);
 
@@ -85,7 +86,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
 
             var payload = GetPayload(command);
 
-            var request = CreateRequest("http://localhost:5000/teachers/lesson", payload,
+            var request = CreateRequest("http://localhost:5000/lessons", payload,
                 new Dictionary<string,string>
                 {
                     { "Authorization", $"Bearer {token}" },
@@ -93,15 +94,15 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
                 }
             );
 
-            var response = await request.SendAsync("PUT");
+            var response = await request.PostAsync();
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
         }
 
         [Test]
         public async Task adding_lesson_async_to_invalid_teacher_should_return_errorcode_teacher_not_found()
         {
-            var email = "test6@email.com";
-            var password = "secret6";
+            var email = "test20@email.com";
+            var password = "secret20";
             var user = await GetUserAsync(email);
             var token = await GetTokenAsync(email, password);
 
@@ -115,7 +116,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
 
             var payload = GetPayload(command);
 
-            var request = CreateRequest("http://localhost:5000/teachers/lesson", payload,
+            var request = CreateRequest("http://localhost:5000/lessons", payload,
                 new Dictionary<string,string>
                 {
                     { "Authorization", $"Bearer {token}" },
@@ -123,7 +124,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
                 }
             );
 
-            var response = await request.SendAsync("PUT");
+            var response = await request.PostAsync();
             var exceptionMessage = await GetExceptionCodeAndMessageAsync(response);
             exceptionMessage.Item1.ShouldBeEquivalentTo(ServiceErrorCodes.TeacherNotFound);
         }

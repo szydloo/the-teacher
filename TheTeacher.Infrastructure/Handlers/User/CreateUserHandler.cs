@@ -16,7 +16,7 @@ namespace TheTeacher.Infrastructure.Handlers.User
         }
         public async Task HandleAsync(CreateUser command)
         {
-            await _userService.RegisterAsync(Guid.NewGuid(), command.Email, command.Password, command.Username, command.Fullname, command.Role);
+            await _userService.RegisterAsync(Guid.NewGuid(), command.Email, command.Password, command.Username, command.Role, command.Fullname);
         }
     }
 }

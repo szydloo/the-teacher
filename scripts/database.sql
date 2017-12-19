@@ -18,7 +18,7 @@ SELECT * FROM Users;
 
 DROP TABLE Users;
 
--- Basic queries review
+-- ******** Basic queries review ***********
 SELECT Id, Email, Username FROM Users
         WHERE Users.Role LIKE 'admin'
         ORDER BY Username DESC;

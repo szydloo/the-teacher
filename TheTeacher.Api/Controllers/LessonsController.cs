@@ -8,7 +8,6 @@ using TheTeacher.Infrastructure.Commands.LessonCom;
 
 namespace TheTeacher.Api.Controllers
 {
-    [Route("teachers/[Controller]")]
     public class LessonsController : ApiControllerBase
     {
         private readonly ITeacherService _teacherService;
@@ -27,8 +26,8 @@ namespace TheTeacher.Api.Controllers
         }
 
         [Authorize]
-        [HttpPut]
-        public async Task<IActionResult> Put([FromBody]AddLesson command)
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody]AddLesson command)
         {
             await DispatchAsync(command);
             return NoContent();
