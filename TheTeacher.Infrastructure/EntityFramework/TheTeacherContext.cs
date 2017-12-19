@@ -9,7 +9,6 @@ namespace TheTeacher.Infrastructure.EntityFramework
         public DbSet<User> Users { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         
-        
         public TheTeacherContext(DbContextOptions<TheTeacherContext> options, SqlSettings sqlSettings ) : base(options)
         {
             _sqlSettings = sqlSettings;
@@ -34,7 +33,7 @@ namespace TheTeacher.Infrastructure.EntityFramework
             userBuilder.HasKey(x => x.Id);
             var teacherBuilder = modelBuilder.Entity<Teacher>();
             teacherBuilder.HasKey(x => x.UserID);
-        }
 
+        }
     }
 }

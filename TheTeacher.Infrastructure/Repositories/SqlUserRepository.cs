@@ -38,12 +38,12 @@ namespace TheTeacher.Infrastructure.Repositories
         }
         public async Task UpdateAsync(Guid user, string newUsername)
         {
-            await Task.CompletedTask;
+            await Task.CompletedTask; // TODO implement
         }
 
         public async Task UpdateAsync(Guid userId, string currentPassword, string newPassword)
         {
-            await Task.CompletedTask;
+            await Task.CompletedTask; // TODO implement
         }
     }
 }

@@ -12,6 +12,7 @@ namespace TheTeacher.Core.Domain
         public Guid UserID { get; protected set; }
         public string Name { get; protected set; }
         public string Address { get; protected set; }
+        public string PhoneNumber { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         
@@ -39,12 +40,18 @@ namespace TheTeacher.Core.Domain
         public void RemoveLesson(Lesson lesson)
             => Lessons.Remove(lesson);
 
+        public void UpdateLesson(Lesson lesson)
+        {
+            Lessons.Remove(lesson);
+            Lessons.Add(lesson);
+        }
+
         public void RemoveLesson(string name)
         {
             var lesson = Lessons.SingleOrDefault(x => x.Subject.Name == name);
             if(lesson == null)
             {
-                throw new DomainException(DomainErrorCodes.InvalidName, $"Subject with name {name} does not exist.");
+                throw new DomainException(DomainErrorCodes.InvalidName, $"Lesson with name {name} does not exist.");
             }
             RemoveLesson(lesson);
 

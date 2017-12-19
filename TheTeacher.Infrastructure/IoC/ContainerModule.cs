@@ -19,7 +19,7 @@ namespace TheTeacher.Infrastructure.IoC
             builder.RegisterModule<CommandModule>();            
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<MongoModule>(); // Order matters
-            builder.RegisterModule<SqlModule>(); // overites mongo/repository
+            builder.RegisterModule<SqlModule>(); // overites mongo/IMrepository
             builder.RegisterModule<ServiceModule>();
             builder.RegisterInstance(AutoMapperConfig.Initialize()).SingleInstance();
 

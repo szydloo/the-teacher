@@ -20,7 +20,7 @@ namespace TheTeacher.Core.Domain
         {
         }
         
-        public User(Guid id, string email, string password, string salt, string username, string fullname, string role)
+        public User(Guid id, string email, string password, string salt, string username, string role, string fullname)
         {
             Id = id;
             SetName(username);
@@ -93,6 +93,11 @@ namespace TheTeacher.Core.Domain
 
         public void SetFullname(string fullname)
         {
+            if(fullname == null) 
+            {
+                Fullname = null;
+                return;
+            }
             if( String.IsNullOrWhiteSpace(fullname))
             {
                 throw new DomainException(DomainErrorCodes.InvalidName, "Fullname cannot be empty.");

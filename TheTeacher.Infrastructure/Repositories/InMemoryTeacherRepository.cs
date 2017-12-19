@@ -30,6 +30,8 @@ namespace TheTeacher.Infrastructure.Repositories
 
         public async Task UpdateAsync(Teacher teacher)
         {
+            _teachers.Remove(teacher);
+            _teachers.Add(teacher);
             await Task.CompletedTask;
         }
     }

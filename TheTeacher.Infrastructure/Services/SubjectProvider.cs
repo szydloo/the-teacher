@@ -31,6 +31,13 @@ namespace TheTeacher.Infrastructure.Services
                     "Reading",
                     "Writing",
                 },
+                ["Math"] = new List<string>
+                {
+                    "Calculus",
+                    "Prealgebra",
+                    "Algebra",
+                    "Mathematical Analyiys"
+                },
                 ["Languages"] = new List<string>
                 {
                     "Spanish",
@@ -69,8 +76,10 @@ namespace TheTeacher.Infrastructure.Services
             {
                 throw new ServiceException(ServiceErrorCodes.InvalidSubjectDetails ,$"Category {category} is not available.");
             }
+
             var subjects = availableSubjects[category];
             var subject = subjects.SingleOrDefault(x => x.ToLowerInvariant() == name.ToLowerInvariant());
+
             if(subject == null)
             {
                 throw new ServiceException(ServiceErrorCodes.InvalidSubjectDetails, $"Subject '{name}' is not available.");

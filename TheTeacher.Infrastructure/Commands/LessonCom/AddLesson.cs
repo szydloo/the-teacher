@@ -1,6 +1,6 @@
 using System;
 
-namespace TheTeacher.Infrastructure.Commands.Teacher
+namespace TheTeacher.Infrastructure.Commands.LessonCom
 {
     public class AddLesson : AuthenticatedCommandBase
     {

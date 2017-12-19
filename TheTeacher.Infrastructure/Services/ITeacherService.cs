@@ -11,9 +11,8 @@ namespace TheTeacher.Infrastructure.Services
         Task<TeacherDTO> GetAsync(Guid userId);
         Task<IEnumerable<TeacherDTO>> BrowseAsync();
         Task DeleteAsync(Guid userId);
+        Task UpdateAsync(Teacher teacher);
         Task UpdateAddressAsync(Guid userId, string address);
         Task CreateAsync(Guid userId, string address);
-        Task AddLessonAsync(Guid userId, string name, string category, string grade, decimal pricePerHour);
-
     }
 }

@@ -34,7 +34,7 @@ namespace TheTeacher.Infrastructure.Repositories
         public async Task UpdateAsync(Guid userId, string currentPassword, string newPassword)
         {
             var user = await GetAsync(userId);
-            // TODO
+            
         }
 
         public async Task UpdateAsync(Guid userId, string newUsername)

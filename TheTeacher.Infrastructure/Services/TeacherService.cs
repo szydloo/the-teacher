@@ -49,7 +49,6 @@ namespace TheTeacher.Infrastructure.Services
             await _teacherRepository.AddAsync(new Teacher(user, address));
 
         }
-
         public async Task DeleteAsync(Guid userId)
         {
             var teacher = await _teacherRepository.GetOrFailAsync(userId);
@@ -64,12 +63,11 @@ namespace TheTeacher.Infrastructure.Services
             await _teacherRepository.UpdateAsync(teacher); // TODO implement proper logic
         }
 
-        public async Task AddLessonAsync(Guid userId, string name, string category, string grade, decimal pricePerHour)
+        public async Task UpdateAsync(Teacher teacher)
         {
-            var teacher = await _teacherRepository.GetOrFailAsync(userId);
-            var subjectDetails = await _subjectProvider.GetAsync(name,category);
-            var subject = Subject.Create(subjectDetails.Name, subjectDetails.Category);
-            teacher.AddLesson(subject, grade, pricePerHour);
+            var thisTeacher = await _teacherRepository.GetOrFailAsync(teacher.UserID);
+            
+            await _teacherRepository.UpdateAsync(teacher);
         }
     }
 }

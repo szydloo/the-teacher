@@ -20,6 +20,7 @@ namespace TheTeacher.Api.Controllers
             _userService = userService;
         }
         
+        [Authorize(Policy = "admin")]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -53,12 +54,12 @@ namespace TheTeacher.Api.Controllers
         {
             await DispatchAsync(command);
 
-            return NoContent(); // HTTP specification
+            return NoContent(); 
         }
 
         [Authorize]
         [HttpPut]
-        [Route("username")] // TODO might want to change
+        [Route("username")] 
         public async Task<IActionResult> Put([FromBody]ChangeUserUsername command)
         {
             await DispatchAsync(command);
@@ -67,7 +68,7 @@ namespace TheTeacher.Api.Controllers
         }
 
         [Authorize]
-        [HttpDelete("me")] // TODO authorization
+        [HttpDelete("me")]
         public async Task<IActionResult> Delete()
         {
             await DispatchAsync(new DeleteUser());

@@ -7,7 +7,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using TheTeacher.Infrastructure.Commands.Teacher;
+using TheTeacher.Infrastructure.Commands.Lesson;
 using TheTeacher.Infrastructure.Commands.User;
 using TheTeacher.Infrastructure.DTO;
 using TheTeacher.Infrastructure.Exceptions;

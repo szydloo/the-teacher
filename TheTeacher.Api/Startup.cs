@@ -61,6 +61,7 @@ namespace TheTeacher.Api
                             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings.Key))
                         };
                     });
+            services.AddAuthorization(x => x.AddPolicy("admin", y => y.RequireRole("admin")));
 
             // Autofac setup
             var builder = new ContainerBuilder();
