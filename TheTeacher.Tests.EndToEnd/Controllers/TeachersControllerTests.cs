@@ -15,6 +15,7 @@ using TheTeacher.Infrastructure.Exceptions;
 
 namespace TheTeacher.Tests.EndToEnd.Controllers
 {
+    [TestFixture]
     public class TeachersControllerTests : ControllerBaseTests
     {
 
@@ -27,7 +28,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             var response = await Client.GetAsync($"/teachers/{user.Id}");
             var responseMessage = await GetExceptionCodeAndMessageAsync(response);
 
-            // TODO: should be okey, but dotnet test says no / 'run test' says yes || Now it works ???? Read NUnitDocs word by word
+            // TODO: should be okey, but dotnet test says no / 'run test' says yes || Now it works ???? Read NUnitDocs line by line
             responseMessage.Item1.ShouldBeEquivalentTo(ServiceErrorCodes.TeacherNotFound); 
             
         }
@@ -60,73 +61,14 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
         [Test]
         public async Task getting_teacher_with_valid_email_should_return_no_content()
         {
-            string email = "test1@email.com";
+            string email = "test10@email.com";
             var user = await GetUserAsync(email);
 
             var response = await Client.GetAsync($"/teachers/{user.Id}");
             // Doesnt work with dotnet test though it should work/works with run test TODO: Fix  
-            // response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
         }
 
-        [Test]
-        public async Task adding_lesson_async_should_return_no_content()
-        {
-            var email = "test4@email.com";
-            var password = "secret4";
-            var user = await GetUserAsync(email);
-            var token = await GetTokenAsync(email, password);
-
-            var command = new AddLesson
-            {
-                Name = "Biology",
-                Category = "Science",
-                PricePerHour = 5M,
-                Grade = "Elementary"
-            };
-
-            var payload = GetPayload(command);
-
-            var request = CreateRequest("http://localhost:5000/lessons", payload,
-                new Dictionary<string,string>
-                {
-                    { "Authorization", $"Bearer {token}" },
-                    { "Content-type", $"application/json" }
-                }
-            );
-
-            var response = await request.PostAsync();
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
-        }
-
-        [Test]
-        public async Task adding_lesson_async_to_invalid_teacher_should_return_errorcode_teacher_not_found()
-        {
-            var email = "test20@email.com";
-            var password = "secret20";
-            var user = await GetUserAsync(email);
-            var token = await GetTokenAsync(email, password);
-
-            var command = new AddLesson
-            {
-                Name = "Biology",
-                Category = "Science",
-                PricePerHour = 5M,
-                Grade = "Elementary"
-            };
-
-            var payload = GetPayload(command);
-
-            var request = CreateRequest("http://localhost:5000/lessons", payload,
-                new Dictionary<string,string>
-                {
-                    { "Authorization", $"Bearer {token}" },
-                    { "Content-type", $"application/json" }
-                }
-            );
-
-            var response = await request.PostAsync();
-            var exceptionMessage = await GetExceptionCodeAndMessageAsync(response);
-            exceptionMessage.Item1.ShouldBeEquivalentTo(ServiceErrorCodes.TeacherNotFound);
-        }
+ 
     }
 }

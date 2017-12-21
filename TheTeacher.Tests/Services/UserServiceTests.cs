@@ -19,7 +19,7 @@ namespace TheTeacher.Tests.Services
     {
         Mock<IMapper> mapperMock;
         Mock<IUserRepository> userRepositoryMock;
-        Encrypter encrypter;
+        IEncrypter encrypter;
         IUserService userService;
 
         [SetUp]
@@ -35,7 +35,7 @@ namespace TheTeacher.Tests.Services
         [Test]
         public async Task registering_user_should_invoke_add_async_once()
         {
-            await userService.RegisterAsync(Guid.NewGuid(), "email123@gmail.com", "secret", "username1", "Jack Daniels", "user");
+            await userService.RegisterAsync(Guid.NewGuid(), "email123@gmail.com", "secret", "username1", "user", "Jack Daniels");
             userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()),Times.Exactly(1));
         }
 
@@ -44,6 +44,14 @@ namespace TheTeacher.Tests.Services
         {
             var user = await userService.GetAsync("user@email.com");
             user.Should().BeNull();
+        }
+
+        [Test]
+        public async Task browse_async_should_be_invoked_once()
+        {
+            var users = await userService.BrowseAsync();
+            userRepositoryMock.Verify(x => x.GetAllAsync(), Times.Once);
+            
         }
 
         [Test]
