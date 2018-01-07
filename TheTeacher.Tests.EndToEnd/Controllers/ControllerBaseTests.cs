@@ -76,13 +76,13 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
         }
 
         // Returns a Tuple<string, string> with Item1 being error code and Item2 message
-        protected async Task<Tuple<string,string>> GetExceptionCodeAndMessageAsync(HttpResponseMessage response) 
+        protected async Task<(string errorCode, string errorMessage)> GetExceptionCodeAndMessageAsync(HttpResponseMessage response) 
         {
 
             var definition = new { code = "", message = "" };
             var responseString = await response.Content.ReadAsStringAsync();
             var exceptionMessage = JsonConvert.DeserializeAnonymousType(responseString, definition);
-            return new Tuple<string,string>(exceptionMessage.code,exceptionMessage.message);
+            return (exceptionMessage.code, exceptionMessage.message);
         }
     }
 }

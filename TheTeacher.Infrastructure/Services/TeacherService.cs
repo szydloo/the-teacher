@@ -38,7 +38,7 @@ namespace TheTeacher.Infrastructure.Services
             return _mapper.Map<IEnumerable<TeacherDTO>>(teachers);
         }
 
-        public async Task CreateAsync(Guid userId, string address)
+        public async Task CreateAsync(Guid userId, string address, string fullname)
         {
             var user = await _userRepository.GetOrFailAsync(userId);
             var teacher = await _teacherRepository.GetAsync(userId);
@@ -46,7 +46,7 @@ namespace TheTeacher.Infrastructure.Services
             {
                 throw new ServiceException(ServiceErrorCodes.UserAlreadyExists, $"Teacher with id '{userId}' already exists");
             }
-            await _teacherRepository.AddAsync(new Teacher(user, address));
+            await _teacherRepository.AddAsync(new Teacher(user, address, fullname));
 
         }
         public async Task DeleteAsync(Guid userId)

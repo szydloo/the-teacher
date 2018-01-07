@@ -10,12 +10,15 @@ namespace TheTeacher.Infrastructure.Services
         private readonly IUserService _userService;
         private readonly ITeacherService _teacherService;
         private readonly ILessonService _lessonService;
+        private readonly IAvailableTimePeriodService _availableTimePeriodService;
         
-        public DataInitializer(IUserService userService, ITeacherService teacherService, ILessonService lessonService)
+        public DataInitializer(IUserService userService, ITeacherService teacherService,
+             ILessonService lessonService, IAvailableTimePeriodService availableTimePeriodService)
         {
             _userService = userService;
             _teacherService = teacherService;
             _lessonService = lessonService;
+            _availableTimePeriodService = availableTimePeriodService;
         }
         public async Task SeedAsync()
         {
@@ -30,13 +33,13 @@ namespace TheTeacher.Infrastructure.Services
             {
                 Guid userId = Guid.NewGuid();
                 
-                await _userService.RegisterAsync(userId,$"test{i}@email.com",$"secret{i}",$"username{i}", "user", $"TestTest{i}");
+                await _userService.RegisterAsync(userId,$"test{i}@email.com",$"secret{i}",$"username{i}", "user");
             }
             for(int i = 1; i <= 3; i++)
             {
                 Guid userIdADmin = Guid.NewGuid();
                 
-                await _userService.RegisterAsync(userIdADmin, $"testadmin{i}@email.com", $"secretAdmin", $"usernameAdmin{i}", "admin", $"AdminAdmin{i}");
+                await _userService.RegisterAsync(userIdADmin, $"testadmin{i}@email.com", $"secretAdmin", $"usernameAdmin{i}", "admin");
             }
             for(int i = 11; i <= 30; i++)
             {
@@ -57,12 +60,21 @@ namespace TheTeacher.Infrastructure.Services
             for(int i = 1; i <= 10; i++)
             {
                 var user = await _userService.GetAsync($"test{i}@email.com");
-                await _teacherService.CreateAsync(user.Id, $"randomAdress{i}");
+                await _teacherService.CreateAsync(user.Id, $"randomAdress{i}", $"testName{i}");
             }   
             for(int i = 1; i <= 3; i++) 
             {
                 var u = await _userService.GetAsync($"test{i}@email.com");
                 await _lessonService.AddAsync(u.Id, "Biology", "Science", "Elementary", 100M );
+            }
+
+            for(int i = 1; i <= 3; i++) 
+            {
+                var user = await _userService.GetAsync($"test{i}@email.com");
+                await _availableTimePeriodService.AddTimePeriodAsync(user.Id, new DateTime(2016,12,6,12,15,00), new DateTime(2016,12,6,13,15,00));
+
+                await _availableTimePeriodService.AddTimePeriodAsync(user.Id, new DateTime(2015,12,6,14,15,00), new DateTime(2015,12,6,15,15,00));
+
             }
                  
         }

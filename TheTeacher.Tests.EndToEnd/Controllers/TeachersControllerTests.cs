@@ -28,8 +28,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             var response = await Client.GetAsync($"/teachers/{user.Id}");
             var responseMessage = await GetExceptionCodeAndMessageAsync(response);
 
-            // TODO: should be okey, but dotnet test says no / 'run test' says yes || Now it works ???? Read NUnitDocs line by line
-            responseMessage.Item1.ShouldBeEquivalentTo(ServiceErrorCodes.TeacherNotFound); 
+            responseMessage.errorCode.ShouldBeEquivalentTo(ServiceErrorCodes.TeacherNotFound); 
             
         }
 
@@ -42,7 +41,8 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             var token = await GetTokenAsync(email, password);
             var command = new CreateTeacher
             {
-                Address = "address"                 
+                Address = "address",  
+                Fullname = "Test Test"
             };
             var payload = GetPayload(command);
 
@@ -65,7 +65,6 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             var user = await GetUserAsync(email);
 
             var response = await Client.GetAsync($"/teachers/{user.Id}");
-            // Doesnt work with dotnet test though it should work/works with run test TODO: Fix  
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
         }
 

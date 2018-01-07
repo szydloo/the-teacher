@@ -49,7 +49,7 @@ namespace TheTeacher.Api.Controllers
 
         [Authorize]
         [HttpPut]
-        [Route("password")] // TODO might want to change
+        [Route("password")] 
         public async Task<IActionResult> Put([FromBody]ChangeUserPassword command)
         {
             await DispatchAsync(command);

@@ -35,7 +35,7 @@ namespace TheTeacher.Tests.Services
         [Test]
         public async Task registering_user_should_invoke_add_async_once()
         {
-            await userService.RegisterAsync(Guid.NewGuid(), "email123@gmail.com", "secret", "username1", "user", "Jack Daniels");
+            await userService.RegisterAsync(Guid.NewGuid(), "email123@gmail.com", "secret", "username1", "user");
             userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()),Times.Exactly(1));
         }
 

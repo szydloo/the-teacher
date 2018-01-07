@@ -69,14 +69,14 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
 
             var response = await request.PostAsync();
             var exceptionMessage = await GetExceptionCodeAndMessageAsync(response);
-            exceptionMessage.Item1.ShouldBeEquivalentTo(ServiceErrorCodes.TeacherNotFound);
+            exceptionMessage.errorCode.ShouldBeEquivalentTo(ServiceErrorCodes.TeacherNotFound);
         }
 
         [Test]
         public async Task deleting_lesson_should_return_no_content()
         {
-            var email = "test3@email.com";
-            var password = "secret3";
+            var email = "test2@email.com";
+            var password = "secret2";
             var user = await GetUserAsync(email);
             var token = await GetTokenAsync(email, password);
 

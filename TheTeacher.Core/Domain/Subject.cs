@@ -24,7 +24,7 @@ namespace TheTeacher.Core.Domain
             {
                 throw new DomainException(DomainErrorCodes.InvalidName, "Subject name cannot be empty.");
             }
-            else if (name.Length < 2 )
+            else if (name.Length < 2)
             {
                 throw new DomainException(DomainErrorCodes.InvalidName, "Subject name has to have at least 2 characters.");
             }

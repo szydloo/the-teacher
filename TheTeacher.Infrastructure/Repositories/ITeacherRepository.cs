@@ -8,6 +8,7 @@ namespace TheTeacher.Infrastructure.Repositories
     public interface ITeacherRepository : IRepository
     {
         Task<Teacher> GetAsync(Guid userId);
+        Task<Teacher> GetAsync(string Name);        
         Task<IEnumerable<Teacher>> GetAllAsync();
         Task RemoveAsync(Guid userId);
         Task AddAsync(Teacher teacher);

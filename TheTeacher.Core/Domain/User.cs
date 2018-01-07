@@ -20,13 +20,12 @@ namespace TheTeacher.Core.Domain
         {
         }
         
-        public User(Guid id, string email, string password, string salt, string username, string role, string fullname)
+        public User(Guid id, string email, string password, string salt, string username, string role)
         {
             Id = id;
-            SetName(username);
+            SetUsername(username);
             SetEmail(email);
             SetPassword(password);
-            SetFullname(fullname);
             Salt = salt;
             Role = role;
             UpdatedAt = DateTime.UtcNow;
@@ -72,47 +71,23 @@ namespace TheTeacher.Core.Domain
             UpdatedAt = DateTime.UtcNow;
         }
 
-        private void SetName(string name)
+        private void SetUsername(string username)
         {
-            if( String.IsNullOrWhiteSpace(name))
+            if( String.IsNullOrWhiteSpace(username))
             {
                 throw new DomainException(DomainErrorCodes.InvalidUsername, "Username cannot be empty.");
             }
-            else if (name.Length < 2)
+            else if (username.Length < 2)
             {
                 throw new DomainException(DomainErrorCodes.InvalidUsername, "Username has to have at least 2 characters.");
             }
-            else if( name == Username)
+            else if( username == Username)
             {
                 return;
             }
 
-            Username = name;
+            Username = username;
             UpdatedAt = DateTime.UtcNow;            
-        }
-
-        public void SetFullname(string fullname)
-        {
-            if(fullname == null) 
-            {
-                Fullname = null;
-                return;
-            }
-            if( String.IsNullOrWhiteSpace(fullname))
-            {
-                throw new DomainException(DomainErrorCodes.InvalidName, "Fullname cannot be empty.");
-            }
-            else if (fullname.Length < 2)
-            {
-                throw new DomainException(DomainErrorCodes.InvalidName, "Fullname has to have at least 2 characters.");
-            }
-            else if( fullname == Fullname)
-            {
-                return;
-            }
-
-            Fullname = fullname;
-            UpdatedAt = DateTime.UtcNow;
         }
     }
 }

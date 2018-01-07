@@ -38,7 +38,6 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
                 Password = "secretto",
                 Username = "usernemmo",
                 Role = "user",
-                Fullname = "Markitto Robertto"                
             };
             
             var payload = GetPayload(command);
@@ -48,7 +47,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             response.Headers.Location.ToString().ShouldBeEquivalentTo($"/users/{command.Email}");
 
             var user = await GetUserAsync(command.Email);
-            user.Fullname.ShouldBeEquivalentTo(command.Fullname);
+            user.Username.ShouldBeEquivalentTo(command.Username);
         }
 
         [Test]
@@ -60,7 +59,6 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
                 Password = "secret",
                 Username = "usernemmo",
                 Role = "user",
-                Fullname = "Markitto Robertto"
             };
 
             var payload = GetPayload(command);
@@ -68,8 +66,8 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             var response = await Client.PostAsync("users", payload);
             var exceptionMessage = await GetExceptionCodeAndMessageAsync(response);
             
-            exceptionMessage.Item1.ShouldBeEquivalentTo(DomainErrorCodes.InvalidEmail);
-            exceptionMessage.Item2.ShouldBeEquivalentTo("Invalid email address.");
+            exceptionMessage.errorCode.ShouldBeEquivalentTo(DomainErrorCodes.InvalidEmail);
+            exceptionMessage.errorMessage.ShouldBeEquivalentTo("Invalid email address.");
         
         }
 
@@ -81,15 +79,14 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
                 Email = "test1@email.com",
                 Username = "username",
                 Password = "secret",
-                Fullname = "Full Name",
                 Role = "user"
             };
             
             var payload = GetPayload(command);
             var response = await Client.PostAsync("users",payload);
             var exceptionMessage = await GetExceptionCodeAndMessageAsync(response);
-            exceptionMessage.Item1.ShouldBeEquivalentTo(ServiceErrorCodes.EmailInUse);
-            exceptionMessage.Item2.ShouldBeEquivalentTo($"User with this email: '{command.Email}' already exists.");
+            exceptionMessage.errorCode.ShouldBeEquivalentTo(ServiceErrorCodes.EmailInUse);
+            exceptionMessage.errorMessage.ShouldBeEquivalentTo($"User with this email: '{command.Email}' already exists.");
 
         }
 

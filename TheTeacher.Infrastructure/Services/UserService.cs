@@ -49,7 +49,7 @@ namespace TheTeacher.Infrastructure.Services
             }
         }
 
-        public async Task RegisterAsync(Guid id, string email, string password, string username, string role, string fullname = null)
+        public async Task RegisterAsync(Guid id, string email, string password, string username, string role)
         {
             var user = await _userRepository.GetAsync(email);
             if(user != null)
@@ -59,7 +59,7 @@ namespace TheTeacher.Infrastructure.Services
 
             string salt = _encrypter.GetSalt();
             string hash = _encrypter.GetHash(password, salt);
-            await _userRepository.AddAsync(new User(id, email, hash, salt, username, role, fullname));
+            await _userRepository.AddAsync(new User(id, email, hash, salt, username, role));
         }
 
         public async Task<IEnumerable<UserDTO>> BrowseAsync()
