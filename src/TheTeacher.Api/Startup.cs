@@ -1,29 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using TheTeacher.Infrastructure.Mapper;
-using TheTeacher.Infrastructure.Repositories;
 using TheTeacher.Infrastructure.Services;
 using TheTeacher.Infrastructure.IoC;
 using TheTeacher.Infrastructure.Settings;
-using TheTeacher.Infrastructure.Extensions;
 using TheTeacher.Api.Framework;
 using System.Text;
-using NLog.Extensions.Logging;
-using NLog.Web;
 using TheTeacher.Infrastructure.Mongo;
 using TheTeacher.Infrastructure.EntityFramework;
 
@@ -51,6 +41,7 @@ namespace TheTeacher.Api
             services.AddEntityFrameworkSqlServer()
                     .AddEntityFrameworkInMemoryDatabase()
                     .AddDbContext<TheTeacherContext>();
+                    
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer( opt =>
                     {
@@ -79,25 +70,28 @@ namespace TheTeacher.Api
             // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             // loggerFactory.AddDebug();
 
-            app.UseAuthentication();
-            app.UseMyExceptionMiddleware();
             JwtSettings = app.ApplicationServices.GetService<JwtSettings>();
             var generalSettings  = app.ApplicationServices.GetService<GeneralSettings>();
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             if(generalSettings.SeedData)
             {
                 var dataInitializer = app.ApplicationServices.GetService<IDataInitializer>();
                 dataInitializer.SeedAsync();
             }
-            MongoConfigurator.Initiaize();
-            app.UseMvc();
-            appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
 
+            app.UseAuthentication();
+            app.UseMyExceptionMiddleware();
+
+            MongoConfigurator.Initiaize();
+            
+            app.UseMvc();
+
+            appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }
     }
 }

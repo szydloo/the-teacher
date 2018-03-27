@@ -1,1 +1,1 @@
-dotnet run -p .\TheTeacher.Api
+dotnet run -p .\src\TheTeacher.Api

@@ -10,7 +10,6 @@ namespace TheTeacher.Infrastructure.Repositories
     public class SqlUserRepository : IUserRepository, ISqlRepository
     {
         private readonly TheTeacherContext _context;
-        public DbSet<User> Users { get; set; }
         public SqlUserRepository(TheTeacherContext context)
         {
             _context = context;
@@ -22,7 +21,7 @@ namespace TheTeacher.Infrastructure.Repositories
             => await _context.Users.SingleOrDefaultAsync(x => x.Email == email);
 
         public async Task<IEnumerable<User>> GetAllAsync()
-            => await _context.Users.ToListAsync(); // TODO: Pagination
+            => await _context.Users.ToListAsync(); 
 
         public async Task AddAsync(User user)
         {

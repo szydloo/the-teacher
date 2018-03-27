@@ -20,7 +20,7 @@ namespace TheTeacher.Api.Controllers
             _userService = userService;
         }
         
-        [Authorize(Policy = "admin")]
+        // [Authorize(Policy = "admin")]
         [HttpGet]
         public async Task<IActionResult> Get()
         {

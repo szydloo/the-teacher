@@ -78,7 +78,6 @@ namespace TheTeacher.Tests.Services
             
             subjectProviderMock.Setup(x => x.GetAsync(It.IsAny<string>(), It.IsAny<string>())).Returns(tcs2.Task);
 
-
             // Act
             await lessonService.GetTeachersWithLessonAsync("Biolog");
 

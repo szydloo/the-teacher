@@ -75,7 +75,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             return request;
         }
 
-        // Returns a Tuple<string, string> with Item1 being error code and Item2 message
+        // Returns an anonymous type with exception code and message
         protected async Task<(string errorCode, string errorMessage)> GetExceptionCodeAndMessageAsync(HttpResponseMessage response) 
         {
 

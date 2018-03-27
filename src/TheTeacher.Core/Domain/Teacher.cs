@@ -82,7 +82,7 @@ namespace TheTeacher.Core.Domain
         public IEnumerable<Lesson> GetLessons()
         => _lessons;
         
-        public void AddAvailableTimePeriod(DateTime start, DateTime end)
+        public virtual void AddAvailableTimePeriod(DateTime start, DateTime end)
         {
             var timeRange = new TimeRange(start, end);
             if(timeRange.Duration.Hours >= 24)

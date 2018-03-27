@@ -29,7 +29,7 @@ namespace TheTeacher.Infrastructure.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var userBuilder = modelBuilder.Entity<User>();          
-
+            
             userBuilder.HasKey(x => x.Id);
             var teacherBuilder = modelBuilder.Entity<Teacher>();
             teacherBuilder.HasKey(x => x.UserID);
