@@ -10,14 +10,13 @@ namespace TheTeacher.Core.Domain
 {
     public class Teacher
     {
-        public ISet<Lesson> Lessons = new HashSet<Lesson>();
-        public ITimePeriodCollection AvailableTime = new TimePeriodCollection();              
+        private ITimePeriodCollection _availableTime = new TimePeriodCollection();              
+        private ISet<Lesson> _lessons = new HashSet<Lesson>();
         public Guid UserID { get; protected set; }
         public string Fullname { get; protected set; }
         public string Address { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
-        
 
         protected Teacher()
         {   
@@ -26,7 +25,7 @@ namespace TheTeacher.Core.Domain
         public Teacher(User user, string address, string fullname)
         {
             UserID = user.Id;
-            SetAddress(address); // TODO Improve
+            SetAddress(address); 
             SetFullName(fullname);
             UpdatedAt = DateTime.UtcNow;
             CreatedAt = DateTime.UtcNow;
@@ -53,24 +52,24 @@ namespace TheTeacher.Core.Domain
         }
 
         public void AddLesson(Subject subject, string grade, decimal pricePerHour)
-            => Lessons.Add(Lesson.Create(subject, grade, pricePerHour));
+            => _lessons.Add(Lesson.Create(subject, grade, pricePerHour));
 
         public void AddLesson(Lesson lesson)
-            => Lessons.Add(lesson);
+            => _lessons.Add(lesson);
         
         public void RemoveLesson(Lesson lesson)
-            => Lessons.Remove(lesson);
+            => _lessons.Remove(lesson);
 
         public void UpdateLesson(Lesson lesson)
         {
-            Lessons.Remove(lesson);
-            Lessons.Add(lesson);
+            _lessons.Remove(lesson);
+            _lessons.Add(lesson);
             UpdatedAt = DateTime.Now;
         }
 
         public void RemoveLesson(string name)
         {
-            var lesson = Lessons.SingleOrDefault(x => x.Subject.Name == name);
+            var lesson = _lessons.SingleOrDefault(x => x.Subject.Name == name);
             if(lesson == null)
             {
                 throw new DomainException(DomainErrorCodes.InvalidName, $"Lesson with name {name} does not exist.");
@@ -78,9 +77,11 @@ namespace TheTeacher.Core.Domain
             
             RemoveLesson(lesson);
             UpdatedAt = DateTime.Now;
-            
         }
-
+        
+        public IEnumerable<Lesson> GetLessons()
+        => _lessons;
+        
         public void AddAvailableTimePeriod(DateTime start, DateTime end)
         {
             var timeRange = new TimeRange(start, end);
@@ -89,7 +90,7 @@ namespace TheTeacher.Core.Domain
                 throw new DomainException(DomainErrorCodes.InvalidTimePeriod, $"Selected time period availabilty duration cannot be longer thatn 24 hours.");
             }
 
-            foreach(var t in AvailableTime)
+            foreach(var t in _availableTime)
             {
                 var relation = t.GetRelation(timeRange);
   
@@ -99,24 +100,24 @@ namespace TheTeacher.Core.Domain
                 }
             }
 
-            AvailableTime.Add(timeRange);
+            _availableTime.Add(timeRange);
             UpdatedAt = DateTime.Now;
         }
 
-        public void RemoveAvailableTimePeriod(DateTime start, DateTime end)
+        public void RemoveAvailableTimePeriod(DateTime start)
         {
-            var timeRange =(TimeRange)from t in AvailableTime
-                            where AvailableTime.ContainsPeriod(new TimeRange(start, end))
-                            select t;
-
+            var timeRange =(TimeRange)_availableTime.Where(x => x.Start == start);
             if(timeRange == null)
             {
                 throw new DomainException(DomainErrorCodes.InvalidTimePeriod, $"Time period to remove does not exist.");
             }
             
-            AvailableTime.Remove(timeRange);
+            _availableTime.Remove(timeRange);
             UpdatedAt = DateTime.Now;
-            
         }
+
+        public ITimePeriodCollection GetTimePeriodCollection()
+        => _availableTime;
+        
     }
 }

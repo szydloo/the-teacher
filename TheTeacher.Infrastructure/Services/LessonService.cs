@@ -26,7 +26,13 @@ namespace TheTeacher.Infrastructure.Services
         public async Task<IEnumerable<TeacherDTO>> GetTeachersWithLessonAsync(string name)
         {
             var teachers = await _teacherRepository.GetAllAsync();
-            var teachersWithLesson = teachers.Where(t => t.Lessons.Where(l => l.Subject.Name == name).Any());
+            
+            // var teachersWithLesson = teachers.Where(t => t.GetLessons().Where(l => l.Subject.Name == name).Any());
+
+            var teachersWithLesson = from t in teachers
+                                    where t.GetLessons().Any(x => x.Subject.Name.Contains(name))
+                                    select t;
+
             return _mapper.Map<IEnumerable<TeacherDTO>>(teachersWithLesson);
         }
 
@@ -47,7 +53,7 @@ namespace TheTeacher.Infrastructure.Services
         public async Task RemoveAsync(Guid userId, string name)
         {
             var teacher = await _teacherRepository.GetOrFailAsync(userId);
-            var lesson = teacher.Lessons.FirstOrDefault(x => x.Subject.Name == name);
+            var lesson = teacher.GetLessons().FirstOrDefault(x => x.Subject.Name == name);
             teacher.RemoveLesson(lesson);
         }
     }

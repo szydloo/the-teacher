@@ -15,7 +15,7 @@ namespace TheTeacher.Infrastructure.Handlers.AvailableTimePeriod
         }
         public async Task HandleAsync(RemoveAvailableTimePeriod command)
         {
-            await _availableTimePeriodService.RemoveTimePeriodAsync(command.UserId, command.Start, command.End);
+            await _availableTimePeriodService.RemoveTimePeriodAsync(command.UserId, command.Start);
         }
     }
 }

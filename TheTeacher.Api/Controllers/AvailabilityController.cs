@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,10 @@ namespace TheTeacher.Api.Controllers
         public async Task<IActionResult> Get(string fullname)
         {
             var availableTime = await _availableTimePeriodService.BrowseAsync(fullname);
+            if(availableTime == null)
+            {
+                return NotFound();
+            }
             return Json(availableTime);
         }
 
@@ -34,11 +39,15 @@ namespace TheTeacher.Api.Controllers
         }
 
         [Authorize]
-        [HttpDelete]
-        public async Task<IActionResult> Delete([FromBody]RemoveAvailableTimePeriod command)
+        [HttpDelete("{Start}")]
+        public async Task<IActionResult> Delete(DateTime start)
         {
+            var command = new RemoveAvailableTimePeriod
+            {
+                Start = start
+            };
             await DispatchAsync(command);
-            return NoContent();
+            return Ok();
         }
 
     }

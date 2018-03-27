@@ -51,7 +51,7 @@ namespace TheTeacher.Api.Controllers
             };
 
             await DispatchAsync(command);
-            return NoContent();
+            return Ok();
         }
 
     }

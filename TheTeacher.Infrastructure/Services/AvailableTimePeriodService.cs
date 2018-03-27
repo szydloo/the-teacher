@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Itenso.TimePeriod;
@@ -23,14 +24,14 @@ namespace TheTeacher.Infrastructure.Services
         public async Task<IEnumerable<TimeRangeDTO>> BrowseAsync(string name)
         {
             var teacher = await _teacherRepository.GetOrFailAsync(name);
+            var timePeriodCol = teacher.GetTimePeriodCollection();
             var timeRangeList = new List<TimeRangeDTO>();
-            foreach(var t in teacher.AvailableTime)
+            foreach(var timePeriod in timePeriodCol)
             {
-                timeRangeList.Add(_mapper.Map<TimeRangeDTO>((TimeRange)t));
+                timeRangeList.Add(_mapper.Map<TimeRangeDTO>((TimeRange)timePeriod));
             }
             
             return timeRangeList;
-            
         }
         
         public async Task AddTimePeriodAsync(Guid userId, DateTime start, DateTime end)
@@ -39,10 +40,10 @@ namespace TheTeacher.Infrastructure.Services
             teacher.AddAvailableTimePeriod(start, end);
         }
 
-        public async Task RemoveTimePeriodAsync(Guid userId, DateTime start, DateTime end)
+        public async Task RemoveTimePeriodAsync(Guid userId, DateTime start)
         {
             var teacher = await _teacherRepository.GetOrFailAsync(userId);
-            teacher.RemoveAvailableTimePeriod(start, end);
+            teacher.RemoveAvailableTimePeriod(start);
         }
     }
 }

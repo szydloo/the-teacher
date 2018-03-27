@@ -9,7 +9,7 @@ namespace TheTeacher.Infrastructure.Services
     public interface IAvailableTimePeriodService : IService
     {
         Task AddTimePeriodAsync(Guid userId, DateTime start, DateTime end);
-        Task RemoveTimePeriodAsync(Guid userId, DateTime start, DateTime end);
+        Task RemoveTimePeriodAsync(Guid userId, DateTime start);
         Task<IEnumerable<TimeRangeDTO>> BrowseAsync(string username); 
         
     }

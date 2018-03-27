@@ -5,13 +5,12 @@ namespace TheTeacher.Core.Domain
 {
     public class Student
     {
-        public Guid Id { get; protected set; }
         public Guid UserId {get; protected set; }
         public string Address { get; protected set; }
 
         public Student(Guid userId, string address)
         {
-            Id = Guid.NewGuid();
+            UserId = userId;
             SetAddress(address);
         }
 
