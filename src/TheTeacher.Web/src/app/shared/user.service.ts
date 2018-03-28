@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class TeacherService {
+export class UserService {
 
-    constructor() { }
+  constructor() { }
+
+
 
 }

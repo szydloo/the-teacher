@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TeacherListComponent } from './teacher-list.component';
 import { TeacherComponent } from './teacher.component';
 import { TeacherService } from './teacher.service';
+import { TeacherListRoutingModule } from './teacher-list-routing.module';
 
 @NgModule({
     declarations: [
@@ -10,7 +11,8 @@ import { TeacherService } from './teacher.service';
         TeacherListComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        TeacherListRoutingModule,
     ],
     providers: [TeacherService],
 })
