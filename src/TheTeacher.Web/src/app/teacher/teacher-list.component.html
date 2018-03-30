@@ -2,7 +2,7 @@
 <br>
 <div class="panel panel-primary">
     <div class="panel-heading">
-        {{title}}
+        <h3 class="panel-title">{{title}}</h3>
     </div>
     <div class="panel-body">
         <table class="table">
@@ -11,16 +11,40 @@
                     <th scope="col">#</th>
                     <th scope="col">Fullname</th>
                     <th scope="col">Lessons</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Address</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr scope="row" *ngFor="let teacher of teachers;let i=index;">
+                    <td>{{i+1}}</td>
+                    <td>{{teacher.fullname}}</td>
+                    <td>
+                        <ng-container *ngIf="teacher.lessons.length!==0;else otherContent">
+                            <table class="table">
+                                <thead>
+                                    <th scope="col">Lesson Subject</th>
+                                    <th scope="col">Level</th>
+                                    <th scope="col">Price Per Hour</th>
+                                    <th scope="col">Enroll</th>
+                                    <th><button type="button" class="btnSmall btn btn-primary" (click)="toggleProperTable(i)">ToggleMe</button></th>
+                                </thead>
+                                <tbody *ngIf="isTableToggled[i]">
+                                    <tr scope="row" *ngFor="let lesson of teacher.lessons;">
+                                        <td >{{lesson.subject.category}} {{lesson.subject.name}}</td>
+                                        <td>{{lesson.grade}}</td>
+                                        <td>{{lesson.pricePerHour | currency:'USD':'symbol':'1.2-2'}}/h</td>
+                                        <td><button type="button" class="btnSmall btn btn-success">Enroll</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ng-container>
+                        <ng-template #otherContent>No Lessons to display</ng-template>
+                    </td>
+                    <td>{{teacher.address}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-
 </div>
 
 

@@ -1,0 +1,10 @@
+.btnSmall {
+    height: 25px;
+    padding: 0 5px 5px 5px;
+}
+
+th, td, {
+    padding: 5px;
+    text-align: left;
+
+  }

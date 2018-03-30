@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
 
-import { Teacher } from '../models/teacher';
+import { User } from '../models/user';
 
 
 @Injectable()
-export class TeacherService {
-    url: string = "http://localhost:5000/teachers/";
+export class UserService {
+    url: string = 'http://localhost:5000/users';
 
-    constructor(private _client: HttpClient) { }
+    constructor(private _client: HttpClient) { 
+    }
 
-    getTeachers(): Observable<Teacher[]> {
-        return this._client.get<Teacher[]>(this.url)
+    getUsers(): Observable<User[]> {
+        return this._client.get<User[]>(this.url)
                     .catch(this.handleError);
     }
 

@@ -21,6 +21,10 @@ namespace TheTeacher.Api.Framework
         {
             try 
             {
+                // TODO Chaaaaaaaaaange bad practice probably seperate customeware only for dev env
+                context.Response.Headers.Add("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                
                 await _next(context);
             }
             catch(Exception e)

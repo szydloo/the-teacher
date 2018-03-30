@@ -18,6 +18,7 @@ namespace TheTeacher.Api.Controllers
         public UsersController(IUserService userService, ICommandDispatcher commandDispatcher, IJwtHandler jwtHandler) : base(commandDispatcher)
         {
             _userService = userService;
+            
         }
         
         // [Authorize(Policy = "admin")]

@@ -8,7 +8,6 @@ const routes: Routes = [
     { path: 'signup', component: SignupComponent},
     { path: 'teachers', component: TeacherListComponent},
     { path: 'home', component: HomeComponent},
-    { path: '', component: HomeComponent},
     { path: '**',  pathMatch: 'full', redirectTo: 'home'}
 ]
 
