@@ -9,20 +9,24 @@ import { TeacherComponent } from './teacher/teacher.component';
 import { TeacherModule } from './teacher/teacher.module';
 import { AppRoutingModule } from './app-routing.module';
 import { UserModule } from './user/user.module';
+import { LoginComponent } from './signup/login.component';
+import { SignupLoginModule } from './signup/signup-login.module';
+import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
 
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        SignupComponent,
     ],
     imports: [
         BrowserModule,
         TeacherModule,
         AppRoutingModule,
         UserModule,
-        HttpClientModule
+        HttpClientModule,
+        SignupLoginModule,
+        SignupLoginModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

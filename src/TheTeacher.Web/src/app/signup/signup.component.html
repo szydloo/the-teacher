@@ -1,3 +1,77 @@
-<p>
-    signup works!
-</p>
+<app-login></app-login>
+
+
+<div class="card">
+    <div class="card-heading">
+        <div class="card-title">
+            <h3>{{pageTitle}}</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <form novalidate [formGroup]="signUpForm" (submit)="saveUser()">
+            <fieldset>
+                <!-- Username -->
+                <div class="form-group" >
+                    <label class="control-label" [ngClass]="addTextDangerIfErrors('username')" for="usernameId">Username</label>
+                        <div>
+                            <input class="form-control" formControlName="username" [ngClass]="addIsInvalidIfErrors('username')"
+                                    type="text" id="usernameId" placeholder="Username (required)" />
+                        <div *ngIf="isInvalid('username')" class="text-danger">Username is required</div>
+                    </div>
+                </div>
+
+                <!-- Email Group -->
+                <div formGroupName="emailGroup">
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label class="control-label" [ngClass]="addTextDangerIfErrors('emailGroup.email')" for="emailId">Email</label>
+                            <div>
+                                <input class="form-control" formControlName="email" [ngClass]="addIsInvalidIfErrors('emailGroup.email') || addIsInvalidIfErrors('emailGroup')"
+                                    type="text" id="emailId" placeholder="Email (required)" />
+                            <div *ngIf="isInvalid('email')" class="text-danger"
+                                [ngClass]="addIsInvalidIfErrors('emailGroup.email') || addIsInvalidIfErrors('emailGroup')">Email is required</div>
+                        </div>
+                    </div>
+
+                    <!-- Confirm Email -->
+                    <div class="form-group">
+                        <label class="control-label" for="comfirmEmailId">Confirm Email</label>
+                        <div>
+                            <input class="form-control" formControlName="confirmEmail" type="text" id="comfirmEmailId" placeholder="Confirm Email (required)" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Password Group -->
+                <div formGroupName="passwordGroup" [appConfirmEqualValidator]="'password;confirmPassword'">
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label class="control-label" for="passwordId">Password</label>
+                        <div>
+                            <input class="form-control" formControlName="password" type="text" id="passwordId" placeholder="Password (required)" />
+                            <div class="text-danger" *ngIf="signUpForm.get('passwordGroup.password').errors">Danger</div>
+                        </div>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label class="control-label" for="confirmPasswordId">Confirm Password</label>
+                        <div>
+                            <input class="form-control" formControlName="confirmPassword" type="text" id="confirmPasswordId" placeholder="Confirm Password (required)" />
+                        </div>
+                    </div>
+                    <div class="text-danger" *ngIf="signUpForm.get('passwordGroup').errors?.notEqual">asd</div>
+                </div>
+
+                <!-- Basic Checkbox -->
+                <div class="form-group">
+                    <input type="checkbox" id="agreeId" formControlName="agreementOne"> 
+                    <span class="help-block checkboxText">I aggree to lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate quibusdam aut maxime reprehenderit numquam eos quam voluptas incidunt odit accusantium velit hic facilis quaerat aperiam, ducimus consequuntur omnis doloribus blanditiis.</span>
+                </div>
+            </fieldset>
+                <div>
+                    <button class="btn btn-primary" type="submit" >Sign Up</button>
+                </div>
+        </form>
+    </div>
+</div>

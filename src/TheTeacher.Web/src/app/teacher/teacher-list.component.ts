@@ -23,11 +23,13 @@ export class TeacherListComponent implements OnInit {
                                                     () => this.setToggledTableVals() ); 
     }
 
-    setToggledTableVals() {
-        this.isTableToggled = new Array<boolean>(this.teachers.length);
-    }
 
     navigateToRegisterTeacherForm(): void {
+    }
+
+    // Table toggles
+    setToggledTableVals() {
+        this.isTableToggled = new Array<boolean>(this.teachers.length);
     }
 
     toggleProperTable(i): void {
