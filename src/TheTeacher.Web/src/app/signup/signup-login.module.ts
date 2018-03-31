@@ -13,7 +13,7 @@ import { ConfirmEqualValidatorDirective } from '../shared/confirm-equal-validato
     CommonModule,
     BrowserModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   declarations: [
     LoginComponent,

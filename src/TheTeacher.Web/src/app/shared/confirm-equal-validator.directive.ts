@@ -1,6 +1,8 @@
 import { Directive, Input, OnInit } from '@angular/core';
 import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
 
+
+// Deprecated/ Not Working
 @Directive({
     selector: '[appConfirmEqualValidator]',
     providers: [
@@ -12,21 +14,15 @@ import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
     ],
     
 })
-export class ConfirmEqualValidatorDirective implements OnInit,Validator {
+export class ConfirmEqualValidatorDirective implements OnInit, Validator {
 
-
-    @Input('appConfirmEqualValidator') params: string // = 'password' ;
+    @Input() confEqSecControlName: string  = 'password' ;
+    @Input() confEqFirstControlName: string  = 'confirmPassword' ;
     
-    contrls: string[];
-    confEqSecControlName: string;
-    confEqFirstControlName: string;
     constructor() {
     }
 
     ngOnInit(): void {
-        this.contrls = this.params.split(';')
-        this.confEqFirstControlName = this.contrls[0];
-        this.confEqSecControlName = this.contrls[1];
     }
     
     validate(controlGroup: AbstractControl): { [key: string]: any; } {

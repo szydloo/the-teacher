@@ -11,25 +11,25 @@
         <form novalidate [formGroup]="signUpForm" (submit)="saveUser()">
             <fieldset>
                 <!-- Username -->
-                <div class="form-group" >
+                <div class="form-group">
                     <label class="control-label" [ngClass]="addTextDangerIfErrors('username')" for="usernameId">Username</label>
-                        <div>
-                            <input class="form-control" formControlName="username" [ngClass]="addIsInvalidIfErrors('username')"
-                                    type="text" id="usernameId" placeholder="Username (required)" />
-                        <div *ngIf="isInvalid('username')" class="text-danger">Username is required</div>
+                    <div>
+                        <input class="form-control" formControlName="username" [ngClass]="addIsInvalidIfErrors('username')" type="text" id="usernameId"
+                            placeholder="Username (required)" />
+                        <div *ngIf="isRequired('username')" class="text-danger">Username is required</div>
                     </div>
                 </div>
 
                 <!-- Email Group -->
-                <div formGroupName="emailGroup">
+                <div formGroupName="emailGroup" [ngClass]="addAlertDangerIfNotMatching('emailGroup','emailGroup.confirmEmail')">
                     <!-- Email -->
                     <div class="form-group">
                         <label class="control-label" [ngClass]="addTextDangerIfErrors('emailGroup.email')" for="emailId">Email</label>
-                            <div>
-                                <input class="form-control" formControlName="email" [ngClass]="addIsInvalidIfErrors('emailGroup.email') || addIsInvalidIfErrors('emailGroup')"
-                                    type="text" id="emailId" placeholder="Email (required)" />
-                            <div *ngIf="isInvalid('email')" class="text-danger"
-                                [ngClass]="addIsInvalidIfErrors('emailGroup.email') || addIsInvalidIfErrors('emailGroup')">Email is required</div>
+                        <div>
+                            <input class="form-control" formControlName="email" [ngClass]="addIsInvalidIfErrors('emailGroup.email')"
+                                type="text" id="emailId" placeholder="Email (required)" />
+                            <div *ngIf="isRequired('emailGroup.email')" class="text-danger">Email is required</div>
+                            <div *ngIf="isMatchingEmailPattern('emailGroup.email')" class="text-danger">Invalid Format of an Email</div>
                         </div>
                     </div>
 
@@ -37,19 +37,22 @@
                     <div class="form-group">
                         <label class="control-label" for="comfirmEmailId">Confirm Email</label>
                         <div>
-                            <input class="form-control" formControlName="confirmEmail" type="text" id="comfirmEmailId" placeholder="Confirm Email (required)" />
+                            <input class="form-control" formControlName="confirmEmail" type="text" id="comfirmEmailId" placeholder="Confirm Email (required)"
+                            />
                         </div>
                     </div>
+                    <div class="text-danger" *ngIf="signUpForm.get('emailGroup').errors?.notEqual && signUpForm.get('emailGroup.confirmEmail').touched">Email and Confirm Email do not Match</div>
                 </div>
 
                 <!-- Password Group -->
-                <div formGroupName="passwordGroup" [appConfirmEqualValidator]="'password;confirmPassword'">
+                <div formGroupName="passwordGroup" [ngClass]="addAlertDangerIfNotMatching('passwordGroup','passwordGroup.confirmPassword')">
                     <!-- Password -->
                     <div class="form-group">
-                        <label class="control-label" for="passwordId">Password</label>
+                        <label class="control-label" [ngClass]="addTextDangerIfErrors('passwordGroup.password')" for="passwordId">Password</label>
                         <div>
-                            <input class="form-control" formControlName="password" type="text" id="passwordId" placeholder="Password (required)" />
-                            <div class="text-danger" *ngIf="signUpForm.get('passwordGroup.password').errors">Danger</div>
+                            <input class="form-control" [ngClass]="addIsInvalidIfErrors('passwordGroup.password')"
+                                formControlName="password" type="text" id="passwordId" (click)="togglePassword()" placeholder="Password (required)" />
+                            <div class="text-danger" *ngIf="isRequired('passwordGroup.password')">Password is required</div>
                         </div>
                     </div>
 
@@ -57,21 +60,29 @@
                     <div class="form-group">
                         <label class="control-label" for="confirmPasswordId">Confirm Password</label>
                         <div>
-                            <input class="form-control" formControlName="confirmPassword" type="text" id="confirmPasswordId" placeholder="Confirm Password (required)" />
+                            <input class="form-control" formControlName="confirmPassword" type="text" id="confirmPasswordId" placeholder="Confirm Password (required)"
+                            />
                         </div>
                     </div>
-                    <div class="text-danger" *ngIf="signUpForm.get('passwordGroup').errors?.notEqual">asd</div>
+                    <div class="text-danger" *ngIf="signUpForm.get('passwordGroup').errors?.notEqual && signUpForm.get('passwordGroup.confirmPassword').touched">Password and confirm password must match</div>
                 </div>
 
                 <!-- Basic Checkbox -->
                 <div class="form-group">
-                    <input type="checkbox" id="agreeId" formControlName="agreementOne"> 
-                    <span class="help-block checkboxText">I aggree to lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate quibusdam aut maxime reprehenderit numquam eos quam voluptas incidunt odit accusantium velit hic facilis quaerat aperiam, ducimus consequuntur omnis doloribus blanditiis.</span>
+                    <input type="checkbox" id="agreeId" formControlName="agreementOne">
+                    <span class="help-block checkboxText">I aggree to lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate quibusdam aut maxime reprehenderit
+                        numquam eos quam voluptas incidunt odit accusantium velit hic facilis quaerat aperiam, ducimus consequuntur
+                        omnis doloribus blanditiis.</span>
+                    <div class="text-danger" *ngIf="!signUpForm.get('agreementOne').value && signUpForm.get('agreementOne').touched">You have to agreee to specified conditon</div>
                 </div>
             </fieldset>
-                <div>
-                    <button class="btn btn-primary" type="submit" >Sign Up</button>
-                </div>
+            <div>
+                <button class="btn btn-primary" :disabled="signUpForm.invalid" type="submit">Sign Up</button>
+            </div>
         </form>
     </div>
 </div>
+{{signUpForm.value | json }}
+
+{{signUpForm.invalid}}
+

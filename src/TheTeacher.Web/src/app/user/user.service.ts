@@ -21,6 +21,8 @@ export class UserService {
                     .catch(this.handleError);
     }
 
+    
+
     handleError(err: HttpErrorResponse) {
         // TODO: Log into error database
         let errMessage = '';

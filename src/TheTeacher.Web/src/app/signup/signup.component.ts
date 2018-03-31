@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
+
+
+import { confirmEqualPasswordValidator, confirmEqualEmailValidator } from '../shared/confirm-equal.validator'
+import { throws } from 'assert';
 
 @Component({
     selector: 'app-signup',
@@ -16,35 +21,66 @@ export class SignupComponent implements OnInit {
     ngOnInit() {
         this.signUpForm = this.fb.group({
             username: ['', [Validators.required]],
+            agreementOne: [false, [Validators.requiredTrue]],
             emailGroup: this.fb.group({
-                email: ['', [Validators.required,]],
+                email: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+')]],
                 confirmEmail: ['', [Validators.required]],
-            }),
+            }, { validator: confirmEqualEmailValidator }),
             passwordGroup: this.fb.group({
                 password: ['', [Validators.required]],
                 confirmPassword: ['', [Validators.required]],
-            }),
-            agreementOne: [false]
+            }, { validator: confirmEqualPasswordValidator }),
+           
         });
     }
 
+
+    //#region  Validation errors display functions
     addIsInvalidIfErrors(controlName: string) {
-        let styles = { 
-            'is-invalid': this.isInvalid(controlName),
+        let styles = {
+            'is-invalid': this.hasErrors(controlName),
         }
         return styles;
     }
 
     addTextDangerIfErrors(controlName: string) {
-        let styles = { 
-            'text-danger': this.isInvalid(controlName),
+        let styles = {
+            'text-danger': this.hasErrors(controlName),
         }
         return styles;
     }
-    
-    isInvalid(controlName: string): boolean {
-        let control = this.signUpForm.get(controlName);
-        if(control === null || control === undefined) return true;
-        return (control.touched && (control.errors != null));
+
+    addAlertDangerIfNotMatching(controlGroupName: string, confirmationFieldName: string) {
+        let controlGroup = this.signUpForm.get(controlGroupName);
+        let confirmationControl = this.signUpForm.get(confirmationFieldName);
+        if(controlGroup.errors === null) return;
+        let styles = { 'alert alert-danger': this.signUpForm.get(controlGroupName).errors.notEqual && confirmationControl.touched }
+        return styles;
     }
+
+    hasErrors(controlName: string): boolean {
+        let control = this.signUpForm.get(controlName);
+        if (control === null || control === undefined) throw `Lacking control with name ${controlName}.`;
+        if (control.touched && control.errors !== null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    isRequired(controlName: string): boolean {
+        let control = this.signUpForm.get(controlName);
+        if (control === null || control === undefined) throw `Lacking control with name ${controlName}.`;
+        if (control.errors === null) return false;
+        return (control.touched && (control.errors.required));
+    }
+
+    isMatchingEmailPattern(controlName: string): boolean {
+        let control = this.signUpForm.get(controlName);
+        if (control === null || control === undefined) throw `Lacking control with name ${controlName}.`;
+        if (control.errors === null) return false;
+        return (control.touched && (control.errors.pattern));
+    }
+
+    //#endregion
 }
