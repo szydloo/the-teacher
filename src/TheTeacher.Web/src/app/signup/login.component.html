@@ -1,3 +1,36 @@
-<p>
-  login works!
-</p>
+<div class="card offset-md-4 col-md-4">
+    <div class="card-heading">
+        <div class="card-title">
+            <h3>{{title}}</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <form novalidate [formGroup]="logInForm" (submit)="logIn()">
+            <fieldset>
+                <!-- email -->
+                <div class="form-group">
+                    <label class="control-label" [ngClass]="{'text-danger': logInForm.get('email').touched && logInForm.get('email').errors.required }"
+                        for="emailId">Email</label>
+                    <div>
+                        <input class="form-control" formControlName="email" [ngClass]="{'is-invalid': logInForm.get('email').touched && logInForm.get('email').errors.required }"
+                            type="text" id="emailId" placeholder="Email" />
+                        <div *ngIf="logInForm.get('email').touched && logInForm.get('email').errors.required" class="text-danger">Email is required</div>
+                    </div>
+                </div>
+                <!-- password -->
+                <div class="form-group">
+                    <label class="control-label" [ngClass]="{'text-danger': logInForm.get('password').touched && logInForm.get('password').errors.required }"
+                        for="passwordId">Password</label>
+                    <div>
+                        <input class="form-control" formControlName="password" [ngClass]="{'is-invalid': logInForm.get('password').touched && logInForm.get('password').errors.required }"
+                            type="text" id="passwordId" placeholder="Password" />
+                        <div *ngIf="logInForm.get('password').touched && logInForm.get('password').errors.required" class="text-danger">Password is required</div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="offset-md-4 col-md-4">
+                <button type="submit" :disabled="logInForm.invalid" class="btn btn-primary">Log In</button>
+            </div>
+        </form>
+    </div>
+</div>
