@@ -11,27 +11,28 @@
             <fieldset>
                 <!-- email -->
                 <div class="form-group">
-                    <label class="control-label" [ngClass]="{'text-danger': logInForm.get('email').touched && logInForm.get('email').errors.required }"
-                        for="emailId">Email</label>
+                    <label class="control-label" [ngClass]="{'text-danger': logInForm.get('email').touched && logInForm.get('email').errors?.required }"
+                        for="emailLoginId">Email</label>
                     <div>
-                        <input class="form-control" formControlName="email" [ngClass]="{'is-invalid': logInForm.get('email').touched && logInForm.get('email').errors.required }"
-                            type="text" id="emailId" placeholder="Email" />
-                        <div *ngIf="logInForm.get('email').touched && logInForm.get('email').errors.required" class="text-danger">Email is required</div>
+                        <input class="form-control" formControlName="email" [ngClass]="{'is-invalid': logInForm.get('email').touched && logInForm.get('email').errors?.required }"
+                            type="text" id="emailLoginId" placeholder="Email" />
+                        <div *ngIf="logInForm.get('email').touched && logInForm.get('email').errors?.required" class="text-danger">Email is required</div>
                     </div>
                 </div>
                 <!-- password -->
                 <div class="form-group">
-                    <label class="control-label" [ngClass]="{'text-danger': logInForm.get('password').touched && logInForm.get('password').errors.required }"
-                        for="passwordId">Password</label>
+                    <label class="control-label" [ngClass]="{'text-danger': logInForm.get('password').touched && logInForm.get('password').errors?.required }"
+                        for="passwordLoginId">Password</label>
                     <div>
-                        <input class="form-control" formControlName="password" [ngClass]="{'is-invalid': logInForm.get('password').touched && logInForm.get('password').errors.required }"
-                            type="text" id="passwordId" placeholder="Password" />
-                        <div *ngIf="logInForm.get('password').touched && logInForm.get('password').errors.required" class="text-danger">Password is required</div>
+                        <input class="form-control" formControlName="password" [ngClass]="{'is-invalid': logInForm.get('password').touched && logInForm.get('password').errors?.required }"
+                            [type]="showPassword.checked ? 'text' : 'password'" id="passwordLoginId" placeholder="Password" />
+                        <div *ngIf="logInForm.get('password').touched && logInForm.get('password').errors?.required" class="text-danger">Password is required</div>
+                        <mat-checkbox type="checkbox" #showPassword>Show/Hide</mat-checkbox>
                     </div>
                 </div>
             </fieldset>
             <div class="offset-md-4 col-md-4">
-                <button type="submit" :disabled="logInForm.invalid" class="btn btn-primary">Log In</button>
+                <button type="submit" [disabled]="logInForm.invalid" class="btn btn-primary">Log In</button>
             </div>
         </form>
     </div>

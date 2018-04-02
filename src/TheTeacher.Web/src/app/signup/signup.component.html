@@ -51,7 +51,7 @@
                     <div class="form-group">
                         <label class="control-label" [ngClass]="addTextDangerIfErrors('passwordGroup.password')" for="passwordId">Password</label>
                         <div>
-                            <input class="form-control" [ngClass]="addIsInvalidIfErrors('passwordGroup.password')"
+                            <input class="form-control" [type]="showPasswordSignup.checked ? 'text' : 'password'" [ngClass]="addIsInvalidIfErrors('passwordGroup.password')"
                                 formControlName="password" type="text" id="passwordId" placeholder="Password (required)" />
                             <div class="text-danger" *ngIf="isRequired('passwordGroup.password')">Password is required</div>
                         </div>
@@ -61,9 +61,10 @@
                     <div class="form-group">
                         <label class="control-label" for="confirmPasswordId">Confirm Password</label>
                         <div>
-                            <input class="form-control" formControlName="confirmPassword" type="text" id="confirmPasswordId" placeholder="Confirm Password (required)"
+                            <input class="form-control" [type]="showPasswordSignup.checked ? 'text' : 'password'" formControlName="confirmPassword" type="text" id="confirmPasswordId" placeholder="Confirm Password (required)"
                             />
                         </div>
+                        <mat-checkbox #showPasswordSignup>Show/Hide</mat-checkbox>
                     </div>
                     <div class="text-danger" *ngIf="signUpForm.get('passwordGroup').errors?.notEqual && signUpForm.get('passwordGroup.confirmPassword').touched">Password and confirm password must match</div>
                 </div>

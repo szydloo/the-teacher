@@ -13,19 +13,19 @@ import { User } from '../models/user';
 export class UserService {
     url: string = 'http://localhost:5000/users';
 
-    constructor(private _client: HttpClient) { 
+    constructor(private client: HttpClient) { 
     }
 
     getUsers(): Observable<User[]> {
-        return this._client.get<User[]>(this.url)
+        return this.client.get<User[]>(this.url)
                     .catch(this.handleError);
     }
 
     saveUser(user: User): Observable<HttpResponse<User>> {
         const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
-
         const body = JSON.stringify(user);
-        return this._client.post(this.url, body, options)
+        
+        return this.client.post(this.url, body, options)
                             .catch(this.handleError);
     }
 
