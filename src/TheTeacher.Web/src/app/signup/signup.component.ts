@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
-
+import { MatDialog } from '@angular/material';
 
 import { confirmEqualPasswordValidator, confirmEqualEmailValidator } from '../shared/confirm-equal.validator'
 import { throws } from 'assert';
 import { UserService } from '../user/user.service';
 import { User } from '../models/user';
+import { SignupLoginResultDialog } from './signup-login-result-dialog.component';
 
 @Component({
     selector: 'app-signup',
@@ -18,7 +19,7 @@ export class SignupComponent implements OnInit {
     signUpForm: FormGroup;
 
 
-    constructor(private fb: FormBuilder, private userService: UserService) { }
+    constructor(private fb: FormBuilder, private userService: UserService, private dialog: MatDialog) { }
 
     ngOnInit() {
         // TODO change initial data
@@ -33,7 +34,7 @@ export class SignupComponent implements OnInit {
                 password: ['testSecret', [Validators.required]],
                 confirmPassword: ['testSecret', [Validators.required]],
             }, { validator: confirmEqualPasswordValidator }),
-           
+
         });
     }
 
@@ -43,15 +44,31 @@ export class SignupComponent implements OnInit {
         u.password = this.signUpForm.value.passwordGroup.password;
         u.username = this.signUpForm.value.username;
         u.role = 'user';
-        console.log(JSON.stringify(u));
         this.userService.saveUser(u).subscribe(() => this.onSaveComplete,
-                                                (err) => console.log(err));
+            (err) => this.handleErrorWithModalPopup(err));
     }
 
     onSaveComplete() {
         this.signUpForm.reset();
     }
 
+    // Handle error sent by api
+    handleErrorWithModalPopup(err: any): void {
+        if (err.error !== undefined) {
+            console.log(JSON.stringify(err.error.message));
+            let dialogRef = this.dialog.open(SignupLoginResultDialog, {
+                width: '500px',
+                height: '200px',
+                data: { errorMessage: err.error.message }
+            });
+            dialogRef.afterClosed().subscribe(() => {
+                this.signUpForm.controls.emailGroup.reset();
+            });
+        } else {
+            // If Not custom error log into database?
+            console.error(err);
+        }
+    }
 
     //#region  Validation errors display functions go here
     addIsInvalidIfErrors(controlName: string) {
@@ -71,7 +88,7 @@ export class SignupComponent implements OnInit {
     addAlertDangerIfNotMatching(controlGroupName: string, confirmationFieldName: string) {
         let controlGroup = this.signUpForm.get(controlGroupName);
         let confirmationControl = this.signUpForm.get(confirmationFieldName);
-        if(controlGroup.errors === null) return;
+        if (controlGroup.errors === null) return;
         let styles = { 'alert alert-danger': this.signUpForm.get(controlGroupName).errors.notEqual && confirmationControl.touched }
         return styles;
     }

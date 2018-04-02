@@ -12,6 +12,7 @@ import { UserModule } from './user/user.module';
 import { LoginComponent } from './signup/login.component';
 import { SignupLoginModule } from './signup/signup-login.module';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator
         HttpClientModule,
         SignupLoginModule,
         SignupLoginModule,
+        BrowserAnimationsModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
