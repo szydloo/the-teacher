@@ -5,6 +5,8 @@ import { JsonPipe } from '@angular/common';
 
 import { confirmEqualPasswordValidator, confirmEqualEmailValidator } from '../shared/confirm-equal.validator'
 import { throws } from 'assert';
+import { UserService } from '../user/user.service';
+import { User } from '../models/user';
 
 @Component({
     selector: 'app-signup',
@@ -15,26 +17,43 @@ export class SignupComponent implements OnInit {
     pageTitle: string = "Sign Up!"
     signUpForm: FormGroup;
 
-    constructor(private fb: FormBuilder) { }
+
+    constructor(private fb: FormBuilder, private userService: UserService) { }
 
     ngOnInit() {
+        // TODO change initial data
         this.signUpForm = this.fb.group({
-            username: ['', [Validators.required]],
-            agreementOne: [false, [Validators.requiredTrue]],
+            username: ['testUsername', [Validators.required]],
+            agreementOne: [true, [Validators.requiredTrue]],
             emailGroup: this.fb.group({
-                email: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+')]],
-                confirmEmail: ['', [Validators.required]],
+                email: ['testUsername@tet.com', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+')]],
+                confirmEmail: ['testUsername@tet.com', [Validators.required]],
             }, { validator: confirmEqualEmailValidator }),
             passwordGroup: this.fb.group({
-                password: ['', [Validators.required]],
-                confirmPassword: ['', [Validators.required]],
+                password: ['testSecret', [Validators.required]],
+                confirmPassword: ['testSecret', [Validators.required]],
             }, { validator: confirmEqualPasswordValidator }),
            
         });
     }
 
+    saveUser() {
+        let u: User = new User();
+        u.email = this.signUpForm.value.emailGroup.email;
+        u.password = this.signUpForm.value.passwordGroup.password;
+        u.username = this.signUpForm.value.username;
+        u.role = 'user';
+        console.log(JSON.stringify(u));
+        this.userService.saveUser(u).subscribe(() => this.onSaveComplete,
+                                                (err) => console.log(err));
+    }
 
-    //#region  Validation errors display functions
+    onSaveComplete() {
+        this.signUpForm.reset();
+    }
+
+
+    //#region  Validation errors display functions go here
     addIsInvalidIfErrors(controlName: string) {
         let styles = {
             'is-invalid': this.hasErrors(controlName),

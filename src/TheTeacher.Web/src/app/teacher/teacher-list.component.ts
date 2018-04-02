@@ -10,7 +10,7 @@ import { Teacher } from '../models/teacher';
     styleUrls: ['./teacher-list.component.css']
 })
 export class TeacherListComponent implements OnInit {
-    title: string;
+    title: string = "List of Teachers";
     teachers: Teacher[];
     isTableToggled: boolean[];
 

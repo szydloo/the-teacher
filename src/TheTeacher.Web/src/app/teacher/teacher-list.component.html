@@ -1,11 +1,14 @@
 <br>
 <br>
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3 class="panel-title">{{title}}</h3>
+<div class="card offset-md-1 col-md-9">
+    <div class="card-heading">
+        <div class="card-title">
+            <br>
+            <h3>{{title}}</h3>
+        </div>
     </div>
-    <div class="panel-body">
-        <table class="table">
+    <div class="card-body">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -26,14 +29,17 @@
                                     <th scope="col">Level</th>
                                     <th scope="col">Price Per Hour</th>
                                     <th scope="col">Enroll</th>
-                                    <th><button type="button" class="btnSmall btn btn-primary" (click)="toggleProperTable(i)">ToggleMe</button></th>
+                                    <button type="button" class="btnSmall btn btn-primary moveBtnRight" (click)="toggleProperTable(i)">ToggleMe</button>
                                 </thead>
+                               
                                 <tbody *ngIf="isTableToggled[i]">
                                     <tr scope="row" *ngFor="let lesson of teacher.lessons;">
-                                        <td >{{lesson.subject.category}} {{lesson.subject.name}}</td>
+                                        <td>{{lesson.subject.category}} {{lesson.subject.name}}</td>
                                         <td>{{lesson.grade}}</td>
                                         <td>{{lesson.pricePerHour | currency:'USD':'symbol':'1.2-2'}}/h</td>
-                                        <td><button type="button" class="btnSmall btn btn-success">Enroll</button></td>
+                                        <td>
+                                            <button type="button" class="btnSmall btn btn-success">Enroll</button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -19,7 +19,7 @@ namespace TheTeacher.Api.Controllers
         }
 
         [HttpGet]
-        [Route("{name}")]
+        [Route("{fullname}")]
         public async Task<IActionResult> Get(string fullname)
         {
             var availableTime = await _availableTimePeriodService.BrowseAsync(fullname);

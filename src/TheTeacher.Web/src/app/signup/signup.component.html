@@ -1,14 +1,15 @@
 <app-login></app-login>
 
-
-<div class="card  offset-md-4 col-md-4">
+<br>
+<div class="card offset-md-4 col-md-4">
     <div class="card-heading">
         <div class="card-title">
+            <br>
             <h3>{{pageTitle}}</h3>
         </div>
     </div>
     <div class="card-body">
-        <form novalidate [formGroup]="signUpForm" (submit)="saveUser()">
+        <form novalidate [formGroup]="signUpForm" (ngSubmit)="saveUser()">
             <fieldset>
                 <!-- Username -->
                 <div class="form-group">
@@ -51,7 +52,7 @@
                         <label class="control-label" [ngClass]="addTextDangerIfErrors('passwordGroup.password')" for="passwordId">Password</label>
                         <div>
                             <input class="form-control" [ngClass]="addIsInvalidIfErrors('passwordGroup.password')"
-                                formControlName="password" type="text" id="passwordId" (click)="togglePassword()" placeholder="Password (required)" />
+                                formControlName="password" type="text" id="passwordId" placeholder="Password (required)" />
                             <div class="text-danger" *ngIf="isRequired('passwordGroup.password')">Password is required</div>
                         </div>
                     </div>
@@ -77,8 +78,9 @@
                 </div>
             </fieldset>
             <div class="offset-md-4 col-md-4">
-                <button class="btn btn-primary" :disabled="signUpForm.invalid" type="submit">Sign Up</button>
+                <button class="btn btn-primary" [disabled]="signUpForm.invalid" type="submit">Sign Up</button>
             </div>
         </form>
     </div>
 </div>
+{{signUpForm.invalid}}

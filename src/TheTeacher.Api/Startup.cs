@@ -70,6 +70,10 @@ namespace TheTeacher.Api
             // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             // loggerFactory.AddDebug();
 
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200")
+                                            .AllowAnyMethod()
+                                            .AllowAnyHeader());
+
             JwtSettings = app.ApplicationServices.GetService<JwtSettings>();
             var generalSettings  = app.ApplicationServices.GetService<GeneralSettings>();
 

@@ -2,6 +2,10 @@
     height: 25px;
     padding: 0 5px 5px 5px;
 }
+.moveBtnRight {
+    position: relative;
+    left: 10px;
+}
 
 th, td, {
     padding: 5px;
