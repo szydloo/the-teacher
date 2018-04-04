@@ -21,8 +21,6 @@ namespace TheTeacher.Api.Framework
         {
             try 
             {
-                // TODO Chaaaaaaaaaange bad practice probably seperate customeware only for dev env
-                
                 await _next(context);
             }
             catch(Exception e)

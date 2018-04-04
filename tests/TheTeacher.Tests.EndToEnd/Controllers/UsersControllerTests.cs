@@ -162,7 +162,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             var payload = GetPayload(command);
             var response = await Client.PostAsync("/login", payload);
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-            response.Content.ReadAsStringAsync().Result.Length.Should().BeGreaterOrEqualTo(300); //TODO create proper validity of token pressence
+            response.Content.ReadAsStringAsync().Result.Length.Should().BeGreaterOrEqualTo(300); //TODO create proper validation of token pressence
         }
 
         [Test]
