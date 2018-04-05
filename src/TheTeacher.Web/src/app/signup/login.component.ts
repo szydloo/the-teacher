@@ -9,7 +9,7 @@ import { SecurityService } from '../security/security.service';
 import { UserAuth } from '../models/security/user-auth';
 import { User } from '../models/user';
 import { Jwt } from '../models/security/jwt';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -20,9 +20,10 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
     title: string = "Log In!";
     logInForm: FormGroup;
+    returnUrl: string;
 
     constructor(private fb: FormBuilder,private loginService: LoginService, private securityService: SecurityService,
-                private router: Router) {
+                private router: Router, private route: ActivatedRoute) {
 
                 }
 
@@ -31,6 +32,8 @@ export class LoginComponent implements OnInit {
             email: ['testUsername@tet.com',[Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+')]],
             password: ['testSecret', [Validators.required]]
         });
+
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
     }
 
     logIn() {
@@ -45,8 +48,9 @@ export class LoginComponent implements OnInit {
                                                             
     }
 
-    redirectToHome() {
-        this.router.navigateByUrl('/home');
+    redirectToPage() {
+        
+        this.router.navigateByUrl(this.returnUrl);
     }
 
     setCurrentSecObject(jwt: Jwt) {
@@ -59,7 +63,7 @@ export class LoginComponent implements OnInit {
             Object.assign(this.securityService.securityObject, userAuth);
             localStorage.setItem("bearerToken", this.securityService.securityObject.token);
 
-            this.redirectToHome();
+            this.redirectToPage();
         }
     }
 

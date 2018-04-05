@@ -15,6 +15,7 @@ import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SecurityService } from './security/security.service';
 import { HttpRequestInterceptorTokenModule } from './security/http-interceptor-token.module';
+import { AuthGuard } from './security/auth.guard';
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import { HttpRequestInterceptorTokenModule } from './security/http-interceptor-t
         BrowserAnimationsModule,
         HttpRequestInterceptorTokenModule,
     ],
-    providers: [SecurityService],
+    providers: [SecurityService, AuthGuard],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
