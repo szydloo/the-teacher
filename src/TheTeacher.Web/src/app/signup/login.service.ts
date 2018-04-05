@@ -7,20 +7,22 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
-import { LoginUser } from '../models/commands/loginUser';
+import { LoginUserCommand } from '../models/commands/login-user-command';
+import { Jwt } from '../models/security/jwt';
 
 @Injectable()
 export class LoginService {
-    url: string = "http://localhost:5000/login"
+    url: string = "http://localhost:5000/login";
+    
     constructor(private client: HttpClient) { }
 
-    loginUser(loginUser: LoginUser): Observable<HttpResponse<LoginUser>> {
+    loginUser(loginUser: LoginUserCommand): Observable<Jwt> {
         let body = JSON.stringify(loginUser);
         let options = {
             headers: new HttpHeaders({'Content-Type': 'application/json'})
         };
 
-        return this.client.post(this.url, body, options)
+        return this.client.post<Jwt>(this.url, body, options)
                         .catch(this.handleError);
     }
 

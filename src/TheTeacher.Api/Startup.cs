@@ -53,6 +53,7 @@ namespace TheTeacher.Api
                         };
                     });
             services.AddAuthorization(x => x.AddPolicy("admin", y => y.RequireRole("admin")));
+            services.AddAuthorization(x => x.AddPolicy("RoleUser", p => p.RequireRole("user")));
 
             // Autofac setup
             var builder = new ContainerBuilder();

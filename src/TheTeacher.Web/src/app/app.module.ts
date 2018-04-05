@@ -13,6 +13,8 @@ import { LoginComponent } from './signup/login.component';
 import { SignupLoginModule } from './signup/signup-login.module';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SecurityService } from './security/security.service';
+import { HttpRequestInterceptorTokenModule } from './security/http-interceptor-token.module';
 
 
 @NgModule({
@@ -29,8 +31,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         SignupLoginModule,
         SignupLoginModule,
         BrowserAnimationsModule,
+        HttpRequestInterceptorTokenModule,
     ],
-    providers: [],
+    providers: [SecurityService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

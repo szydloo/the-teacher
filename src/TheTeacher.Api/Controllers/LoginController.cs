@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using TheTeacher.Infrastructure.Commands;
@@ -20,10 +21,14 @@ namespace TheTeacher.Api.Controllers
 
         public async Task<IActionResult> Post([FromBody]LoginUser command)
         {
+            IActionResult ret = null;
+            
             command.TokenId = Guid.NewGuid();
             await DispatchAsync(command);
             var jwt = _cache.GetJwt(command.TokenId);
-            return Json(jwt);
+
+            ret = StatusCode(StatusCodes.Status200OK, jwt);
+            return ret;
         }
     }
 }
