@@ -11,6 +11,7 @@ using NLog;
 
 namespace TheTeacher.Api.Controllers
 {
+    [Authorize(policy: "RoleUser")]
     public class UsersController : ApiControllerBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -21,7 +22,6 @@ namespace TheTeacher.Api.Controllers
             
         }
         
-        // [Authorize(Policy = "admin")]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -58,15 +58,16 @@ namespace TheTeacher.Api.Controllers
             return NoContent(); 
         }
 
-        [Authorize]
-        [HttpPut]
-        [Route("username")] 
-        public async Task<IActionResult> Put([FromBody]ChangeUserUsername command)
-        {
-            await DispatchAsync(command);
 
-            return NoContent(); // HTTP specification
-        }
+        // [Authorize]
+        // [HttpPut]
+        // [Route("username")] 
+        // public async Task<IActionResult> Put([FromBody]ChangeUserUsername command)
+        // {
+        //     await DispatchAsync(command);
+
+        //     return NoContent(); // HTTP specification
+        // }
 
         [Authorize]
         [HttpDelete("me")]

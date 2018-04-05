@@ -3,4 +3,5 @@ export class UserAuth {
     token: string = "";
     isAuthenticated: boolean = false;
     role: string = "";
+    username: string = "";
 }

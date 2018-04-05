@@ -20,7 +20,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LoginComponent implements OnInit {
     title: string = "Log In!";
     logInForm: FormGroup;
-    returnUrl: string;
+    returnUrl: string = "";
 
     constructor(private fb: FormBuilder,private loginService: LoginService, private securityService: SecurityService,
                 private router: Router, private route: ActivatedRoute) {
@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
         });
 
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
+
     }
 
     logIn() {
@@ -49,16 +50,23 @@ export class LoginComponent implements OnInit {
     }
 
     redirectToPage() {
-        
+        if(this.returnUrl) {
         this.router.navigateByUrl(this.returnUrl);
+        } else {
+            this.router.navigateByUrl('home');
+        }
     }
 
     setCurrentSecObject(jwt: Jwt) {
         let userAuth: UserAuth = new UserAuth();
         if(jwt.token.length > 0 && jwt != null) {
-            console.log(JWT(jwt.token));
+            let decodedToken: any = JWT(jwt.token);
+            console.log(decodedToken);
+            
             userAuth.isAuthenticated = true;
             userAuth.token = jwt.token;
+            userAuth.username = decodedToken.username;
+
             // userAuth.role = JWT(jwt.token).role
             Object.assign(this.securityService.securityObject, userAuth);
             localStorage.setItem("bearerToken", this.securityService.securityObject.token);

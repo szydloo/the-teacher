@@ -14,13 +14,19 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a class="nav-link " href="" *ngIf="!securityObject.isAuthenticated" [routerLinkActive]="['active']" [routerLink]="['/signup']">Sign In
+            <a class="nav-link" href="" *ngIf="!securityObject.isAuthenticated" [routerLinkActive]="['active']" [routerLink]="['/signup']">Sign In
+                <span class="sr-only">(current)</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="" *ngIf="securityObject.isAuthenticated" [routerLinkActive]="['active']" [routerLink]="['/profile']">Profile
                 <span class="sr-only">(current)</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="" *ngIf="securityObject.isAuthenticated" (click)="logout()">Log Out</a>
         </li>
+
     </ul>
 </nav>
 

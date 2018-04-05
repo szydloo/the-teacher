@@ -11,6 +11,8 @@ export class SecurityService {
     resetSecurityObject() {
         this.securityObject.token = "";
         this.securityObject.isAuthenticated = false;
+        this.securityObject.role = "";
+        this.securityObject.username = "";
 
         localStorage.removeItem("bearerToken");
     }

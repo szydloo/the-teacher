@@ -10,6 +10,8 @@ import { SignupComponent } from './signup.component';
 import { ConfirmEqualValidatorDirective } from '../shared/confirm-equal-validator.directive';
 import { SignupLoginResultDialog } from './signup-login-result-dialog.component';
 import { LoginService } from './login.service';
+import { AlertFilledFormsGuard } from './alert-filled-forms.guard';
+
 
 @NgModule({
   imports: [
@@ -28,7 +30,7 @@ import { LoginService } from './login.service';
     ConfirmEqualValidatorDirective,
     SignupLoginResultDialog
  ],
- entryComponents: [SignupLoginResultDialog],
- providers: [LoginService]
+ entryComponents: [SignupLoginResultDialog ],
+ providers: [LoginService, AlertFilledFormsGuard]
 })
 export class SignupLoginModule { }
