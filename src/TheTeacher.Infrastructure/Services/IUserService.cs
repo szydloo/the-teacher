@@ -12,7 +12,6 @@ namespace TheTeacher.Infrastructure.Services
         Task LoginAsync(string email, string password);
         Task<IEnumerable<UserDTO>> BrowseAsync();        
         Task DeleteAsync(Guid userId);
-        Task ChangeUsernameAsync(Guid userId, string newUsername);
         Task ChangePasswordAsync(Guid userId, string currentPassword, string newPassword);
     }
 }

@@ -28,9 +28,8 @@ namespace TheTeacher.Infrastructure.Repositories
             => await Users.InsertOneAsync(user);
         public async Task RemoveAsync(Guid userId)
             => await Users.DeleteOneAsync(x => x.Id == userId);
-        public async Task UpdateAsync(Guid userId, string newUsername)
-            => await Task.CompletedTask; // TODO implement
-        public async Task UpdateAsync(Guid userId, string currentPassword, string newPassword)
+
+        public async Task UpdateAsync(Guid userId, string newPassword)
             => await Task.CompletedTask; // TODO implement
 
         private IMongoCollection<User> Users => _database.GetCollection<User>("Users");

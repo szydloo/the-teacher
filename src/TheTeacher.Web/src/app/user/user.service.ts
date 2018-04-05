@@ -7,11 +7,13 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 
 import { User } from '../models/user';
+import { ChangeUserPasswordCommand } from '../models/commands/change-user-password-command';
 
 
 @Injectable()
 export class UserService {
-    url: string = 'http://localhost:5000/users';
+    url: string = 'http://localhost:5000/users/';
+    options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
     constructor(private client: HttpClient) { 
     }
@@ -22,10 +24,16 @@ export class UserService {
     }
 
     saveUser(user: User): Observable<HttpResponse<User>> {
-        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
         const body = JSON.stringify(user);
         
-        return this.client.post(this.url, body, options)
+        return this.client.post(this.url, body, this.options)
+                            .catch(this.handleError);
+    }
+
+    changePassword(changePassword: ChangeUserPasswordCommand): Observable<HttpResponse<any>> {
+        const body = JSON.stringify(changePassword);
+
+        return this.client.put(this.url + 'password', body, this.options)
                             .catch(this.handleError);
     }
 

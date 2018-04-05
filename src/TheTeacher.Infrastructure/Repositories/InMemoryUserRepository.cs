@@ -31,17 +31,10 @@ namespace TheTeacher.Infrastructure.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task UpdateAsync(Guid userId, string currentPassword, string newPassword)
+        public async Task UpdateAsync(Guid userId, string newPassword)
         {
             var user = await GetAsync(userId);
             
         }
-
-        public async Task UpdateAsync(Guid userId, string newUsername)
-        {
-            var user = await GetAsync(userId);
-            // TODOu
-        }
-
     }
 }

@@ -62,10 +62,11 @@ export class LoginComponent implements OnInit {
         if(jwt.token.length > 0 && jwt != null) {
             let decodedToken: any = JWT(jwt.token);
             console.log(decodedToken);
-            
+
             userAuth.isAuthenticated = true;
             userAuth.token = jwt.token;
             userAuth.username = decodedToken.username;
+            userAuth.userId = decodedToken.sub;
 
             // userAuth.role = JWT(jwt.token).role
             Object.assign(this.securityService.securityObject, userAuth);

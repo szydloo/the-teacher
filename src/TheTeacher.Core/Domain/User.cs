@@ -56,7 +56,7 @@ namespace TheTeacher.Core.Domain
             else throw new DomainException(DomainErrorCodes.InvalidEmail, "Invalid email address.");
         }
 
-        private void SetPassword(string password)
+        public void SetPassword(string password)
         {
             if( String.IsNullOrWhiteSpace(password))
             {

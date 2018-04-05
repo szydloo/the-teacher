@@ -12,7 +12,6 @@ namespace TheTeacher.Infrastructure.Repositories
         Task<IEnumerable<User>> GetAllAsync();
         Task RemoveAsync(Guid userId);
         Task AddAsync(User user);
-        Task UpdateAsync(Guid user, string newUsername);
-        Task UpdateAsync(Guid userId, string currentPassword, string newPassword); 
+        Task UpdateAsync(Guid userId, string newPassword); 
     }
 }

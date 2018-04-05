@@ -55,19 +55,8 @@ namespace TheTeacher.Api.Controllers
         {
             await DispatchAsync(command);
 
-            return NoContent(); 
+            return Ok(); 
         }
-
-
-        // [Authorize]
-        // [HttpPut]
-        // [Route("username")] 
-        // public async Task<IActionResult> Put([FromBody]ChangeUserUsername command)
-        // {
-        //     await DispatchAsync(command);
-
-        //     return NoContent(); // HTTP specification
-        // }
 
         [Authorize]
         [HttpDelete("me")]

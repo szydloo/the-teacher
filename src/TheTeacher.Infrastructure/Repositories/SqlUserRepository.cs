@@ -35,14 +35,12 @@ namespace TheTeacher.Infrastructure.Repositories
             _context.Remove(user);
             await _context.SaveChangesAsync();
         }
-        public async Task UpdateAsync(Guid user, string newUsername)
-        {
-            await Task.CompletedTask; // TODO implement
-        }
 
-        public async Task UpdateAsync(Guid userId, string currentPassword, string newPassword)
+        public async Task UpdateAsync(Guid userId, string newHashedPassword)
         {
-            await Task.CompletedTask; // TODO implement
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            user.SetPassword(newHashedPassword);
+            await _context.SaveChangesAsync();
         }
     }
 }

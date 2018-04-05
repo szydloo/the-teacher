@@ -78,7 +78,10 @@ namespace TheTeacher.Infrastructure.Services
         {
             var user = await _userRepository.GetOrFailAsync(userId);
 
-            if(currentPassword != user.Password)
+            var salt = user.Salt;
+            var logingHash = _encrypter.GetHash(currentPassword, salt);
+
+            if(logingHash != user.Password)
             {
                 throw new ServiceException("Invalid data please try again.");
             }
@@ -86,14 +89,9 @@ namespace TheTeacher.Infrastructure.Services
             {
                 throw new ServiceException("New password must be different than the old one.");
             }
-
-            await _userRepository.UpdateAsync(userId, currentPassword, newPassword);
+            var newHashedPasword = _encrypter.GetHash(newPassword, salt);
+            await _userRepository.UpdateAsync(userId, newHashedPasword);
         }
 
-        public async Task ChangeUsernameAsync(Guid userId, string newUsername)
-        {
-            var user = await _userRepository.GetOrFailAsync(userId);
-            await _userRepository.UpdateAsync(userId, newUsername);
-        }
     }
 }
