@@ -21,11 +21,13 @@ export class LoginComponent implements OnInit {
     title: string = "Log In!";
     logInForm: FormGroup;
     returnUrl: string = "";
+    logingError: boolean = false;
+    errorMessage: string = "";
 
     constructor(private fb: FormBuilder,private loginService: LoginService, private securityService: SecurityService,
                 private router: Router, private route: ActivatedRoute) {
 
-                }
+    }
 
     ngOnInit() {
         this.logInForm = this.fb.group({
@@ -45,7 +47,7 @@ export class LoginComponent implements OnInit {
 
         // Send login user command to api
         this.loginService.loginUser(loginCommand).subscribe((data) => this.setCurrentSecObject(data),
-                                                            (err) => console.log(err))
+                                                            (err) => this.handleLoginError(err))
                                                             
     }
 
@@ -74,6 +76,17 @@ export class LoginComponent implements OnInit {
 
             this.redirectToPage();
         }
+    }
+
+    handleLoginError(err: any) {
+        console.log(err);
+        // Synchronised with api
+        if(err.error != null && err.error.code === 'invalid_credentials' ) {
+            console.log(err.error.message);
+            this.logingError = true;
+            this.errorMessage = err.error.message;
+        }
+
     }
 
 }

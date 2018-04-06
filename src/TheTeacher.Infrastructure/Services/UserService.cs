@@ -83,11 +83,11 @@ namespace TheTeacher.Infrastructure.Services
 
             if(logingHash != user.Password)
             {
-                throw new ServiceException("Invalid data please try again.");
+                throw new ServiceException(ServiceErrorCodes.InvalidCredentials, "Invalid data please try again.");
             }
             else if(user.Password == newPassword)
             {
-                throw new ServiceException("New password must be different than the old one.");
+                throw new ServiceException(ServiceErrorCodes.InvalidNewPassword, "New password must be different than the old one.");
             }
             var newHashedPasword = _encrypter.GetHash(newPassword, salt);
             await _userRepository.UpdateAsync(userId, newHashedPasword);

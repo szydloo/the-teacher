@@ -27,6 +27,8 @@
                         <input class="form-control" formControlName="password" [ngClass]="{'is-invalid': logInForm.get('password').touched && logInForm.get('password').errors?.required }"
                             [type]="showPassword.checked ? 'text' : 'password'" id="passwordLoginId" placeholder="Password" />
                         <div *ngIf="logInForm.get('password').touched && logInForm.get('password').errors?.required" class="text-danger">Password is required</div>
+                        <span *ngIf="logingError" style="color:red">{{errorMessage}}</span>
+                        <br>
                         <mat-checkbox type="checkbox" #showPassword>Show/Hide</mat-checkbox>
                     </div>
                 </div>

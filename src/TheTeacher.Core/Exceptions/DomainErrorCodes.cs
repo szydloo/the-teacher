@@ -9,7 +9,7 @@ namespace TheTeacher.Core.Exceptions
         public static string InvalidRole => "invalid_role";
         public static string InvalidPrice => "invalid_price_per_hour";
         public static string InvalidGrade => "invalid_grade";
-        public static string InvalidAddress => "invalid_grade";
+        public static string InvalidAddress => "invalid_address";
         public static string InvalidTimePeriod => "invalid_time_period";
         
     }

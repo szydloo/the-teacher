@@ -10,5 +10,6 @@ namespace TheTeacher.Infrastructure.Exceptions
         public static string InvalidCredentials => "invalid_credentials";
         public static string InvalidEmail => "invalid_email";
         public static string InvalidSubjectDetails => "invalid_subject_details";
+        public static string InvalidNewPassword => "invalid_new_password";
     }
 }

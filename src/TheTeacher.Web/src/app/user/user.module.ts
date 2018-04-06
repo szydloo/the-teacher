@@ -6,6 +6,8 @@ import { MatCheckboxModule } from '@angular/material';
 
 import { UserService } from './user.service';
 import { UserProfileComponent } from './user-profile.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { RegisterTeacherComponent } from './register-teacher/register-teacher.component';
 
 @NgModule({
   imports: [
@@ -14,7 +16,7 @@ import { UserProfileComponent } from './user-profile.component';
     BrowserModule, 
     MatCheckboxModule
   ],
-  declarations: [UserProfileComponent],
+  declarations: [UserProfileComponent, ChangePasswordComponent, RegisterTeacherComponent],
   providers: [UserService]
 })
 export class UserModule { }
