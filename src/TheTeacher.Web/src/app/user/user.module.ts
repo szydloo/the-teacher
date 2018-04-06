@@ -13,7 +13,7 @@ import { RegisterTeacherComponent } from './register-teacher/register-teacher.co
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    BrowserModule, 
+    BrowserModule,
     MatCheckboxModule
   ],
   declarations: [UserProfileComponent, ChangePasswordComponent, RegisterTeacherComponent],

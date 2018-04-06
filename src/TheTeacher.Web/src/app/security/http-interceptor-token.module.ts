@@ -1,7 +1,7 @@
-import { NgModule } from "@angular/core";
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { HttpRequestInterceptorToken } from "./http-request-interceptor-token";
+import { HttpRequestInterceptorToken } from './http-request-interceptor-token';
 
 @NgModule({
     providers:  [
@@ -9,4 +9,4 @@ import { HttpRequestInterceptorToken } from "./http-request-interceptor-token";
         useClass: HttpRequestInterceptorToken,
         multi: true}
     ]})
-export class HttpRequestInterceptorTokenModule { } 
+export class HttpRequestInterceptorTokenModule { }

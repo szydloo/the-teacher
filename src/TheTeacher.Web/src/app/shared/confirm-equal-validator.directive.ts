@@ -12,25 +12,25 @@ import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
             multi: true,
         }
     ],
-    
+
 })
 export class ConfirmEqualValidatorDirective implements OnInit, Validator {
 
-    @Input() confEqSecControlName: string  = 'password' ;
-    @Input() confEqFirstControlName: string  = 'confirmPassword' ;
-    
+    @Input() confEqSecControlName  = 'password' ;
+    @Input() confEqFirstControlName  = 'confirmPassword' ;
+
     constructor() {
     }
 
     ngOnInit(): void {
     }
-    
+
     validate(controlGroup: AbstractControl): { [key: string]: any; } {
         console.log(this.confEqFirstControlName + ' ' + this.confEqSecControlName);
-        
-        let firstControl = controlGroup.get(this.confEqFirstControlName);
-        let secControl = controlGroup.get(this.confEqSecControlName);
-        
+
+        const firstControl = controlGroup.get(this.confEqFirstControlName);
+        const secControl = controlGroup.get(this.confEqSecControlName);
+
         console.log(firstControl.value + ' fc ' + secControl.value + ' sec');
         if (firstControl && secControl && ( firstControl.value !== secControl.value )) {
             return { 'notEqual': true};
@@ -39,7 +39,7 @@ export class ConfirmEqualValidatorDirective implements OnInit, Validator {
         }
     }
 
-    registerOnValidatorChange?(fn: () => void): void { 
-        throw new Error("Method not implemented.");
+    registerOnValidatorChange?(fn: () => void): void {
+        throw new Error('Method not implemented.');
     }
 }

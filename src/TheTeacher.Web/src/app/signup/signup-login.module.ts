@@ -8,7 +8,7 @@ import { MatDialogModule, MatButtonModule, MatCheckboxModule } from '@angular/ma
 import { LoginComponent } from './login.component';
 import { SignupComponent } from './signup.component';
 import { ConfirmEqualValidatorDirective } from '../shared/confirm-equal-validator.directive';
-import { SignupLoginResultDialog } from './signup-login-result-dialog.component';
+import { SignupLoginResultDialogComponent } from './signup-login-result-dialog.component';
 import { LoginService } from './login.service';
 import { AlertFilledFormsGuard } from './alert-filled-forms.guard';
 
@@ -22,15 +22,15 @@ import { AlertFilledFormsGuard } from './alert-filled-forms.guard';
     MatDialogModule,
     MatButtonModule,
     MatCheckboxModule,
-    
+
   ],
   declarations: [
     LoginComponent,
     SignupComponent,
     ConfirmEqualValidatorDirective,
-    SignupLoginResultDialog
+    SignupLoginResultDialogComponent
  ],
- entryComponents: [SignupLoginResultDialog ],
+ entryComponents: [SignupLoginResultDialogComponent ],
  providers: [LoginService, AlertFilledFormsGuard]
 })
 export class SignupLoginModule { }

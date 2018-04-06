@@ -12,10 +12,10 @@ import { ChangeUserPasswordCommand } from '../models/commands/change-user-passwo
 
 @Injectable()
 export class UserService {
-    url: string = 'http://localhost:5000/users/';
+    url = 'http://localhost:5000/users/';
     options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
-    constructor(private client: HttpClient) { 
+    constructor(private client: HttpClient) {
     }
 
     getUsers(): Observable<User[]> {
@@ -25,7 +25,7 @@ export class UserService {
 
     saveUser(user: User): Observable<HttpResponse<User>> {
         const body = JSON.stringify(user);
-        
+
         return this.client.post(this.url, body, this.options)
                             .catch(this.handleError);
     }

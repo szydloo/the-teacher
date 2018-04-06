@@ -10,7 +10,7 @@ import { Teacher } from '../models/teacher';
     styleUrls: ['./teacher-list.component.css']
 })
 export class TeacherListComponent implements OnInit {
-    title: string = "List of Teachers";
+    title = 'List of Teachers';
     teachers: Teacher[];
     isTableToggled: boolean[];
 
@@ -20,7 +20,7 @@ export class TeacherListComponent implements OnInit {
     ngOnInit() {
         this._teacherService.getTeachers().subscribe((data) => this.teachers = data,
                                                     (err) => console.log(err), // TODO proper err notificaton
-                                                    () => this.setToggledTableVals() ); 
+                                                    () => this.setToggledTableVals() );
     }
 
 
@@ -33,6 +33,6 @@ export class TeacherListComponent implements OnInit {
     }
 
     toggleProperTable(i): void {
-        this.isTableToggled[i]=!this.isTableToggled[i];
+        this.isTableToggled[i] = !this.isTableToggled[i];
     }
 }

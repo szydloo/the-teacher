@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { MatDialog } from '@angular/material';
 
-import { confirmEqualPasswordValidator, confirmEqualEmailValidator } from '../shared/confirm-equal.validator'
+import { confirmEqualPasswordValidator, confirmEqualEmailValidator } from '../shared/confirm-equal.validator';
 import { throws } from 'assert';
 import { UserService } from '../user/user.service';
 import { User } from '../models/user';
@@ -15,7 +15,7 @@ import { SignupLoginResultDialog } from './signup-login-result-dialog.component'
     styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-    pageTitle: string = "Sign Up!"
+    pageTitle = 'Sign Up!';
     signUpForm: FormGroup;
 
 
@@ -39,7 +39,7 @@ export class SignupComponent implements OnInit {
     }
 
     saveUser() {
-        let u: User = new User();
+        const u: User = new User();
         u.email = this.signUpForm.value.emailGroup.email;
         u.password = this.signUpForm.value.passwordGroup.password;
         u.username = this.signUpForm.value.username;
@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
     handleErrorWithModalPopup(err: any): void {
         if (err.error !== undefined) {
             console.log(JSON.stringify(err.error.message));
-            let dialogRef = this.dialog.open(SignupLoginResultDialog, {
+            const dialogRef = this.dialog.open(SignupLoginResultDialog, {
                 width: '500px',
                 height: '200px',
                 data: { errorMessage: err.error.message }
@@ -72,30 +72,30 @@ export class SignupComponent implements OnInit {
 
     //#region  Validation errors display functions go here
     addIsInvalidIfErrors(controlName: string) {
-        let styles = {
+        const styles = {
             'is-invalid': this.hasErrors(controlName),
-        }
+        };
         return styles;
     }
 
     addTextDangerIfErrors(controlName: string) {
-        let styles = {
+        const styles = {
             'text-danger': this.hasErrors(controlName),
-        }
+        };
         return styles;
     }
 
     addAlertDangerIfNotMatching(controlGroupName: string, confirmationFieldName: string) {
-        let controlGroup = this.signUpForm.get(controlGroupName);
-        let confirmationControl = this.signUpForm.get(confirmationFieldName);
-        if (controlGroup.errors === null) return;
-        let styles = { 'alert alert-danger': this.signUpForm.get(controlGroupName).errors.notEqual && confirmationControl.touched }
+        const controlGroup = this.signUpForm.get(controlGroupName);
+        const confirmationControl = this.signUpForm.get(confirmationFieldName);
+        if (controlGroup.errors === null) { return; }
+        const styles = { 'alert alert-danger': this.signUpForm.get(controlGroupName).errors.notEqual && confirmationControl.touched };
         return styles;
     }
 
     hasErrors(controlName: string): boolean {
-        let control = this.signUpForm.get(controlName);
-        if (control === null || control === undefined) throw `Lacking control with name ${controlName}.`;
+        const control = this.signUpForm.get(controlName);
+        if (control === null || control === undefined) { throw new Error(`Lacking control with name ${controlName}.`); }
         if (control.touched && control.errors !== null) {
             return true;
         } else {
@@ -104,16 +104,16 @@ export class SignupComponent implements OnInit {
     }
 
     isRequired(controlName: string): boolean {
-        let control = this.signUpForm.get(controlName);
-        if (control === null || control === undefined) throw `Lacking control with name ${controlName}.`;
-        if (control.errors === null) return false;
+        const control = this.signUpForm.get(controlName);
+        if (control === null || control === undefined) { throw new Error(`Lacking control with name ${controlName}.`); }
+        if (control.errors === null) { return false; }
         return (control.touched && (control.errors.required));
     }
 
     isMatchingEmailPattern(controlName: string): boolean {
-        let control = this.signUpForm.get(controlName);
-        if (control === null || control === undefined) throw `Lacking control with name ${controlName}.`;
-        if (control.errors === null) return false;
+        const control = this.signUpForm.get(controlName);
+        if (control === null || control === undefined) { throw new Error(`Lacking control with name ${controlName}.`); }
+        if (control.errors === null) { return false; }
         return (control.touched && (control.errors.pattern));
     }
 

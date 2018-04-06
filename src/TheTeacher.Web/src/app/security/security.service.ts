@@ -9,12 +9,12 @@ export class SecurityService {
     constructor() { }
 
     resetSecurityObject() {
-        this.securityObject.token = "";
+        this.securityObject.token = '';
         this.securityObject.isAuthenticated = false;
-        this.securityObject.role = "";
-        this.securityObject.username = "";
+        this.securityObject.role = '';
+        this.securityObject.username = '';
 
-        localStorage.removeItem("bearerToken");
+        localStorage.removeItem('bearerToken');
     }
 
 }

@@ -16,37 +16,37 @@ import { ChangeUserPasswordCommand } from '../../models/commands/change-user-pas
 export class ChangePasswordComponent implements OnInit {
     timeToCheck: boolean;
     editPasswordForm: FormGroup;
-    title: string = "Change Password";
-    changePasswordError: boolean = false;
-    errorMessage: string = "";
+    title = 'Change Password';
+    changePasswordError = false;
+    errorMessage = '';
 
     constructor(private fb: FormBuilder, private securityService: SecurityService, private userService: UserService) { }
 
     ngOnInit() {
         this.editPasswordForm = this.fb.group({
-            currPassword: [''],
+            currPassword: ['', Validators.required],
             passwordGroup: this.fb.group({
                 password: [''],
                 confirmPassword: ['']
             }, {validator: confirmEqualPasswordValidator}),
-        })
+        });
 
-        const confPasswordControl = this.editPasswordForm.get('passwordGroup.confirmPassword').valueChanges.debounceTime(1000).subscribe(() => this.timeToCheck = true);
+        const confPasswordControl = this.editPasswordForm.get('passwordGroup.confirmPassword')
+                                                            .valueChanges.debounceTime(1000).subscribe(() => this.timeToCheck = true);
     }
 
     changePassword() {
-        let changePassword: ChangeUserPasswordCommand = new ChangeUserPasswordCommand();
+        const changePassword: ChangeUserPasswordCommand = new ChangeUserPasswordCommand();
         changePassword.userId = this.securityService.securityObject.userId;
         changePassword.currentPassword = this.editPasswordForm.controls.currPassword.value;
         changePassword.newPassword = this.editPasswordForm.controls.passwordGroup.value.password;
 
-        console.log(JSON.stringify(changePassword));
-        this.userService.changePassword(changePassword).subscribe((data) => { }, 
+        this.userService.changePassword(changePassword).subscribe((data) => { },
                                                                     (err) => this.handleError(err));
     }
 
     handleError(err: any) {
-        if(err.error.message != null) {
+        if (err.error.message != null) {
             this.changePasswordError = true;
             this.errorMessage = err.error.message;
         }

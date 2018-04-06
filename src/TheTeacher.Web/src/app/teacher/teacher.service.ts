@@ -7,7 +7,7 @@ import { Teacher } from '../models/teacher';
 
 @Injectable()
 export class TeacherService {
-    url: string = "http://localhost:5000/teachers/";
+    url = 'http://localhost:5000/teachers/';
 
     constructor(private _client: HttpClient) { }
 
@@ -19,8 +19,8 @@ export class TeacherService {
     handleError(err: HttpErrorResponse) {
         // TODO: Log into error database
         let errMessage = '';
-        if(err.error instanceof Error) {
-            errMessage = `An error occured: ${err.error.message}`; 
+        if (err.error instanceof Error) {
+            errMessage = `An error occured: ${err.error.message}`;
         } else {
             errMessage = `Server returned code: ${err.status}, error message: ${err.message}`;
         }

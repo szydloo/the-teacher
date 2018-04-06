@@ -7,16 +7,16 @@ import { SecurityService } from '../security/security.service';
     styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-    title:string = "";
+    title = '';
 
     constructor(private securityService: SecurityService) {
 
     }
 
     ngOnInit(): void {
-        this.title = this.securityService.securityObject.username + "'s Profile" ;
-        
+        this.title = this.securityService.securityObject.username + '\'s Profile' ;
+
     }
 
-    
+
 }

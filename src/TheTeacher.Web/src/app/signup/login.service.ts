@@ -12,13 +12,13 @@ import { Jwt } from '../models/security/jwt';
 
 @Injectable()
 export class LoginService {
-    url: string = "http://localhost:5000/login";
-    
+    url = 'http://localhost:5000/login';
+
     constructor(private client: HttpClient) { }
 
     loginUser(loginUser: LoginUserCommand): Observable<Jwt> {
-        let body = JSON.stringify(loginUser);
-        let options = {
+        const body = JSON.stringify(loginUser);
+        const options = {
             headers: new HttpHeaders({'Content-Type': 'application/json'})
         };
 

@@ -14,8 +14,8 @@ const routes: Routes = [
     { path: 'profile', component: UserProfileComponent,   }, // TODO Add canActivate: [AuthGuard]
     { path: 'home', component: HomeComponent},
     { path: '**',  pathMatch: 'full', redirectTo: 'home'},
-    
-]
+
+];
 
 @NgModule({
     declarations: [

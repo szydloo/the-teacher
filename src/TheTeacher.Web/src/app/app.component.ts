@@ -12,7 +12,7 @@ export class AppComponent {
     title = 'Welcome to the Teacher App';
     securityObject: UserAuth;
 
-    constructor(private securityService: SecurityService) { 
+    constructor(private securityService: SecurityService) {
         this.securityObject = securityService.securityObject;
     }
 

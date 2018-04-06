@@ -18,20 +18,20 @@ import { Router, ActivatedRoute } from '@angular/router';
     styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-    title: string = "Log In!";
+    title = 'Log In!';
     logInForm: FormGroup;
-    returnUrl: string = "";
-    logingError: boolean = false;
-    errorMessage: string = "";
+    returnUrl = '';
+    logingError = false;
+    errorMessage = '';
 
-    constructor(private fb: FormBuilder,private loginService: LoginService, private securityService: SecurityService,
+    constructor(private fb: FormBuilder, private loginService: LoginService, private securityService: SecurityService,
                 private router: Router, private route: ActivatedRoute) {
 
     }
 
     ngOnInit() {
         this.logInForm = this.fb.group({
-            email: ['testUsername@tet.com',[Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+')]],
+            email: ['testUsername@tet.com', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+')]],
             password: ['testSecret', [Validators.required]]
         });
 
@@ -47,12 +47,12 @@ export class LoginComponent implements OnInit {
 
         // Send login user command to api
         this.loginService.loginUser(loginCommand).subscribe((data) => this.setCurrentSecObject(data),
-                                                            (err) => this.handleLoginError(err))
-                                                            
+                                                            (err) => this.handleLoginError(err));
+
     }
 
     redirectToPage() {
-        if(this.returnUrl) {
+        if (this.returnUrl) {
         this.router.navigateByUrl(this.returnUrl);
         } else {
             this.router.navigateByUrl('home');
@@ -60,9 +60,9 @@ export class LoginComponent implements OnInit {
     }
 
     setCurrentSecObject(jwt: Jwt) {
-        let userAuth: UserAuth = new UserAuth();
-        if(jwt.token.length > 0 && jwt != null) {
-            let decodedToken: any = JWT(jwt.token);
+        const userAuth: UserAuth = new UserAuth();
+        if (jwt.token.length > 0 && jwt != null) {
+            const decodedToken: any = JWT(jwt.token);
             console.log(decodedToken);
 
             userAuth.isAuthenticated = true;
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
 
             // userAuth.role = JWT(jwt.token).role
             Object.assign(this.securityService.securityObject, userAuth);
-            localStorage.setItem("bearerToken", this.securityService.securityObject.token);
+            localStorage.setItem('bearerToken', this.securityService.securityObject.token);
 
             this.redirectToPage();
         }
@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
     handleLoginError(err: any) {
         console.log(err);
         // Synchronised with api
-        if(err.error != null && err.error.code === 'invalid_credentials' ) {
+        if (err.error != null && err.error.code === 'invalid_credentials' ) {
             console.log(err.error.message);
             this.logingError = true;
             this.errorMessage = err.error.message;
