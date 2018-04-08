@@ -11,7 +11,6 @@ using NLog;
 
 namespace TheTeacher.Api.Controllers
 {
-    [Authorize(policy: "RoleUser")]
     public class UsersController : ApiControllerBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -48,7 +47,7 @@ namespace TheTeacher.Api.Controllers
             return Created($"/users/{command.Email}", null);
         }
 
-        [Authorize]
+        [Authorize(policy: "RoleUser")]
         [HttpPut]
         [Route("password")] 
         public async Task<IActionResult> Put([FromBody]ChangeUserPassword command)
@@ -58,7 +57,7 @@ namespace TheTeacher.Api.Controllers
             return Ok(); 
         }
 
-        [Authorize]
+        [Authorize(policy: "RoleUser")]
         [HttpDelete("me")]
         public async Task<IActionResult> Delete()
         {

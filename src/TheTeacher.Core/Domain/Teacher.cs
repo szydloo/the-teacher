@@ -4,8 +4,6 @@ using System.Linq;
 using Itenso.TimePeriod;
 using TheTeacher.Core.Exceptions;
 
-
-
 namespace TheTeacher.Core.Domain
 {
     public class Teacher
@@ -14,7 +12,7 @@ namespace TheTeacher.Core.Domain
         private ISet<Lesson> _lessons = new HashSet<Lesson>();
         public Guid UserID { get; protected set; }
         public string Fullname { get; protected set; }
-        public string Address { get; protected set; }
+        public Address Address { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
 
@@ -22,7 +20,7 @@ namespace TheTeacher.Core.Domain
         {   
         }
 
-        public Teacher(User user, string address, string fullname)
+        public Teacher(User user, Address address, string fullname)
         {
             UserID = user.Id;
             SetAddress(address); 
@@ -41,12 +39,14 @@ namespace TheTeacher.Core.Domain
             UpdatedAt = DateTime.UtcNow;
         }
 
-        public void SetAddress(string address)
+        public void SetAddress(Address address)
         {
-            if(String.IsNullOrWhiteSpace(address))
+            if(String.IsNullOrWhiteSpace(address.City) || String.IsNullOrWhiteSpace(address.Country) 
+                || String.IsNullOrWhiteSpace(address.Street) || String.IsNullOrWhiteSpace(address.Zipcode)) 
             {
-                throw new DomainException(DomainErrorCodes.InvalidTimePeriod, $"Address cannot be empty.");
+                throw new DomainException(DomainErrorCodes.InvalidAddress, $"Address cannot be empty");
             }
+            
             Address = address;
             UpdatedAt = DateTime.UtcNow;
         }

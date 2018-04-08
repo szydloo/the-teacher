@@ -31,8 +31,10 @@ namespace TheTeacher.Infrastructure.EntityFramework
             var userBuilder = modelBuilder.Entity<User>();          
             
             userBuilder.HasKey(x => x.Id);
+
             var teacherBuilder = modelBuilder.Entity<Teacher>();
             teacherBuilder.HasKey(x => x.UserID);
+
 
         }
     }

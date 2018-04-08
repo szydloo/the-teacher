@@ -60,7 +60,7 @@ namespace TheTeacher.Infrastructure.Services
             for(int i = 1; i <= 10; i++)
             {
                 var user = await _userService.GetAsync($"test{i}@email.com");
-                await _teacherService.CreateAsync(user.Id, $"randomAdress{i}", $"testName{i}");
+                await _teacherService.CreateAsync(user.Id, $"randomStreet{i}", $"randomCity{i}", $"{i}{i}-{i}{i}{i}", $"Poland", $"testName{i}");
             }   
             for(int i = 1; i <= 3; i++) 
             {

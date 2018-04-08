@@ -7,7 +7,7 @@ using TheTeacher.Infrastructure.EntityFramework;
 
 namespace TheTeacher.Infrastructure.Repositories
 {
-    public class SqlTeacherRepository // : ITeacherRepository, ISqlRepository // sooon
+    public class SqlTeacherRepository : ITeacherRepository, ISqlRepository
     {
         private readonly TheTeacherContext _context;
         public DbSet<Teacher> Teachers;
@@ -40,6 +40,11 @@ namespace TheTeacher.Infrastructure.Repositories
         {
             _context.Teachers.Update(teacher);
             await _context.SaveChangesAsync();
+        }
+
+        public Task<Teacher> GetAsync(string Name)
+        {
+            throw new NotImplementedException();
         }
     }
 }

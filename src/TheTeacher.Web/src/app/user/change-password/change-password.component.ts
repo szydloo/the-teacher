@@ -16,9 +16,9 @@ import { ChangeUserPasswordCommand } from '../../models/commands/change-user-pas
 export class ChangePasswordComponent implements OnInit {
     timeToCheck: boolean;
     editPasswordForm: FormGroup;
-    title = 'Change Password';
-    changePasswordError = false;
-    errorMessage = '';
+    title: string = 'Change Password';
+    changePasswordError: boolean = false;
+    errorMessage: string = '';
 
     constructor(private fb: FormBuilder, private securityService: SecurityService, private userService: UserService) { }
 
@@ -30,6 +30,7 @@ export class ChangePasswordComponent implements OnInit {
                 confirmPassword: ['']
             }, {validator: confirmEqualPasswordValidator}),
         });
+        
 
         const confPasswordControl = this.editPasswordForm.get('passwordGroup.confirmPassword')
                                                             .valueChanges.debounceTime(1000).subscribe(() => this.timeToCheck = true);

@@ -4,5 +4,6 @@ namespace TheTeacher.Infrastructure.Extensions
     {
         public static bool Empty(this string String)
             => string.IsNullOrWhiteSpace(String);
+
     }
 }

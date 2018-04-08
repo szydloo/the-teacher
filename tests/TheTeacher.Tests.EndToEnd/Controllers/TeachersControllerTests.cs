@@ -41,7 +41,10 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             var token = await GetTokenAsync(email, password);
             var command = new CreateTeacher
             {
-                Address = "address",  
+                Street = "testStreet",
+                City = "testCity",
+                Zipcode = "00-000",
+                Country = "testCountry",
                 Fullname = "Test Test"
             };
             var payload = GetPayload(command);

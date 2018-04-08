@@ -7,7 +7,7 @@ import { confirmEqualPasswordValidator, confirmEqualEmailValidator } from '../sh
 import { throws } from 'assert';
 import { UserService } from '../user/user.service';
 import { User } from '../models/user';
-import { SignupLoginResultDialog } from './signup-login-result-dialog.component';
+import { SignupLoginResultDialogComponent } from './signup-login-result-dialog.component';
 
 @Component({
     selector: 'app-signup',
@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
     handleErrorWithModalPopup(err: any): void {
         if (err.error !== undefined) {
             console.log(JSON.stringify(err.error.message));
-            const dialogRef = this.dialog.open(SignupLoginResultDialog, {
+            const dialogRef = this.dialog.open(SignupLoginResultDialogComponent, {
                 width: '500px',
                 height: '200px',
                 data: { errorMessage: err.error.message }

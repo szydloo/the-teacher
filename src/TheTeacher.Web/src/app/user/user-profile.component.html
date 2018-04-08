@@ -1,11 +1,21 @@
-<div class="card offset-md-0">
-    <div class="card-heading">
-        <div class="card-title offset-md-1">
-            <h1>{{title}}</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="card col-md-12">
+            <div class="card-heading">
+                <div class="card-title offset-md-2">
+                    <h1>{{title}}</h1>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="card-body" >
-        <app-change-password></app-change-password>
-        <app-register-teacher></app-register-teacher>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 offset-md-1">
+            <app-change-password></app-change-password>
+        </div>
+        <div class="col-md-6">
+            <app-register-teacher></app-register-teacher>
+        </div>
     </div>
 </div>

@@ -1,3 +1,42 @@
-<p>
-  register-teacher works!
-</p>
+<br>
+<div>
+    <div class="card">
+        <div class="card-heading">
+            <div class="card-title">
+                <h3>Register as a teacher!</h3>
+            </div>
+        </div>
+        <div class="card-body">
+            <form [FormName]="teacherForm" (ngSubmit)="saveTeacher()">
+                <fieldset>
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label class="control-label" for="fullNameId"></label>
+                    <div>
+                        <input class="form-control" formControlName="fullName" type="text" id="fullNameId"/>
+                    </div>
+                </div>
+                <!-- Address -->
+                <div class="form-group">
+                    <label class="control-label" for="AddressId"></label>
+                    <div>
+                        <input class="form-control" formControlName="Address" type="text" id="AddressId"/>
+                    </div>
+                </div>
+
+                <!-- Optional -->
+                <div></div>
+                <!-- Lesson -->
+                <div>
+                    <!-- Dropdown Subject -->
+                        <!-- Name + Cat -->
+
+                    <!-- Grade -->
+
+                    <!-- Price Per Hour -->
+                </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

@@ -36,7 +36,7 @@ namespace TheTeacher.Tests.Services
             var start = new DateTime(2014,12,12,12,12,00);
             var end = new DateTime(2014,12,12,13,12,00);
             var tcs = new TaskCompletionSource<Teacher>();
-            tcs.SetResult(new Teacher(new User(id,"email@email.com","password","salt","username","user"),"address","fullname"));
+            tcs.SetResult(new Teacher(new User(id,"email@email.com","password","salt","username","user"),new Address("testStreet","testCity","testZipcode","testCountry"),"fullname"));
 
             teacherRepositoryMock.Setup(x => x.GetAsync(id)).Returns(tcs.Task);
 
