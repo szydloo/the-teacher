@@ -25,17 +25,17 @@ namespace TheTeacher.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public async Task<TeacherDTO> GetAsync(Guid userId)
+        public async Task<TeacherDto> GetAsync(Guid userId)
         {
             var teacher = await _teacherRepository.GetOrFailAsync(userId);
 
-            return _mapper.Map<TeacherDTO>(teacher);
+            return _mapper.Map<TeacherDto>(teacher);
         }
         
-        public async Task<IEnumerable<TeacherDTO>> BrowseAsync()
+        public async Task<IEnumerable<TeacherDto>> BrowseAsync()
         {
             var teachers = await _teacherRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<TeacherDTO>>(teachers);
+            return _mapper.Map<IEnumerable<TeacherDto>>(teachers);
         }
 
         public async Task CreateAsync(Guid userId, string street, string city, string zipcode, string country, string fullname)

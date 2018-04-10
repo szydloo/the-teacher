@@ -5,7 +5,7 @@ namespace TheTeacher.Infrastructure.Services
 {
     public interface IJwtHandler : IService
     {
-        JwtDTO CreateToken(Guid userId,string username, string role);
+        JwtDto CreateToken(Guid userId,string username, string role);
 
     }
 }

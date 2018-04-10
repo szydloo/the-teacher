@@ -28,10 +28,10 @@ namespace TheTeacher.Infrastructure.Services
             _userRepository = userRepository;
         }
 
-        public async Task<UserDTO> GetAsync(string email)
+        public async Task<UserDto> GetAsync(string email)
         {
             var user = await _userRepository.GetAsync(email);
-            return _mapper.Map<UserDTO>(user);
+            return _mapper.Map<UserDto>(user);
         }
 
         public async Task LoginAsync(string email, string password)
@@ -62,11 +62,11 @@ namespace TheTeacher.Infrastructure.Services
             await _userRepository.AddAsync(new User(id, email, hash, salt, username, role));
         }
 
-        public async Task<IEnumerable<UserDTO>> BrowseAsync()
+        public async Task<IEnumerable<UserDto>> BrowseAsync()
         {
             var users = await _userRepository.GetAllAsync();
 
-            return _mapper.Map<IEnumerable<UserDTO>>(users);
+            return _mapper.Map<IEnumerable<UserDto>>(users);
         }
 
         public async Task DeleteAsync(Guid userId)

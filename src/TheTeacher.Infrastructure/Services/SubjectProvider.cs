@@ -51,9 +51,9 @@ namespace TheTeacher.Infrastructure.Services
         {
             _cache = cache;   
         }
-        public async Task<IEnumerable<SubjectDTO>> BrowseAsync()
+        public async Task<IEnumerable<SubjectDto>> BrowseAsync()
         {
-            var subjects = _cache.Get<IEnumerable<SubjectDTO>>(CacheKey);
+            var subjects = _cache.Get<IEnumerable<SubjectDto>>(CacheKey);
             if(subjects == null || !subjects.Any())
             {
                 subjects = await GetAllAsync();
@@ -62,15 +62,15 @@ namespace TheTeacher.Infrastructure.Services
             return subjects;
         }
 
-        public async Task<IEnumerable<SubjectDTO>> GetAllAsync()
+        public async Task<IEnumerable<SubjectDto>> GetAllAsync()
             => await Task.FromResult(availableSubjects.GroupBy(x => x.Key)
-                        .SelectMany(g => g.SelectMany(d => d.Value.Select(s => new SubjectDTO
+                        .SelectMany(g => g.SelectMany(d => d.Value.Select(s => new SubjectDto
                         {
                             Category = d.Key,
                             Name = s
                         }))));
 
-        public async Task<SubjectDTO> GetAsync(string name, string category)
+        public async Task<SubjectDto> GetAsync(string name, string category)
         {
             if(!availableSubjects.ContainsKey(category))
             {
@@ -85,7 +85,7 @@ namespace TheTeacher.Infrastructure.Services
                 throw new ServiceException(ServiceErrorCodes.InvalidSubjectDetails, $"Subject '{name}' is not available.");
             }
             
-            return await Task.FromResult(new SubjectDTO
+            return await Task.FromResult(new SubjectDto
             {
                 Name = subject,
                 Category = category

@@ -15,22 +15,29 @@ namespace TheTeacher.Infrastructure.Repositories
         {
             _database = database;
         }
+
         public async Task<User> GetAsync(Guid userId)
-            => await Users.AsQueryable().FirstOrDefaultAsync(x => x.Id == userId);
+        => await Users.AsQueryable().FirstOrDefaultAsync(x => x.Id == userId);
 
         public async Task<User> GetAsync(string email)
-            => await Users.AsQueryable().FirstOrDefaultAsync(x => x.Email == email);
+        => await Users.AsQueryable().FirstOrDefaultAsync(x => x.Email == email);
 
         public async Task<IEnumerable<User>> GetAllAsync()
-            => await Users.AsQueryable().ToListAsync();
+        => await Users.AsQueryable().ToListAsync();
 
         public async Task AddAsync(User user)
-            => await Users.InsertOneAsync(user);
-        public async Task RemoveAsync(Guid userId)
-            => await Users.DeleteOneAsync(x => x.Id == userId);
+        => await Users.InsertOneAsync(user);
 
-        public async Task UpdateAsync(Guid userId, string newHashedPassword)
-            => await Task.CompletedTask;
+        public async Task RemoveAsync(Guid userId)
+        => await Users.DeleteOneAsync(x => x.Id == userId);
+
+        public async Task UpdateAsync(Guid userId, string newHashedPassword) 
+        {
+            var modificationUpdate = Builders<User>.Update
+                .Set(u => u.Password, newHashedPassword);
+
+            await Users.UpdateOneAsync(u => u.Id == userId, modificationUpdate);
+        }
 
         private IMongoCollection<User> Users => _database.GetCollection<User>("Users");
             

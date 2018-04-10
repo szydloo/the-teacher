@@ -6,7 +6,7 @@ using TheTeacher.Core.Domain;
 
 namespace TheTeacher.Infrastructure.Repositories
 {
-    public class InMemoryTeacherRepository : ITeacherRepository
+    public class InMemoryTeacherRepository // : ITeacherRepository
     {
         public static readonly ISet<Teacher> _teachers = new HashSet<Teacher>();
 

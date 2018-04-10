@@ -40,12 +40,12 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             return new StringContent(json, Encoding.UTF8, "application/json");
         }
 
-        protected async Task<UserDTO> GetUserAsync(string email)
+        protected async Task<UserDto> GetUserAsync(string email)
         {
             var response = await Client.GetAsync($"users/{email}");
             var responseString = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<UserDTO>(responseString);
+            return JsonConvert.DeserializeObject<UserDto>(responseString);
         }
 
         protected async Task<string> GetTokenAsync(string email, string password)
@@ -59,7 +59,7 @@ namespace TheTeacher.Tests.EndToEnd.Controllers
             var payload = GetPayload(command);
             var response = await Client.PostAsync("/login", payload);
             var responseString = await response.Content.ReadAsStringAsync();
-            var jwt = JsonConvert.DeserializeObject<JwtDTO>(responseString);
+            var jwt = JsonConvert.DeserializeObject<JwtDto>(responseString);
 
             return jwt.Token;  
         }        

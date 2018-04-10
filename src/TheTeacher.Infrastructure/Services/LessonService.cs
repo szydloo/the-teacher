@@ -23,7 +23,7 @@ namespace TheTeacher.Infrastructure.Services
             _subjectProvider = subjectProvider;
         }
 
-        public async Task<IEnumerable<TeacherDTO>> GetTeachersWithLessonAsync(string name)
+        public async Task<IEnumerable<TeacherDto>> GetTeachersWithLessonAsync(string name)
         {
             var teachers = await _teacherRepository.GetAllAsync();
             
@@ -33,7 +33,7 @@ namespace TheTeacher.Infrastructure.Services
                                     where t.GetLessons().Any(x => x.Subject.Name.Contains(name))
                                     select t;
 
-            return _mapper.Map<IEnumerable<TeacherDTO>>(teachersWithLesson);
+            return _mapper.Map<IEnumerable<TeacherDto>>(teachersWithLesson);
         }
 
         public async Task AddAsync(Guid userId, string name, string category, string grade, decimal pricePerHour)
@@ -41,20 +41,20 @@ namespace TheTeacher.Infrastructure.Services
             var teacher = await _teacherRepository.GetOrFailAsync(userId);
             var subjectDetails = await _subjectProvider.GetAsync(name, category);
             var subject = Subject.Create(subjectDetails.Name, subjectDetails.Category);
-            teacher.AddLesson(subject, grade, pricePerHour);
+            var lesson = new Lesson(subject, grade,pricePerHour);
+            await _teacherRepository.AddLesson(teacher, lesson);
         }
 
         public async Task UpdateAsync(Guid userId, Lesson lesson)
         {
             var teacher = await _teacherRepository.GetOrFailAsync(userId);
-            teacher.UpdateLesson(lesson);
+            
         }
 
         public async Task RemoveAsync(Guid userId, string name)
         {
             var teacher = await _teacherRepository.GetOrFailAsync(userId);
             var lesson = teacher.GetLessons().FirstOrDefault(x => x.Subject.Name == name);
-            teacher.RemoveLesson(lesson);
         }
     }
 }

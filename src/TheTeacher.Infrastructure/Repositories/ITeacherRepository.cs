@@ -13,5 +13,6 @@ namespace TheTeacher.Infrastructure.Repositories
         Task RemoveAsync(Guid userId);
         Task AddAsync(Teacher teacher);
         Task UpdateAsync(Teacher teacher);
+        Task AddLesson(Teacher teacher, Lesson lesson);
     }
 }

@@ -10,15 +10,14 @@ namespace TheTeacher.Infrastructure.Services
         private readonly IUserService _userService;
         private readonly ITeacherService _teacherService;
         private readonly ILessonService _lessonService;
-        private readonly IAvailableTimePeriodService _availableTimePeriodService;
+        // private readonly IAvailableTimePeriodService _availableTimePeriodService;
         
         public DataInitializer(IUserService userService, ITeacherService teacherService,
-             ILessonService lessonService, IAvailableTimePeriodService availableTimePeriodService)
+             ILessonService lessonService)
         {
             _userService = userService;
             _teacherService = teacherService;
             _lessonService = lessonService;
-            _availableTimePeriodService = availableTimePeriodService;
         }
         public async Task SeedAsync()
         {
@@ -68,14 +67,14 @@ namespace TheTeacher.Infrastructure.Services
                 await _lessonService.AddAsync(u.Id, "Biology", "Science", "Elementary", 100M );
             }
 
-            for(int i = 1; i <= 3; i++) 
-            {
-                var user = await _userService.GetAsync($"test{i}@email.com");
-                await _availableTimePeriodService.AddTimePeriodAsync(user.Id, new DateTime(2016,12,6,12,15,00), new DateTime(2016,12,6,13,15,00));
+            // for(int i = 1; i <= 3; i++) 
+            // {
+            //     var user = await _userService.GetAsync($"test{i}@email.com");
+            //     await _availableTimePeriodService.AddTimePeriodAsync(user.Id, new DateTime(2016,12,6,12,15,00), new DateTime(2016,12,6,13,15,00));
 
-                await _availableTimePeriodService.AddTimePeriodAsync(user.Id, new DateTime(2015,12,6,14,15,00), new DateTime(2015,12,6,15,15,00));
+            //     await _availableTimePeriodService.AddTimePeriodAsync(user.Id, new DateTime(2015,12,6,14,15,00), new DateTime(2015,12,6,15,15,00));
 
-            }
+            // }
                  
         }
 

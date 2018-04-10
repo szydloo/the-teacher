@@ -9,7 +9,7 @@ using TheTeacher.Infrastructure.Services;
 
 namespace TheTeacher.Api.Controllers
 {
-    [Authorize(policy: "RoleUser")]
+    // [Authorize(policy: "RoleUser")] 
     public class TeachersController : ApiControllerBase
     {
         private readonly ITeacherService _teacherService;
@@ -38,7 +38,7 @@ namespace TheTeacher.Api.Controllers
             return Json(teacher);
         }
 
-        [Authorize]
+        // [Authorize] 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateTeacher command)
         {

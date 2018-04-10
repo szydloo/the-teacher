@@ -7,7 +7,7 @@ using TheTeacher.Infrastructure.EntityFramework;
 
 namespace TheTeacher.Infrastructure.Repositories
 {
-    public class SqlUserRepository : IUserRepository, ISqlRepository
+    public class SqlUserRepository //: IUserRepository, ISqlRepository
     {
         private readonly TheTeacherContext _context;
         public SqlUserRepository(TheTeacherContext context)

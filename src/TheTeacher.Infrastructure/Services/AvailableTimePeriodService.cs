@@ -1,49 +1,49 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Itenso.TimePeriod;
-using TheTeacher.Infrastructure.DTO;
-using TheTeacher.Infrastructure.Extensions;
-using TheTeacher.Infrastructure.Repositories;
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Threading.Tasks;
+// using AutoMapper;
+// using Itenso.TimePeriod;
+// using TheTeacher.Infrastructure.DTO;
+// using TheTeacher.Infrastructure.Extensions;
+// using TheTeacher.Infrastructure.Repositories;
 
-namespace TheTeacher.Infrastructure.Services
-{
-    public class AvailableTimePeriodService : IAvailableTimePeriodService
-    {
-        private readonly ITeacherRepository _teacherRepository;
-        private readonly IMapper _mapper;
+// namespace TheTeacher.Infrastructure.Services
+// {
+//     public class AvailableTimePeriodService : IAvailableTimePeriodService
+//     {
+//         private readonly ITeacherRepository _teacherRepository;
+//         private readonly IMapper _mapper;
 
-        public AvailableTimePeriodService(ITeacherRepository teacherRepository, IMapper mapper)
-        {
-            _teacherRepository = teacherRepository;
-            _mapper = mapper;
-        }
+//         public AvailableTimePeriodService(ITeacherRepository teacherRepository, IMapper mapper)
+//         {
+//             _teacherRepository = teacherRepository;
+//             _mapper = mapper;
+//         }
 
-        public async Task<IEnumerable<TimeRangeDTO>> BrowseAsync(string name)
-        {
-            var teacher = await _teacherRepository.GetOrFailAsync(name);
-            var timePeriodCol = teacher.GetTimePeriodCollection();
-            var timeRangeList = new List<TimeRangeDTO>();
-            foreach(var timePeriod in timePeriodCol)
-            {
-                timeRangeList.Add(_mapper.Map<TimeRangeDTO>((TimeRange)timePeriod));
-            }
+//         public async Task<IEnumerable<TimeRangeDto>> BrowseAsync(string name)
+//         {
+//             var teacher = await _teacherRepository.GetOrFailAsync(name);
+//             var timePeriodCol = teacher.GetTimePeriodCollection();
+//             var timeRangeList = new List<TimeRangeDto>();
+//             foreach(var timePeriod in timePeriodCol)
+//             {
+//                 timeRangeList.Add(_mapper.Map<TimeRangeDto>((TimeRange)timePeriod));
+//             }
             
-            return timeRangeList;
-        }
+//             return timeRangeList;
+//         }
         
-        public async Task AddTimePeriodAsync(Guid userId, DateTime start, DateTime end)
-        {
-            var teacher = await _teacherRepository.GetOrFailAsync(userId);
-            teacher.AddAvailableTimePeriod(start, end);
-        }
+//         public async Task AddTimePeriodAsync(Guid userId, DateTime start, DateTime end)
+//         {
+//             var teacher = await _teacherRepository.GetOrFailAsync(userId);
+//             teacher.AddAvailableTimePeriod(start, end);
+//         }
 
-        public async Task RemoveTimePeriodAsync(Guid userId, DateTime start)
-        {
-            var teacher = await _teacherRepository.GetOrFailAsync(userId);
-            teacher.RemoveAvailableTimePeriod(start);
-        }
-    }
-}
+//         public async Task RemoveTimePeriodAsync(Guid userId, DateTime start)
+//         {
+//             var teacher = await _teacherRepository.GetOrFailAsync(userId);
+//             teacher.RemoveAvailableTimePeriod(start);
+//         }
+//     }
+// }

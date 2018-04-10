@@ -15,7 +15,7 @@ namespace TheTeacher.Core.Domain
         {
         }
 
-        private Lesson(Subject subject, string grade, decimal pricePerHour)
+        public Lesson(Subject subject, string grade, decimal pricePerHour)
         {
             Subject = subject;
             SetGrade(grade);

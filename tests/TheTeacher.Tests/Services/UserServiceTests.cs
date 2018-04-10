@@ -58,7 +58,7 @@ namespace TheTeacher.Tests.Services
         public async Task browse_async_should_return_ieunmerable()
         {
             var users = await userService.BrowseAsync();
-            users.Should().AllBeAssignableTo<IEnumerable<UserDTO>>();
+            users.Should().AllBeAssignableTo<IEnumerable<UserDto>>();
             
         }
     }

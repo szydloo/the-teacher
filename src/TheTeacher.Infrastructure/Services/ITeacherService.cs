@@ -8,8 +8,8 @@ namespace TheTeacher.Infrastructure.Services
 {
     public interface ITeacherService : IService
     {
-        Task<TeacherDTO> GetAsync(Guid userId);
-        Task<IEnumerable<TeacherDTO>> BrowseAsync();
+        Task<TeacherDto> GetAsync(Guid userId);
+        Task<IEnumerable<TeacherDto>> BrowseAsync();
         Task DeleteAsync(Guid userId);
         Task UpdateAsync(Teacher teacher);
         Task UpdateAddressAsync(Guid userId, string address);

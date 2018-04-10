@@ -36,8 +36,8 @@ namespace TheTeacher.Tests.Services
             tcs.SetResult(new Teacher(new User(id,"email@email.com","test","test","test","user"),new Address("testStreet","testCity","testZipcode","testCountry"),"TestTest"));
             teacherRepositoryMock.Setup( x => x.GetAsync(It.IsAny<Guid>())).Returns(tcs.Task);
 
-            var tcs2 = new TaskCompletionSource<SubjectDTO>();
-            tcs2.SetResult(new SubjectDTO
+            var tcs2 = new TaskCompletionSource<SubjectDto>();
+            tcs2.SetResult(new SubjectDto
             {
                 Name = "Biology",
                 Category = "Science"
@@ -69,8 +69,8 @@ namespace TheTeacher.Tests.Services
                 });
             teacherRepositoryMock.Setup( x => x.GetAllAsync()).Returns(tcs.Task);
 
-            var tcs2 = new TaskCompletionSource<SubjectDTO>();
-            tcs2.SetResult(new SubjectDTO
+            var tcs2 = new TaskCompletionSource<SubjectDto>();
+            tcs2.SetResult(new SubjectDto
             {
                 Name = "Biology",
                 Category = "Science"

@@ -10,10 +10,10 @@ namespace TheTeacher.Infrastructure.Mapper
         public static IMapper Initialize()
             => new MapperConfiguration( cfg =>
             {
-                cfg.CreateMap<UserDTO,User>();                
-                cfg.CreateMap<TeacherDTO,Teacher>();
-                cfg.CreateMap<SubjectDTO,Lesson>();
-                cfg.CreateMap<TimeRangeDTO,TimeRange>();
+                cfg.CreateMap<UserDto,User>();                
+                cfg.CreateMap<TeacherDto,Teacher>();
+                cfg.CreateMap<SubjectDto,Lesson>();
+                cfg.CreateMap<TimeRangeDto,TimeRange>();
             })
             .CreateMapper();
     }

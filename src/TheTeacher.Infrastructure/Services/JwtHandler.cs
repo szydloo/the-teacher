@@ -23,7 +23,7 @@ namespace TheTeacher.Infrastructure.Services
 
         }
 
-        public JwtDTO CreateToken(Guid userId, string username, string role)
+        public JwtDto CreateToken(Guid userId, string username, string role)
         {
             var now = DateTime.UtcNow;
 
@@ -51,7 +51,7 @@ namespace TheTeacher.Infrastructure.Services
 
             var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-            return new JwtDTO
+            return new JwtDto
             {
                 Token = token,
                 Expires = expires.ToTimestamp()

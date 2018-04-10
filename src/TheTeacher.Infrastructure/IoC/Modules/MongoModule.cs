@@ -27,7 +27,7 @@ namespace TheTeacher.Infrastructure.IoC.Modules
                 var settings = c.Resolve<MongoSettings>();
                 var database = client.GetDatabase(settings.Database);
                 return database;
-            }).As<IMongoDatabase>();
+            }).As<IMongoDatabase>().SingleInstance();
 
             builder.RegisterAssemblyTypes(assembly)
                    .Where(x => x.IsAssignableTo<IMongoRepository>())

@@ -21,7 +21,7 @@ namespace TheTeacher.Infrastructure.Mongo
 
         public static void RegisterConventions()
         {
-            ConventionRegistry.Register("TheTeacher Conventions", new MongoConventionsPack(), x => true);
+            ConventionRegistry.Register("TheTeacher Conventions", new MongoConventionsPack(),x => true);
         }
 
 

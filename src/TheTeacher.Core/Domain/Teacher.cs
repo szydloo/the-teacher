@@ -8,8 +8,8 @@ namespace TheTeacher.Core.Domain
 {
     public class Teacher
     {
-        private ITimePeriodCollection _availableTime = new TimePeriodCollection();              
-        private ISet<Lesson> _lessons = new HashSet<Lesson>();
+        //public ITimePeriodCollection AvailableTime = new TimePeriodCollection();              
+        public ISet<Lesson> Lessons = new HashSet<Lesson>();
         public Guid UserID { get; protected set; }
         public string Fullname { get; protected set; }
         public Address Address { get; protected set; }
@@ -51,73 +51,45 @@ namespace TheTeacher.Core.Domain
             UpdatedAt = DateTime.UtcNow;
         }
 
-        public void AddLesson(Subject subject, string grade, decimal pricePerHour)
-            => _lessons.Add(Lesson.Create(subject, grade, pricePerHour));
-
-        public void AddLesson(Lesson lesson)
-            => _lessons.Add(lesson);
-        
-        public void RemoveLesson(Lesson lesson)
-            => _lessons.Remove(lesson);
-
-        public void UpdateLesson(Lesson lesson)
-        {
-            _lessons.Remove(lesson);
-            _lessons.Add(lesson);
-            UpdatedAt = DateTime.Now;
-        }
-
-        public void RemoveLesson(string name)
-        {
-            var lesson = _lessons.SingleOrDefault(x => x.Subject.Name == name);
-            if(lesson == null)
-            {
-                throw new DomainException(DomainErrorCodes.InvalidName, $"Lesson with name {name} does not exist.");
-            }
-            
-            RemoveLesson(lesson);
-            UpdatedAt = DateTime.Now;
-        }
-        
         public IEnumerable<Lesson> GetLessons()
-        => _lessons;
+        => Lessons;
         
-        public virtual void AddAvailableTimePeriod(DateTime start, DateTime end)
-        {
-            var timeRange = new TimeRange(start, end);
-            if(timeRange.Duration.Hours >= 24)
-            {
-                throw new DomainException(DomainErrorCodes.InvalidTimePeriod, $"Selected time period availabilty duration cannot be longer thatn 24 hours.");
-            }
+        // public virtual void AddAvailableTimePeriod(DateTime start, DateTime end)
+        // {
+        //     var timeRange = new TimeRange(start, end);
+        //     if(timeRange.Duration.Hours >= 24)
+        //     {
+        //         throw new DomainException(DomainErrorCodes.InvalidTimePeriod, $"Selected time period availabilty duration cannot be longer thatn 24 hours.");
+        //     }
 
-            foreach(var t in _availableTime)
-            {
-                var relation = t.GetRelation(timeRange);
+        //     foreach(var t in AvailableTime)
+        //     {
+        //         var relation = t.GetRelation(timeRange);
   
-                if(!(relation == PeriodRelation.Before || relation == PeriodRelation.After))
-                {
-                    throw new DomainException(DomainErrorCodes.InvalidTimePeriod, $"Selected time period is overlaping with another time period.");
-                }
-            }
+        //         if(!(relation == PeriodRelation.Before || relation == PeriodRelation.After))
+        //         {
+        //             throw new DomainException(DomainErrorCodes.InvalidTimePeriod, $"Selected time period is overlaping with another time period.");
+        //         }
+        //     }
 
-            _availableTime.Add(timeRange);
-            UpdatedAt = DateTime.Now;
-        }
+        //     AvailableTime.Add(timeRange);
+        //     UpdatedAt = DateTime.Now;
+        // }
 
-        public void RemoveAvailableTimePeriod(DateTime start)
-        {
-            var timeRange =(TimeRange)_availableTime.Where(x => x.Start == start);
-            if(timeRange == null)
-            {
-                throw new DomainException(DomainErrorCodes.InvalidTimePeriod, $"Time period to remove does not exist.");
-            }
+        // public void RemoveAvailableTimePeriod(DateTime start)
+        // {
+        //     var timeRange =(TimeRange)AvailableTime.Where(x => x.Start == start);
+        //     if(timeRange == null)
+        //     {
+        //         throw new DomainException(DomainErrorCodes.InvalidTimePeriod, $"Time period to remove does not exist.");
+        //     }
             
-            _availableTime.Remove(timeRange);
-            UpdatedAt = DateTime.Now;
-        }
+        //     AvailableTime.Remove(timeRange);
+        //     UpdatedAt = DateTime.Now;
+        // }
 
-        public ITimePeriodCollection GetTimePeriodCollection()
-        => _availableTime;
+        // public ITimePeriodCollection GetTimePeriodCollection()
+        // => AvailableTime;
         
     }
 }

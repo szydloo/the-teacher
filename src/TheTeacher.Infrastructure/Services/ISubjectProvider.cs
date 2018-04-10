@@ -6,7 +6,7 @@ namespace TheTeacher.Infrastructure.Services
 {
     public interface ISubjectProvider : IService
     {
-         Task<IEnumerable<SubjectDTO>> BrowseAsync();
-         Task<SubjectDTO> GetAsync(string name, string category);
+         Task<IEnumerable<SubjectDto>> BrowseAsync();
+         Task<SubjectDto> GetAsync(string name, string category);
     }
 }
