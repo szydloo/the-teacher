@@ -6,8 +6,9 @@ import { MatDialog } from '@angular/material';
 import { confirmEqualPasswordValidator, confirmEqualEmailValidator } from '../shared/confirm-equal.validator';
 import { throws } from 'assert';
 import { UserService } from '../user/user.service';
-import { User } from '../models/user';
 import { SignupLoginResultDialogComponent } from './signup-login-result-dialog.component';
+import { ServiceErrorCodes } from '../exception/service-error-codes';
+import { RegisterUserCommand } from '../models/commands/user/register-user';
 
 @Component({
     selector: 'app-signup',
@@ -39,7 +40,7 @@ export class SignupComponent implements OnInit {
     }
 
     saveUser() {
-        const u: User = new User();
+        const u: RegisterUserCommand = new RegisterUserCommand();
         u.email = this.signUpForm.value.emailGroup.email;
         u.password = this.signUpForm.value.passwordGroup.password;
         u.username = this.signUpForm.value.username;
@@ -54,7 +55,7 @@ export class SignupComponent implements OnInit {
 
     // Handle error sent by api
     handleErrorWithModalPopup(err: any): void {
-        if (err.error !== undefined) {
+        if (err.error.code === ServiceErrorCodes.emailInUse) {
             console.log(JSON.stringify(err.error.message));
             const dialogRef = this.dialog.open(SignupLoginResultDialogComponent, {
                 width: '500px',

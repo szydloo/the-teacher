@@ -7,8 +7,8 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
-import { LoginUserCommand } from '../models/commands/login-user-command';
 import { Jwt } from '../models/security/jwt';
+import { LoginUserCommand } from '../models/commands/user/login-user-command';
 
 @Injectable()
 export class LoginService {

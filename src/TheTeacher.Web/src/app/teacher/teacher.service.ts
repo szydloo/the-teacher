@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 
 import { Teacher } from '../models/teacher';
+import { RegisterTeacherCommand } from '../models/commands/teacher/register-teacher';
 
 
 @Injectable()
@@ -14,6 +15,15 @@ export class TeacherService {
     getTeachers(): Observable<Teacher[]> {
         return this._client.get<Teacher[]>(this.url)
                     .catch(this.handleError);
+    }
+
+    saveTeacher(registerTeacher: RegisterTeacherCommand): Observable<Teacher> {
+        const body = JSON.stringify(registerTeacher);
+        const options = {
+            headers: new HttpHeaders({'Content-Type': 'application/json'})
+        }
+        return this._client.post(this.url, body, options)
+                            .catch(this.handleError);
     }
 
     handleError(err: HttpErrorResponse) {

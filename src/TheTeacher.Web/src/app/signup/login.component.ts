@@ -4,12 +4,12 @@ import { MatCheckbox } from '@angular/material';
 import * as JWT from 'jwt-decode';
 
 import { LoginService } from './login.service';
-import { LoginUserCommand } from '../models/commands/login-user-command';
 import { SecurityService } from '../security/security.service';
 import { UserAuth } from '../models/security/user-auth';
-import { User } from '../models/user';
 import { Jwt } from '../models/security/jwt';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ServiceErrorCodes } from '../exception/service-error-codes';
+import { LoginUserCommand } from '../models/commands/user/login-user-command';
 
 
 @Component({
@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
     handleLoginError(err: any) {
         console.log(err);
         // Synchronised with api
-        if (err.error != null && err.error.code === 'invalid_credentials' ) {
+        if (err.error != null && err.error.code === ServiceErrorCodes.invalidCredentials) {
             console.log(err.error.message);
             this.logingError = true;
             this.errorMessage = err.error.message;

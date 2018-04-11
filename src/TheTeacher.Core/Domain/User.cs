@@ -27,9 +27,21 @@ namespace TheTeacher.Core.Domain
             SetEmail(email);
             SetPassword(password);
             Salt = salt;
-            Role = role;
+            SetRole(role);
             UpdatedAt = DateTime.UtcNow;
             CreatedAt = DateTime.UtcNow;
+        }
+
+        private void SetRole(string role)
+        {
+            if(role == null)
+            {
+                Role = "user";
+            }
+            else 
+            {
+                Role = role;
+            }
         }
 
         public bool IsValid(string email)

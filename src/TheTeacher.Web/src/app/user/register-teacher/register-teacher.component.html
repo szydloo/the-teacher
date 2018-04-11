@@ -7,34 +7,76 @@
             </div>
         </div>
         <div class="card-body">
-            <form [FormName]="teacherForm" (ngSubmit)="saveTeacher()">
+            <form novalidate [formGroup]="teacherForm" (ngSubmit)="saveTeacher()">
                 <fieldset>
-                <!-- Full Name -->
-                <div class="form-group">
-                    <label class="control-label" for="fullNameId"></label>
-                    <div>
-                        <input class="form-control" formControlName="fullName" type="text" id="fullNameId"/>
+                    <!-- Full Name -->
+                    <div class="form-group">
+                        <label class="control-label" for="fullNameId">Firstname and Surname</label>
+                        <div>
+                            <input class="form-control" formControlName="fullName" type="text" id="fullNameId" />
+                        </div>
                     </div>
-                </div>
-                <!-- Address -->
-                <div class="form-group">
-                    <label class="control-label" for="AddressId"></label>
-                    <div>
-                        <input class="form-control" formControlName="Address" type="text" id="AddressId"/>
-                    </div>
-                </div>
+                    <!-- Address -->
+                    <div class="card container">
+                        <div class="card-heading">
+                            <div class="card-title">
+                                <h4>Address</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div formGroupName="addressGroup">
+                                <div class="">
+                                    <div class="form-group">
+                                        <label class="control-label" for="streetId">Street</label>
+                                        <div>
+                                            <input class="form-control" formControlName="street" type="text" id="streetId" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
 
-                <!-- Optional -->
-                <div></div>
-                <!-- Lesson -->
-                <div>
-                    <!-- Dropdown Subject -->
+                                    <div class="form-group">
+                                        <div class="col-md-8">
+
+                                            <label class="col control-label" for="zipcodeId">Zpicode</label>
+                                            <div>
+                                                <input class="form-control" formControlName="zipcode" type="text" id="zipcodeId" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-2">
+                                            <label class="col control-label" for="cityId">City</label>
+                                            <div>
+                                                <input class="form-control" formControlName="city" type="text" id="cityId" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group">
+                                        <label class="col control-label" for="countryId">Contry</label>
+                                        <div>
+                                            <input class="form-control" formControlName="country" type="text" id="countryId" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Optional -->
+                    <div></div>
+                    <!-- Lesson -->
+                    <div>
+                        <!-- Dropdown Subject -->
                         <!-- Name + Cat -->
 
-                    <!-- Grade -->
+                        <!-- Grade -->
 
-                    <!-- Price Per Hour -->
-                </div>
+                        <!-- Price Per Hour -->
+                    </div>
                 </fieldset>
             </form>
         </div>

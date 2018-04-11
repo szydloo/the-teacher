@@ -6,8 +6,9 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 
+import { RegisterUserCommand } from '../models/commands/user/register-user';
+import { ChangeUserPasswordCommand } from '../models/commands/user/change-user-password-command';
 import { User } from '../models/user';
-import { ChangeUserPasswordCommand } from '../models/commands/change-user-password-command';
 
 
 @Injectable()
@@ -23,7 +24,7 @@ export class UserService {
                     .catch(this.handleError);
     }
 
-    saveUser(user: User): Observable<HttpResponse<User>> {
+    saveUser(user: RegisterUserCommand): Observable<HttpResponse<RegisterUserCommand>> {
         const body = JSON.stringify(user);
 
         return this.client.post(this.url, body, this.options)
