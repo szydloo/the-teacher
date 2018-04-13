@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpErrorResponse, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaderResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { Teacher } from '../models/teacher';
 import { RegisterTeacherCommand } from '../models/commands/teacher/register-teacher';
@@ -9,6 +9,7 @@ import { RegisterTeacherCommand } from '../models/commands/teacher/register-teac
 @Injectable()
 export class TeacherService {
     url = 'http://localhost:5000/teachers/';
+    options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
     constructor(private _client: HttpClient) { }
 
@@ -17,25 +18,15 @@ export class TeacherService {
                     .catch(this.handleError);
     }
 
-    saveTeacher(registerTeacher: RegisterTeacherCommand): Observable<Teacher> {
+    saveTeacher(registerTeacher: RegisterTeacherCommand): Observable<HttpResponse<any>> {
         const body = JSON.stringify(registerTeacher);
-        const options = {
-            headers: new HttpHeaders({'Content-Type': 'application/json'})
-        }
-        return this._client.post(this.url, body, options)
+
+        return this._client.post(this.url, body, this.options)
                             .catch(this.handleError);
     }
 
-    handleError(err: HttpErrorResponse) {
-        // TODO: Log into error database
-        let errMessage = '';
-        if (err.error instanceof Error) {
-            errMessage = `An error occured: ${err.error.message}`;
-        } else {
-            errMessage = `Server returned code: ${err.status}, error message: ${err.message}`;
-        }
-
-        console.error(errMessage);
-        return Observable.throw(errMessage);
+    handleError(err: HttpResponse<any>) {
+        
+        return Observable.throw(err);
     }
 }

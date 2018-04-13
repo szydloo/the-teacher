@@ -14,6 +14,6 @@ import { AddLessonComponent } from './add-lesson.component';
     imports: [
         CommonModule,
     ],
-    providers: [TeacherService],
+    
 })
 export class TeacherModule { }

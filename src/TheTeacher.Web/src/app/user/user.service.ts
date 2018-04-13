@@ -24,8 +24,8 @@ export class UserService {
                     .catch(this.handleError);
     }
 
-    saveUser(user: RegisterUserCommand): Observable<HttpResponse<RegisterUserCommand>> {
-        const body = JSON.stringify(user);
+    saveUser(registerUser: RegisterUserCommand): Observable<HttpResponse<RegisterUserCommand>> {
+        const body = JSON.stringify(registerUser);
 
         return this.client.post(this.url, body, this.options)
                             .catch(this.handleError);
@@ -39,6 +39,7 @@ export class UserService {
     }
 
     handleError(err: HttpResponse<any>) {
+        
         return Observable.throw(err);
     }
 }

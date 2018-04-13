@@ -5,7 +5,7 @@ import 'rxjs/add/operator/debounceTime';
 import { SecurityService } from '../../security/security.service';
 import { UserService } from '../user.service';
 import { confirmEqualPasswordValidator } from '../../shared/confirm-equal.validator';
-import { ChangeUserPasswordCommand } from '../../models/commands/change-user-password-command';
+import { ChangeUserPasswordCommand } from '../../models/commands/user/change-user-password-command';
 
 
 @Component({

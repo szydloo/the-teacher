@@ -25,8 +25,8 @@
                         </div>
                         <div class="card-body">
                             <div formGroupName="addressGroup">
-                                <div class="">
-                                    <div class="form-group">
+                                <div class="form-group">
+                                    <div class="col-md-8">
                                         <label class="control-label" for="streetId">Street</label>
                                         <div>
                                             <input class="form-control" formControlName="street" type="text" id="streetId" />
@@ -36,7 +36,7 @@
                                 <div class="row">
 
                                     <div class="form-group">
-                                        <div class="col-md-8">
+                                        <div class="offset-sm-1 col-md-8">
 
                                             <label class="col control-label" for="zipcodeId">Zpicode</label>
                                             <div>
@@ -44,9 +44,8 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="form-group">
-                                        <div class="col-md-2">
+                                        <div class="col-md-13">
                                             <label class="col control-label" for="cityId">City</label>
                                             <div>
                                                 <input class="form-control" formControlName="city" type="text" id="cityId" />
@@ -56,28 +55,23 @@
                                 </div>
                                 <div>
                                     <div class="form-group">
-                                        <label class="col control-label" for="countryId">Contry</label>
+                                            <div class="col-md-8">
+                                        
+                                        <label class="col control-label" for="countryId">Country</label>
                                         <div>
                                             <input class="form-control" formControlName="country" type="text" id="countryId" />
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Optional -->
-                    <div></div>
-                    <!-- Lesson -->
-                    <div>
-                        <!-- Dropdown Subject -->
-                        <!-- Name + Cat -->
-
-                        <!-- Grade -->
-
-                        <!-- Price Per Hour -->
-                    </div>
                 </fieldset>
+                <br>
+                <div class="offset-md-5">
+                    <button type="submit" [disabled]="teacherForm.invalid" class="btn btn-primary">Save</button>
+                </div>
             </form>
         </div>
     </div>

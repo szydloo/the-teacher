@@ -44,7 +44,7 @@ namespace TheTeacher.Infrastructure.Services
             var teacher = await _teacherRepository.GetAsync(userId);
             if(teacher != null)
             {
-                throw new ServiceException(ServiceErrorCodes.UserAlreadyExists, $"Teacher with id '{userId}' already exists");
+                throw new ServiceException(ServiceErrorCodes.TeacherAlreadyExists, $"Teacher with id '{userId}' already exists");
             }
             var address = new Address(street, city, zipcode, country);
             await _teacherRepository.AddAsync(new Teacher(user, address, fullname));

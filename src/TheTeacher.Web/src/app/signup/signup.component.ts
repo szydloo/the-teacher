@@ -9,6 +9,9 @@ import { UserService } from '../user/user.service';
 import { SignupLoginResultDialogComponent } from './signup-login-result-dialog.component';
 import { ServiceErrorCodes } from '../exception/service-error-codes';
 import { RegisterUserCommand } from '../models/commands/user/register-user';
+import { Router } from '@angular/router';
+import { LoginService } from './login.service';
+import { LoginUserCommand } from '../models/commands/user/login-user-command';
 
 @Component({
     selector: 'app-signup',
@@ -20,7 +23,8 @@ export class SignupComponent implements OnInit {
     signUpForm: FormGroup;
 
 
-    constructor(private fb: FormBuilder, private userService: UserService, private dialog: MatDialog) { }
+    constructor(private fb: FormBuilder, private userService: UserService, private loginService: LoginService,
+        private dialog: MatDialog, private router: Router) { }
 
     ngOnInit() {
         // TODO change initial data
@@ -40,18 +44,19 @@ export class SignupComponent implements OnInit {
     }
 
     saveUser() {
-        const u: RegisterUserCommand = new RegisterUserCommand();
-        u.email = this.signUpForm.value.emailGroup.email;
-        u.password = this.signUpForm.value.passwordGroup.password;
-        u.username = this.signUpForm.value.username;
-        u.role = 'user';
-        this.userService.saveUser(u).subscribe(() => this.onSaveComplete,
-            (err) => this.handleErrorWithModalPopup(err));
+        let u: RegisterUserCommand = new RegisterUserCommand();
+        Object.assign(u ,{ username : this.signUpForm.controls.username.value },
+             {email : this.signUpForm.controls.emailGroup.value.email}, { password : this.signUpForm.controls.passwordGroup.value.password })
+
+        this.userService.saveUser(u).subscribe(() => this.onSaveComplete(),
+            (err) => this.handleErrorWithModalPopup(err))
     }
 
     onSaveComplete() {
         this.signUpForm.reset();
+        this.router.navigateByUrl('home');
     }
+
 
     // Handle error sent by api
     handleErrorWithModalPopup(err: any): void {

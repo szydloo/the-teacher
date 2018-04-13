@@ -38,7 +38,7 @@ namespace TheTeacher.Api.Controllers
             return Json(teacher);
         }
 
-        // [Authorize] 
+        [Authorize] 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateTeacher command)
         {

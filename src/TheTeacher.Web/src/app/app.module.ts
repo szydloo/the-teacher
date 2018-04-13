@@ -16,6 +16,7 @@ import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator
 import { SecurityService } from './security/security.service';
 import { HttpRequestInterceptorTokenModule } from './security/http-interceptor-token.module';
 import { AuthGuard } from './security/auth.guard';
+import { TeacherService } from './teacher/teacher.service';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import { AuthGuard } from './security/auth.guard';
         BrowserAnimationsModule,
         HttpRequestInterceptorTokenModule,
     ],
-    providers: [SecurityService, AuthGuard],
+    providers: [SecurityService, AuthGuard, TeacherService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
