@@ -78,7 +78,7 @@ namespace TheTeacher.Infrastructure.Services
         {
             var user = await _userRepository.GetOrFailAsync(userId);
 
-            var salt = user.Salt;
+            var salt = user.Salt; 
             var logingHash = _encrypter.GetHash(currentPassword, salt);
 
             if(logingHash != user.Password)
@@ -89,8 +89,9 @@ namespace TheTeacher.Infrastructure.Services
             {
                 throw new ServiceException(ServiceErrorCodes.InvalidNewPassword, "New password must be different than the old one.");
             }
-            var newHashedPasword = _encrypter.GetHash(newPassword, salt);
-            await _userRepository.UpdateAsync(userId, newHashedPasword);
+            var newSalt = _encrypter.GetSalt();            
+            var newHashedPasword = _encrypter.GetHash(newPassword, newSalt);
+            await _userRepository.UpdateAsync(userId, newHashedPasword, newSalt);
         }
 
     }

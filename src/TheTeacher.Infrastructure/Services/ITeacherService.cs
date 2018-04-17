@@ -13,6 +13,6 @@ namespace TheTeacher.Infrastructure.Services
         Task DeleteAsync(Guid userId);
         Task UpdateAsync(Teacher teacher);
         Task UpdateAddressAsync(Guid userId, string address);
-        Task CreateAsync(Guid userId, string street, string city, string zipcode, string country, string fullname);
+        Task CreateAsync(Guid id, Guid userId, string street, string city, string zipcode, string country, string fullname);
     }
 }

@@ -12,5 +12,7 @@ namespace TheTeacher.Infrastructure.Services
         Task<IEnumerable<TeacherDto>> GetTeachersWithLessonAsync(string name);
         Task UpdateAsync(Guid userId, Lesson lesson);
         Task RemoveAsync(Guid userId, string name);
+        
+
     }
 }

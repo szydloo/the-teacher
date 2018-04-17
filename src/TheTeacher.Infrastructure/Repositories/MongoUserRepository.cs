@@ -31,10 +31,11 @@ namespace TheTeacher.Infrastructure.Repositories
         public async Task RemoveAsync(Guid userId)
         => await Users.DeleteOneAsync(x => x.Id == userId);
 
-        public async Task UpdateAsync(Guid userId, string newHashedPassword) 
+        public async Task UpdateAsync(Guid userId, string newHashedPassword, string newSalt) 
         {
             var modificationUpdate = Builders<User>.Update
-                .Set(u => u.Password, newHashedPassword);
+                .Set(u => u.Password, newHashedPassword)
+                .Set(u => u.Salt, newSalt);
 
             await Users.UpdateOneAsync(u => u.Id == userId, modificationUpdate);
         }

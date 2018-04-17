@@ -8,7 +8,8 @@ namespace TheTeacher.Core.Domain
 {
     public class Teacher
     {
-        //public ITimePeriodCollection AvailableTime = new TimePeriodCollection();              
+        //public ITimePeriodCollection AvailableTime = new TimePeriodCollection();
+        public Guid Id { get; protected set; }              
         public ISet<Lesson> Lessons = new HashSet<Lesson>();
         public Guid UserID { get; protected set; }
         public string Fullname { get; protected set; }
@@ -20,8 +21,9 @@ namespace TheTeacher.Core.Domain
         {   
         }
 
-        public Teacher(User user, Address address, string fullname)
+        public Teacher(Guid id, User user, Address address, string fullname)
         {
+            Id = id;
             UserID = user.Id;
             SetAddress(address); 
             SetFullName(fullname);

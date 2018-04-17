@@ -49,6 +49,7 @@ namespace TheTeacher.Api
                         {
                             ValidIssuer = JwtSettings.Issuer,
                             ValidateAudience = false,
+                            
                             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings.Key))
                         };
                     });
