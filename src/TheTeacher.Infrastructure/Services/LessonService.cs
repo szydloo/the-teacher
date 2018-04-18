@@ -6,7 +6,7 @@ using System;
 using TheTeacher.Infrastructure.Extensions;
 using TheTeacher.Core.Domain;
 using System.Collections.Generic;
-using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Dto;
 
 namespace TheTeacher.Infrastructure.Services
 {

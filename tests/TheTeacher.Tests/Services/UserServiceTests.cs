@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using TheTeacher.Infrastructure.Repositories;
 using TheTeacher.Infrastructure.Services;
 using System.Collections.Generic;
-using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Dto;
 using TheTeacher.Infrastructure.Settings;
 using System;
 

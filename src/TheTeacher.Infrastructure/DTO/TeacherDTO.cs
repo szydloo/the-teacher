@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Itenso.TimePeriod;
 using TheTeacher.Core.Domain;
 
-namespace TheTeacher.Infrastructure.DTO
+namespace TheTeacher.Infrastructure.Dto
 {
     public class TeacherDto
     {

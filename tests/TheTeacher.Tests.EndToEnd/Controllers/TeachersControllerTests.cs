@@ -10,7 +10,7 @@ using NUnit.Framework;
 using TheTeacher.Infrastructure.Commands.LessonCom;
 using TheTeacher.Infrastructure.Commands.Teacher;
 using TheTeacher.Infrastructure.Commands.User;
-using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Dto;
 using TheTeacher.Infrastructure.Exceptions;
 
 namespace TheTeacher.Tests.EndToEnd.Controllers

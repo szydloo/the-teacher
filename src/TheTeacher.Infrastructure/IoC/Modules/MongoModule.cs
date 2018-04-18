@@ -18,6 +18,7 @@ namespace TheTeacher.Infrastructure.IoC.Modules
                 var settings = c.Resolve<MongoSettings>();
 
                 return new MongoClient(settings.ConnectionString);
+                
             }).SingleInstance();
 
             // Registering MongoDatabase

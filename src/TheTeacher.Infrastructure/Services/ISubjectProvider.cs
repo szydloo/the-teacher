@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Dto;
 
 namespace TheTeacher.Infrastructure.Services
 {

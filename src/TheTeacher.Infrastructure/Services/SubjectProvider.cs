@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver;
 using TheTeacher.Core.Domain;
-using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Dto;
 using TheTeacher.Infrastructure.Exceptions;
 
 namespace TheTeacher.Infrastructure.Services
@@ -12,45 +16,18 @@ namespace TheTeacher.Infrastructure.Services
     public class SubjectProvider : ISubjectProvider
     {
         private readonly IMemoryCache _cache;
+        private readonly IMongoDatabase _database;
         private readonly static string CacheKey = "subject";
-
-        private static readonly IDictionary<string,IEnumerable<string>> availableSubjects = 
-            new Dictionary<string, IEnumerable<string>>
-            {
-                ["Science"] = new List<string>
-                {
-                    "Astronomy",
-                    "Biology",
-                    "Chemistry",
-                    "Computer Science",
-                    "Physics"
-                },
-                ["Humanities"] = new List<string>
-                {
-                    "History",
-                    "Reading",
-                    "Writing",
-                },
-                ["Math"] = new List<string>
-                {
-                    "Calculus",
-                    "Prealgebra",
-                    "Algebra",
-                    "Mathematical Analyiys"
-                },
-                ["Languages"] = new List<string>
-                {
-                    "Spanish",
-                    "English",
-                    "French",
-                    "German"
-                }
-            };
+        private static IDictionary<string,List<string>> availableSubjects;
         
-        public SubjectProvider(IMemoryCache cache)
+        public SubjectProvider(IMemoryCache cache, IMongoDatabase database)
         {
             _cache = cache;   
+            _database = database;
+            
         }
+
+
         public async Task<IEnumerable<SubjectDto>> BrowseAsync()
         {
             var subjects = _cache.Get<IEnumerable<SubjectDto>>(CacheKey);
@@ -62,16 +39,32 @@ namespace TheTeacher.Infrastructure.Services
             return subjects;
         }
 
-        public async Task<IEnumerable<SubjectDto>> GetAllAsync()
-            => await Task.FromResult(availableSubjects.GroupBy(x => x.Key)
-                        .SelectMany(g => g.SelectMany(d => d.Value.Select(s => new SubjectDto
-                        {
-                            Category = d.Key,
-                            Name = s
-                        }))));
+        private async Task<IEnumerable<SubjectDto>> GetAllAsync()
+        {
+
+            var data = _database.GetCollection<SubjectDetails>("AvailableSubjects");
+
+            var projection = new BsonDocument() {
+                {nameof(SubjectDto.Category), $"$Key"},
+                {nameof(SubjectDto.Name), $"$Value"},
+                { "_id", 0}
+            };
+
+            var result = await data.Aggregate()
+                    .Unwind("Value")
+                    .Project<SubjectDto>(projection)
+                    .ToListAsync();
+                
+            return result;
+        }
+     
 
         public async Task<SubjectDto> GetAsync(string name, string category)
         {
+            if(availableSubjects == null)
+            {
+                availableSubjects = (await BrowseAsync()).GroupBy(x => x.Category, x => x.Name).ToDictionary(x => x.Key, x=> x.ToList());
+            }
             if(!availableSubjects.ContainsKey(category))
             {
                 throw new ServiceException(ServiceErrorCodes.InvalidSubjectDetails ,$"Category {category} is not available.");
@@ -90,6 +83,14 @@ namespace TheTeacher.Infrastructure.Services
                 Name = subject,
                 Category = category
             });
+        }
+
+        private class SubjectDetails 
+        {
+            public ObjectId Id {get; set;}
+            public string Key { get; set; }
+            public List<string> Value { get; set; }
+            
         }
     }
 }

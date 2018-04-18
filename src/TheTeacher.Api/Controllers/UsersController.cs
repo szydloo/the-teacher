@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheTeacher.Infrastructure.Commands.User;
-using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Dto;
 using TheTeacher.Infrastructure.Services;
 using TheTeacher.Infrastructure.Commands;
 using Microsoft.AspNetCore.Authorization;

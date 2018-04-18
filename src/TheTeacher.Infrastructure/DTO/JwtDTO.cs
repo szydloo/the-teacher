@@ -1,4 +1,4 @@
-namespace TheTeacher.Infrastructure.DTO
+namespace TheTeacher.Infrastructure.Dto
 {
     public class JwtDto
     {

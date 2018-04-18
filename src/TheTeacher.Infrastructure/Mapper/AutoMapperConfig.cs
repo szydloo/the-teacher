@@ -1,7 +1,7 @@
 using AutoMapper;
 using Itenso.TimePeriod;
 using TheTeacher.Core.Domain;
-using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Dto;
 
 namespace TheTeacher.Infrastructure.Mapper
 {
@@ -12,7 +12,7 @@ namespace TheTeacher.Infrastructure.Mapper
             {
                 cfg.CreateMap<UserDto,User>();                
                 cfg.CreateMap<TeacherDto,Teacher>();
-                cfg.CreateMap<SubjectDto,Lesson>();
+                cfg.CreateMap<SubjectDto,Subject>();
                 cfg.CreateMap<TimeRangeDto,TimeRange>();
             })
             .CreateMapper();

@@ -2,7 +2,7 @@ using System;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Dto;
 using TheTeacher.Infrastructure.Settings;
 using TheTeacher.Infrastructure.Extensions;
 using Microsoft.IdentityModel.Tokens;

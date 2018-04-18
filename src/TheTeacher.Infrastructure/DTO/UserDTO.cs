@@ -1,6 +1,6 @@
 using System;
 
-namespace TheTeacher.Infrastructure.DTO
+namespace TheTeacher.Infrastructure.Dto
 {
     public class UserDto
     {

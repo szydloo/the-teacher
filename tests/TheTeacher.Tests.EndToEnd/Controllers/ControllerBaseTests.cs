@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using TheTeacher.Api;
 using TheTeacher.Infrastructure.Commands.User;
-using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Dto;
 
 namespace TheTeacher.Tests.EndToEnd.Controllers
 {

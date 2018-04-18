@@ -1,5 +1,5 @@
 using System;
-using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Dto;
 
 namespace TheTeacher.Infrastructure.Services
 {

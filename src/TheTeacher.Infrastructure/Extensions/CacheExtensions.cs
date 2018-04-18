@@ -1,6 +1,6 @@
 using System;
 using Microsoft.Extensions.Caching.Memory;
-using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Dto;
 
 namespace TheTeacher.Infrastructure.Extensions
 {

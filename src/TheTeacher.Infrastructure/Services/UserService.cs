@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using TheTeacher.Core.Domain;
-using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Dto;
 using TheTeacher.Infrastructure.Exceptions;
 using TheTeacher.Infrastructure.Extensions;
 using TheTeacher.Infrastructure.Repositories;

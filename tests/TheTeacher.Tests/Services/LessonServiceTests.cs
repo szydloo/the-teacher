@@ -5,7 +5,7 @@ using AutoMapper;
 using Moq;
 using NUnit.Framework;
 using TheTeacher.Core.Domain;
-using TheTeacher.Infrastructure.DTO;
+using TheTeacher.Infrastructure.Dto;
 using TheTeacher.Infrastructure.Repositories;
 using TheTeacher.Infrastructure.Services;
 
