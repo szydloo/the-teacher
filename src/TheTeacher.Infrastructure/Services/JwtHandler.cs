@@ -23,7 +23,7 @@ namespace TheTeacher.Infrastructure.Services
 
         }
 
-        public JwtDto CreateToken(Guid userId, string username, string role)
+        public JwtDto CreateToken(Guid userId, string username, string role, bool isTeacher)
         {
             var now = DateTime.UtcNow;
 
@@ -33,6 +33,7 @@ namespace TheTeacher.Infrastructure.Services
                 new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
                 new Claim(JwtRegisteredClaimNames.UniqueName, userId.ToString()),
                 new Claim("username", username),
+                new Claim("isTeacher", isTeacher.ToString()),
                 new Claim(ClaimTypes.Role, role),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, now.ToTimestamp().ToString(), ClaimValueTypes.Integer64)

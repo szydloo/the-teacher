@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from '../security/security.service';
+import { UserAuth } from '../models/security/user-auth';
 
 @Component({
     selector: 'app-user-profile',
@@ -7,15 +8,15 @@ import { SecurityService } from '../security/security.service';
     styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-    title = '';
+    title: string = '';
+    securityObject: UserAuth;
 
     constructor(private securityService: SecurityService) {
-
     }
 
     ngOnInit(): void {
-        this.title = this.securityService.securityObject.username + '\'s Profile' ;
-
+        this.securityObject = this.securityService.securityObject;
+        this.title = this.securityObject.username;
     }
 
 

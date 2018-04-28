@@ -32,7 +32,7 @@ export class RegisterTeacherComponent implements OnInit {
     };
 
     saveTeacher() {
-        // Make it pretier
+        // TODO: Make it pretier
         let registerTeacher: RegisterTeacherCommand = new RegisterTeacherCommand();
         registerTeacher.fullname = this.teacherForm.controls.fullName.value;
         registerTeacher.city = this.teacherForm.controls.addressGroup.value.city;

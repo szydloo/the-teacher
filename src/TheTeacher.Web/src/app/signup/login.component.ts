@@ -69,6 +69,7 @@ export class LoginComponent implements OnInit {
             userAuth.token = jwt.token;
             userAuth.username = decodedToken.username;
             userAuth.userId = decodedToken.sub;
+            userAuth.isTeacher = decodedToken.isTeacher.toLowerCase() == "true" ? true : false;
 
             // userAuth.role = JWT(jwt.token).role
             Object.assign(this.securityService.securityObject, userAuth);

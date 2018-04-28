@@ -8,13 +8,14 @@ import { UserService } from './user.service';
 import { UserProfileComponent } from './user-profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RegisterTeacherComponent } from './register-teacher/register-teacher.component';
+import { TeacherModule } from '../teacher/teacher.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     BrowserModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   declarations: [UserProfileComponent, ChangePasswordComponent, RegisterTeacherComponent],
   providers: [UserService]

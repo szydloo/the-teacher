@@ -11,7 +11,12 @@
             <app-change-password></app-change-password>
         </div>
         <div class="col-lg-5 col-md-12">
-            <app-register-teacher></app-register-teacher>
+            <div *ngIf="!securityObject.isTeacher">
+                <app-register-teacher></app-register-teacher>
+            </div>
+            <div *ngIf="securityObject.isTeacher">
+                <app-add-lesson></app-add-lesson>
+            </div>
         </div>
     </div>
 </div>
