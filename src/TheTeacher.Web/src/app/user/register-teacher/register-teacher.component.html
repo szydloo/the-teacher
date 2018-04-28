@@ -1,78 +1,78 @@
 <br>
-<div>
-    <div class="card">
-        <div class="card-heading">
-            <div class="card-title">
-                <h3>Register as a teacher!</h3>
-            </div>
+<div class="card container">
+    <div class="card-heading row">
+        <div class="card-title offset-md-1">
+            <br>
+            <h3>Register as a teacher!</h3>
         </div>
-        <div class="card-body">
-            <form novalidate [formGroup]="teacherForm" (ngSubmit)="saveTeacher()">
-                <fieldset>
-                    <!-- Full Name -->
-                    <div class="form-group">
-                        <label class="control-label" for="fullNameId">Firstname and Surname</label>
-                        <div>
-                            <input class="form-control" formControlName="fullName" type="text" id="fullNameId" />
+    </div>
+    <div class="card-body">
+        <form novalidate [formGroup]="teacherForm" (ngSubmit)="saveTeacher()">
+            <fieldset>
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label class="control-label" for="fullNameId">Firstname and Surname</label>
+                    <div>
+                        <input class="form-control" formControlName="fullName" type="text" id="fullNameId" />
+                    </div>
+                </div>
+                <!-- Address -->
+                <div class="card container">
+                    <div class="card-heading">
+                        <div class="card-title">
+                            <h4>Address</h4>
                         </div>
                     </div>
-                    <!-- Address -->
-                    <div class="card container">
-                        <div class="card-heading">
-                            <div class="card-title">
-                                <h4>Address</h4>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div formGroupName="addressGroup">
-                                <div class="form-group">
-                                    <div class="col-md-8">
+                    <div class="card-body">
+                        <div formGroupName="addressGroup">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <label class="control-label" for="streetId">Street</label>
                                         <div>
                                             <input class="form-control" formControlName="street" type="text" id="streetId" />
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group">
                                 <div class="row">
-
-                                    <div class="form-group">
-                                        <div class="offset-sm-1 col-md-8">
-
-                                            <label class="col control-label" for="zipcodeId">Zpicode</label>
-                                            <div>
-                                                <input class="form-control" formControlName="zipcode" type="text" id="zipcodeId" />
-                                            </div>
+                                    <div class="col-md-5">
+                                        <label class="col control-label" for="zipcodeId">Zpicode</label>
+                                        <div>
+                                            <input class="form-control" formControlName="zipcode" type="text" id="zipcodeId" />
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-md-13">
-                                            <label class="col control-label" for="cityId">City</label>
-                                            <div>
-                                                <input class="form-control" formControlName="city" type="text" id="cityId" />
-                                            </div>
+                                    <div class="col-md-7">
+                                        <label class="col control-label" for="cityId">City</label>
+                                        <div>
+                                            <input class="form-control" formControlName="city" type="text" id="cityId" />
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <div class="form-group">
-                                            <div class="col-md-8">
-                                        
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <label class="col control-label" for="countryId">Country</label>
                                         <div>
                                             <input class="form-control" formControlName="country" type="text" id="countryId" />
-                                        </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </fieldset>
-                <br>
-                <div class="offset-md-5">
-                    <button type="submit" [disabled]="teacherForm.invalid" class="btn btn-primary">Save</button>
                 </div>
-            </form>
-        </div>
+            </fieldset>
+            <br>
+            <div>
+                <span *ngIf="registerError" style="color:red">{{registerErrorMessage}}</span>
+                <span *ngIf="registerSuccess" style="color:green">{{registerSuccessMessage}}</span>
+            </div>
+            <div class="offset-md-5">
+                <button type="submit" [disabled]="teacherForm.invalid" class="btn btn-primary">Save</button>
+            </div>
+        </form>
     </div>
 </div>

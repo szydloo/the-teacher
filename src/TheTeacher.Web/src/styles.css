@@ -1,2 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+.my-container {
+    border: 5px solid green;
+}
+
+.my-row {
+    border: 3px solid red;
+}
+
+.my-col {
+    border: 3px dotted blue;
+}
