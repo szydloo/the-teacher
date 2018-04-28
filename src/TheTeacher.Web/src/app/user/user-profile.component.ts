@@ -16,7 +16,7 @@ export class UserProfileComponent implements OnInit {
 
     ngOnInit(): void {
         this.securityObject = this.securityService.securityObject;
-        this.title = this.securityObject.username;
+        this.title = this.securityObject.username + "'s profile";
     }
 
 

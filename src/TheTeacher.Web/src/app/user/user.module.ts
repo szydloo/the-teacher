@@ -9,6 +9,8 @@ import { UserProfileComponent } from './user-profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RegisterTeacherComponent } from './register-teacher/register-teacher.component';
 import { TeacherModule } from '../teacher/teacher.module';
+import { AddLessonComponent } from './add-lesson/add-lesson.component';
+import { SubjectProviderService } from './add-lesson/subject-provider.service';
 
 @NgModule({
   imports: [
@@ -17,7 +19,7 @@ import { TeacherModule } from '../teacher/teacher.module';
     BrowserModule,
     MatCheckboxModule,
   ],
-  declarations: [UserProfileComponent, ChangePasswordComponent, RegisterTeacherComponent],
-  providers: [UserService]
+  declarations: [UserProfileComponent, ChangePasswordComponent, RegisterTeacherComponent, AddLessonComponent],
+  providers: [UserService, SubjectProviderService]
 })
 export class UserModule { }

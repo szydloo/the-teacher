@@ -1,0 +1,72 @@
+<br>
+<div class="card">
+    <div class="card-heading">
+        <div class="card-title offset-md-1">
+            <br>
+            <h3>{{title}}</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <form novalidate [formGroup]="addLessonForm" (ngSubmit)="addLesson()">
+            <div class="container">
+                <fieldset>
+                    <!-- Subject -->
+                    <div formGroupName="subject">
+                        <!-- Category -->
+                        <div class="row ">
+                            <div class="col-md-12 ">
+                                <label class="control-label" for="CategoryId">Category</label>
+                                <!-- <div>
+                                    <input class="form-control" formControlName="category" type="text" id="CategoryId" />
+                                </div> -->
+                                <select class="custom-select" formControlName="category" id="CategoryId" (change)="setNames($event.target.value)">
+                                    <option value="0">Select Category</option>
+                                    <option *ngFor="let category of categories" [ngValue]="category">{{category}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Name -->
+                        <div class="row ">
+                            <div class="col-md-12 ">
+                                <label class="control-label" for="NameId">Name</label>
+                                <select class="custom-select" formControlName="name" id="NameId">
+                                    <option *ngIf="addLessonForm.get('subject.category').value == '0'" value="0">Select category to select name</option>
+                                    <option *ngFor="let name of names" [ngValue]="name">{{name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Grade -->
+                    <div class="row ">
+                        <div class="col-md-12 ">
+                            <label class="control-label" for="GradeId">Grade</label>
+                            <div>
+                                <input class="form-control" formControlName="grade" type="text" id="GradeId" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- PricePerHour -->
+                    <div class="row ">
+                        <div class="col-md-12 ">
+                            <label class="control-label" for="PricePerHourId">Price Per Hour</label>
+                            <div>
+                                <input class="form-control" formControlName="pricePerHour" type="number" id="PricePerHourId" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <span *ngIf="addLessonError" style="color:red;">{{errorMessage}}</span>
+                        <span *ngIf="addLessonSuccess" style="color:green;">{{successMessage}}</span>
+                        <br>
+                    </div>
+
+                </fieldset>
+            </div>
+            <div class="offset-md-5">
+                <button type="submit" [disabled]="addLessonForm.invalid" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<pre>{{addLessonForm.value | json}}</pre>
