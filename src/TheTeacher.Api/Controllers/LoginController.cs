@@ -22,6 +22,8 @@ namespace TheTeacher.Api.Controllers
         public async Task<IActionResult> Post([FromBody]LoginUser command)
         {
             IActionResult ret = null;
+            Console.WriteLine(HttpContext.Connection.RemoteIpAddress);
+            Console.WriteLine(HttpContext.Connection.RemotePort);
             
             command.TokenId = Guid.NewGuid();
             await DispatchAsync(command);

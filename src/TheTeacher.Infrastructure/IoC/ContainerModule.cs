@@ -22,7 +22,6 @@ namespace TheTeacher.Infrastructure.IoC
             builder.RegisterModule<MongoModule>(); // current repo used
             builder.RegisterModule<ServiceModule>();
             builder.RegisterInstance(AutoMapperConfig.Initialize()).SingleInstance();
-
         }
     }
 }

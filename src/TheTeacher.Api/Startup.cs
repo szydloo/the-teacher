@@ -47,9 +47,10 @@ namespace TheTeacher.Api
                     {
                         opt.TokenValidationParameters = new TokenValidationParameters
                         {
+                            ValidateIssuer = true,
                             ValidIssuer = JwtSettings.Issuer,
-                            ValidateAudience = false,
-                            
+
+                            ValidateAudience = false,                            
                             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings.Key))
                         };
                     });

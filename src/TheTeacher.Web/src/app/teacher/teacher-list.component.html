@@ -1,6 +1,6 @@
 <br>
 <br>
-<div class="card offset-md-1 col-md-9">
+<div class="card">
     <div class="card-heading">
         <div class="card-title">
             <br>
@@ -8,8 +8,8 @@
         </div>
     </div>
     <div class="card-body">
-        <table class="table table-bordered">
-            <thead>
+        <table class="table table-bordered col-md-10">
+            <thead >
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Fullname</th>
@@ -31,7 +31,7 @@
                                     <th scope="col">Enroll</th>
                                     <button type="button" class="btnSmall btn btn-primary moveBtnRight" (click)="toggleProperTable(i)">ToggleMe</button>
                                 </thead>
-                               
+
                                 <tbody *ngIf="isTableToggled[i]">
                                     <tr scope="row" *ngFor="let lesson of teacher.lessons;">
                                         <td>{{lesson.subject.category}} {{lesson.subject.name}}</td>
@@ -41,6 +41,7 @@
                                             <button type="button" class="btnSmall btn btn-success">Enroll</button>
                                         </td>
                                     </tr>
+
                                 </tbody>
                             </table>
                         </ng-container>

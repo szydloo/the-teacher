@@ -8,7 +8,7 @@ namespace TheTeacher.Core.Domain
 {
     public class Teacher
     {
-        public ITimePeriodCollection AvailableTime = new TimePeriodCollection();
+        // public ITimePeriodCollection AvailableTime = new TimePeriodCollection();
         
         public Guid Id { get; protected set; }     
         // Set of lesson types this teacher is willing to tutor

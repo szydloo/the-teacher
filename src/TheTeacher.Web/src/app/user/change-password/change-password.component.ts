@@ -19,6 +19,8 @@ export class ChangePasswordComponent implements OnInit {
     title: string = 'Change Password';
     changePasswordError: boolean = false;
     errorMessage: string = '';
+    changePasswordSuccess: boolean = false;
+    successMessage: string;
 
     constructor(private fb: FormBuilder, private securityService: SecurityService, private userService: UserService) { }
 
@@ -31,7 +33,6 @@ export class ChangePasswordComponent implements OnInit {
             }, {validator: confirmEqualPasswordValidator}),
         });
         
-
         const confPasswordControl = this.editPasswordForm.get('passwordGroup.confirmPassword')
                                                             .valueChanges.debounceTime(1000).subscribe(() => this.timeToCheck = true);
     }
@@ -42,12 +43,19 @@ export class ChangePasswordComponent implements OnInit {
         changePassword.currentPassword = this.editPasswordForm.controls.currPassword.value;
         changePassword.newPassword = this.editPasswordForm.controls.passwordGroup.value.password;
 
-        this.userService.changePassword(changePassword).subscribe((data) => { },
+        this.userService.changePassword(changePassword).subscribe((data) => this.changeSuccess(),
                                                                     (err) => this.handleError(err));
+    }
+
+    changeSuccess() {
+        this.changePasswordError = false;
+        this.changePasswordSuccess = true;  
+        this.successMessage = "Password was changed succesfuly."
     }
 
     handleError(err: any) {
         if (err.error.message != null) {
+            this.changePasswordSuccess = false;
             this.changePasswordError = true;
             this.errorMessage = err.error.message;
         }
