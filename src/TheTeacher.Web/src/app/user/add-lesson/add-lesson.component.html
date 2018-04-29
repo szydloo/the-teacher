@@ -13,9 +13,11 @@
                     <!-- Subject -->
                     <div formGroupName="subject">
                         <!-- Category -->
-                        <div class="row ">
-                            <div class="col-md-12 ">
-                                <label class="control-label" for="CategoryId">Category</label>
+                        <div class="row rowPadding">
+                            <div class="col-md-3">
+                                <label class="control-label addLessonLabel" for="CategoryId">Category</label>
+                            </div>
+                            <div class="col-md-9 ">
                                 <select class="custom-select" formControlName="category" id="CategoryId" (change)="setNames($event.target.value)">
                                     <option *ngIf="!addLessonForm.get('subject.category').dirty" value="0">Select Category</option>
                                     <option *ngFor="let category of categories" [ngValue]="category">{{category}}</option>
@@ -23,9 +25,11 @@
                             </div>
                         </div>
                         <!-- Name -->
-                        <div class="row ">
-                            <div class="col-md-12 ">
-                                <label class="control-label" for="NameId">Name</label>
+                        <div class="row rowPadding">
+                            <div class="col-md-3">
+                                <label class="control-label addLessonLabel" for="NameId">Name</label>
+                            </div>
+                            <div class="col-md-9 ">
                                 <select class="custom-select" formControlName="name" id="NameId">
                                     <option *ngIf="addLessonForm.get('subject.category').value == '0'" value="0">Select category to select name</option>
                                     <option *ngFor="let name of names" [ngValue]="name">{{name}}</option>
@@ -34,9 +38,11 @@
                         </div>
                     </div>
                     <!-- Grade -->
-                    <div class="row ">
-                        <div class="col-md-12 ">
-                            <label class="control-label" for="GradeId">Grade</label>
+                    <div class="row rowPadding">
+                        <div class="col-md-3">
+                            <label class="control-label addLessonLabel" for="GradeId">Grade</label>
+                        </div>
+                        <div class="col-md-9 ">
                             <select class="custom-select" formControlName="grade" id="GradeId">
                                 <option *ngIf="addLessonForm.get('grade').dirty == '0'" value="0">Select grade</option>
                                 <option *ngFor="let grade of grades" [ngValue]="grade">{{grade}}</option>
@@ -44,12 +50,12 @@
                         </div>
                     </div>
                     <!-- PricePerHour -->
-                    <div class="row ">
-                        <div class="col-md-12 ">
-                            <label class="control-label" for="PricePerHourId">Price Per Hour</label>
-                            <div>
-                                <input class="form-control" formControlName="pricePerHour" type="number" id="PricePerHourId" placeholder="0.00"/>
-                            </div>
+                    <div class="row rowPadding">
+                        <div class="col-md-3">
+                            <label class="control-label addLessonLabel" for="PricePerHourId">Price Per Hour</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" formControlName="pricePerHour" type="number" id="PricePerHourId" placeholder="0.00" />
                         </div>
                     </div>
                     <div>

@@ -11,7 +11,7 @@ import { LessonService } from '../lesson.service';
     styleUrls: ['./add-lesson.component.css']
 })
 export class AddLessonComponent implements OnInit {
-    title : string = "Add Subjects you want to teach.";
+    title : string = "Add Subject you want to teach.";
     addLessonForm: FormGroup;
     successMessage: string;
     addLessonSuccess: boolean = false;
@@ -63,9 +63,11 @@ export class AddLessonComponent implements OnInit {
         command.category = this.addLessonForm.get('subject.category').value;
         command.name = this.addLessonForm.get('subject.name').value;
         command.grade = this.addLessonForm.get('grade').value;
-        command.pricePerHour = this.addLessonForm.get('pricePerHour').value;
-        
-        this.lessonService.addLesson(command).subscribe(() => this.onAddSuccess(), (err) => this.onAddFailure(err) )
+        let pricePerHour = (<number>this.addLessonForm.get('pricePerHour').value).toFixed(2);
+        command.pricePerHour = +pricePerHour;
+        console.log(command.pricePerHour);
+        this.lessonService.addLesson(command).subscribe(() => this.onAddSuccess(),
+                                                        (err) => this.onAddFailure(err) )
     }
     onAddFailure(err: any) {
         this.addLessonSuccess = false;
