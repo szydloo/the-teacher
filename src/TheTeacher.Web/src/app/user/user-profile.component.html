@@ -1,21 +1,31 @@
-<div class="container-fluid">
-    <div class="col-md-12">
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
         <div class="row">
-            <div class="card-title offset-md-1">
-                <h1>{{title}}</h1>
-            </div>
+            <h1>{{title}}</h1>
         </div>
     </div>
+</div>
+<div class="container-fluid">
     <div class="row justify-content-around">
+        <div class="col-lg-6 col-md-12">
+            <app-personal-info></app-personal-info>
+        </div>
         <div class="col-lg-4 col-md-12">
             <app-change-password></app-change-password>
         </div>
-        <div class="col-lg-6 col-md-12">
-            <div *ngIf="securityObject.isTeacher">
+    </div>
+    <div class="row  justify-content-around">
+        <div class="col-lg-5 col-md-12">
+            <div *ngIf="!securityObject.isTeacher">
                 <app-register-teacher></app-register-teacher>
             </div>
-            <div *ngIf="!securityObject.isTeacher">
+            <div *ngIf="securityObject.isTeacher">
                 <app-add-lesson></app-add-lesson>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <div *ngIf="securityObject.isTeacher">
+                <app-lesson-list></app-lesson-list>
             </div>
         </div>
     </div>

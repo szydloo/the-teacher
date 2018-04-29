@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using TheTeacher.Infrastructure.Commands;
 using TheTeacher.Infrastructure.Services;
 using TheTeacher.Infrastructure.Commands.LessonCom;
+using System;
 
 namespace TheTeacher.Api.Controllers
 {
@@ -23,6 +24,14 @@ namespace TheTeacher.Api.Controllers
         public async Task<IActionResult> Get(string name)
         {
             return Json(await _lessonService.GetTeachersWithLessonAsync(name));
+        }
+
+        [Authorize]
+        [Route("all/{userId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetAll(Guid userId)
+        {
+            return Json(await _lessonService.GetAllAsync(userId));
         }
 
         [Authorize]

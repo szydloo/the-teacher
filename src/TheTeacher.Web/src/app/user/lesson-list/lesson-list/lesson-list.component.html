@@ -1,0 +1,35 @@
+<br>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <br>
+            <h3 class="card-title">
+                {{title}}
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr class="d-flex">
+                            <th class="col-3">Category</th>
+                            <th class="col-3">Subject</th>
+                            <th class="col-2">Grade</th>
+                            <th class="col-2">Price</th>
+                            <th class="col-2">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="d-flex" *ngFor="let lesson of lessons;">
+                            <td class="col-3">{{lesson.subject.category}}</td>
+                            <td class="col-3">{{lesson.subject.name}}</td>
+                            <td class="col-2">{{lesson.grade}}</td>
+                            <td class="col-2">{{lesson.pricePerHour}}</td>
+                            <td class="col-2"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

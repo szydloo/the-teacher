@@ -12,6 +12,8 @@ import { TeacherModule } from '../teacher/teacher.module';
 import { AddLessonComponent } from './add-lesson/add-lesson.component';
 import { SubjectProviderService } from './add-lesson/subject-provider.service';
 import { LessonService } from './lesson.service';
+import { LessonListComponent } from './lesson-list/lesson-list/lesson-list.component';
+import { PersonalInfoComponent } from './personal-info/personal-info.component';
 
 @NgModule({
   imports: [
@@ -20,7 +22,7 @@ import { LessonService } from './lesson.service';
     BrowserModule,
     MatCheckboxModule,
   ],
-  declarations: [UserProfileComponent, ChangePasswordComponent, RegisterTeacherComponent, AddLessonComponent],
+  declarations: [UserProfileComponent, ChangePasswordComponent, RegisterTeacherComponent, AddLessonComponent, LessonListComponent, PersonalInfoComponent],
   providers: [UserService, SubjectProviderService, LessonService]
 })
 export class UserModule { }

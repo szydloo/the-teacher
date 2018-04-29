@@ -44,6 +44,14 @@ namespace TheTeacher.Infrastructure.Services
             return lesson;
         }
 
+        public async Task<IEnumerable<Lesson>> GetAllAsync(Guid userId)
+        {
+            var teacher = await _teacherRepository.GetAsync(userId);
+            var lessons = teacher.GetLessons();
+
+            return lessons;
+        }
+
         public async Task AddAsync(Guid userId, string name, string category, string grade, decimal pricePerHour)
         {
             var teacher = await _teacherRepository.GetOrFailAsync(userId);
