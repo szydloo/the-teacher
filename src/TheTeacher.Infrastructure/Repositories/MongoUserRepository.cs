@@ -40,7 +40,7 @@ namespace TheTeacher.Infrastructure.Repositories
             await Users.UpdateOneAsync(u => u.Id == userId, modificationUpdate);
         }
 
-        private IMongoCollection<User> Users => _database.GetCollection<User>("Users");
+        private IMongoCollection<User> Users => _database.GetCollection<User>("users");
             
     }
 }

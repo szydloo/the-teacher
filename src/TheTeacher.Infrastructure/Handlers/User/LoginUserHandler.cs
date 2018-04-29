@@ -25,8 +25,7 @@ namespace TheTeacher.Infrastructure.Handlers.User
         {
             await _userService.LoginAsync(command.Email, command.Password);
             var user = await _userService.GetAsync(command.Email);
-            var teacher = await _teacherService.GetAsync(user.Id);
-            bool isTeacher = teacher == null ? false : true;
+            var isTeacher = await _teacherService.IsTeacher(user.Id);
             var jwt = _jwtHandler.CreateToken(user.Id, user.Username, user.Role, isTeacher);
             _cache.SetJwt(command.TokenId, jwt);
         }

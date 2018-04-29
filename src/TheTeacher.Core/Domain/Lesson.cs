@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TheTeacher.Core.Exceptions;
 
 namespace TheTeacher.Core.Domain
@@ -43,9 +44,11 @@ namespace TheTeacher.Core.Domain
             {
                 throw new DomainException(DomainErrorCodes.InvalidGrade, "Grade name cannot be empty.");
             }
-            else if (grade.Length < 2 )
+            else if(!_possibleGrades.Contains(grade))
             {
-                throw new DomainException(DomainErrorCodes.InvalidGrade, "Grade name has to have at least 2 characters.");
+                throw new DomainException(DomainErrorCodes.InvalidGrade, "Grade field must be one of the following values:" + 
+                                                                        "\"Starter\", \"Elementary\", \"Intermediate\", \"Upper Intermediate\", " +
+                                                                        "\"Expert\", \"Mastery\".");
             }
             else if( grade == Grade)
             {
@@ -57,5 +60,8 @@ namespace TheTeacher.Core.Domain
 
         public static Lesson Create(Subject subject, string grade, decimal pricePerHour)
             => new Lesson(subject, grade, pricePerHour);
+
+        private readonly IList<string> _possibleGrades = new List<string> {"Starter", "Elementary", "Intermediate", "Upper Intermediate", "Expert", "Mastery"};
+            
     }
 }

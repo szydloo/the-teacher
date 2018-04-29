@@ -17,7 +17,7 @@ namespace TheTeacher.Infrastructure.Services
     {
         private readonly IMemoryCache _cache;
         private readonly IMongoDatabase _database;
-        private readonly static string CacheKey = "subject";
+        private readonly static string CacheKey = "subjects";
         private static IDictionary<string,List<string>> availableSubjects;
         
         public SubjectProvider(IMemoryCache cache, IMongoDatabase database)
@@ -34,7 +34,6 @@ namespace TheTeacher.Infrastructure.Services
             if(subjects == null || !subjects.Any())
             {
                 subjects = await GetAllAsync();
-                _cache.Set(CacheKey, subjects);
             }
             return subjects;
         }
@@ -42,16 +41,16 @@ namespace TheTeacher.Infrastructure.Services
         private async Task<IEnumerable<SubjectDto>> GetAllAsync()
         {
 
-            var data = _database.GetCollection<SubjectDetails>("AvailableSubjects");
+            var data = _database.GetCollection<SubjectDetails>("subjects");
 
             var projection = new BsonDocument() {
-                {nameof(SubjectDto.Category), $"$Key"},
-                {nameof(SubjectDto.Name), $"$Value"},
+                {(nameof(SubjectDto.Category)).ToLower(), $"$key"},
+                {(nameof(SubjectDto.Name)).ToLower(), $"$value"},
                 { "_id", 0}
             };
 
             var result = await data.Aggregate()
-                    .Unwind("Value")
+                    .Unwind("value")
                     .Project<SubjectDto>(projection)
                     .ToListAsync();
                 

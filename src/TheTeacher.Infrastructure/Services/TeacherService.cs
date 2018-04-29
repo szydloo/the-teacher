@@ -32,6 +32,11 @@ namespace TheTeacher.Infrastructure.Services
             return _mapper.Map<TeacherDto>(teacher);
         }
         
+        public async Task<bool> IsTeacher(Guid userId)
+        {
+            var teacher = await _teacherRepository.GetAsync(userId);
+            return teacher == null ? false : true;
+        }
         public async Task<IEnumerable<TeacherDto>> BrowseAsync()
         {
             var teachers = await _teacherRepository.GetAllAsync();

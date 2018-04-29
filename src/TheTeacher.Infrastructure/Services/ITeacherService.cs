@@ -9,6 +9,7 @@ namespace TheTeacher.Infrastructure.Services
     public interface ITeacherService : IService
     {
         Task<TeacherDto> GetAsync(Guid userId);
+        Task<bool> IsTeacher(Guid userId);
         Task<IEnumerable<TeacherDto>> BrowseAsync();
         Task DeleteAsync(Guid userId);
         Task UpdateAsync(Teacher teacher);

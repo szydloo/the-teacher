@@ -16,11 +16,8 @@
                         <div class="row ">
                             <div class="col-md-12 ">
                                 <label class="control-label" for="CategoryId">Category</label>
-                                <!-- <div>
-                                    <input class="form-control" formControlName="category" type="text" id="CategoryId" />
-                                </div> -->
                                 <select class="custom-select" formControlName="category" id="CategoryId" (change)="setNames($event.target.value)">
-                                    <option value="0">Select Category</option>
+                                    <option *ngIf="!addLessonForm.get('subject.category').dirty" value="0">Select Category</option>
                                     <option *ngFor="let category of categories" [ngValue]="category">{{category}}</option>
                                 </select>
                             </div>
@@ -40,9 +37,10 @@
                     <div class="row ">
                         <div class="col-md-12 ">
                             <label class="control-label" for="GradeId">Grade</label>
-                            <div>
-                                <input class="form-control" formControlName="grade" type="text" id="GradeId" />
-                            </div>
+                            <select class="custom-select" formControlName="grade" id="GradeId">
+                                <option *ngIf="addLessonForm.get('grade').dirty == '0'" value="0">Select grade</option>
+                                <option *ngFor="let grade of grades" [ngValue]="grade">{{grade}}</option>
+                            </select>
                         </div>
                     </div>
                     <!-- PricePerHour -->
@@ -50,7 +48,7 @@
                         <div class="col-md-12 ">
                             <label class="control-label" for="PricePerHourId">Price Per Hour</label>
                             <div>
-                                <input class="form-control" formControlName="pricePerHour" type="number" id="PricePerHourId" />
+                                <input class="form-control" formControlName="pricePerHour" type="number" id="PricePerHourId" placeholder="0.00"/>
                             </div>
                         </div>
                     </div>
