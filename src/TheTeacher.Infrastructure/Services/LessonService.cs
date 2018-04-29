@@ -7,6 +7,7 @@ using TheTeacher.Infrastructure.Extensions;
 using TheTeacher.Core.Domain;
 using System.Collections.Generic;
 using TheTeacher.Infrastructure.Dto;
+using TheTeacher.Infrastructure.Exceptions;
 
 namespace TheTeacher.Infrastructure.Services
 {
@@ -36,12 +37,26 @@ namespace TheTeacher.Infrastructure.Services
             return _mapper.Map<IEnumerable<TeacherDto>>(teachersWithLesson);
         }
 
+        public async Task<Lesson> GetAsync(Guid userId, string name, string category, string grade)
+        {
+            var lesson = await _teacherRepository.GetLessonAsync(userId, name, category, grade);
+
+            return lesson;
+        }
+
         public async Task AddAsync(Guid userId, string name, string category, string grade, decimal pricePerHour)
         {
             var teacher = await _teacherRepository.GetOrFailAsync(userId);
+            var les = await GetAsync(userId, name, category, grade);
+            if(les != null)
+            {
+                throw new ServiceException(ServiceErrorCodes.LessonAlreadyExists, "Lesson with specific name, category and grade already exists.");
+            }
+            
             var subjectDetails = await _subjectProvider.GetAsync(name, category);
             var subject = Subject.Create(subjectDetails.Name, subjectDetails.Category);
-            var lesson = new Lesson(subject, grade,pricePerHour);
+            var lesson = new Lesson(subject, grade, pricePerHour);
+
             await _teacherRepository.AddLesson(teacher, lesson);
         }
 

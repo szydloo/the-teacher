@@ -14,5 +14,6 @@ namespace TheTeacher.Infrastructure.Repositories
         Task AddAsync(Teacher teacher);
         Task UpdateAsync(Teacher teacher);
         Task AddLesson(Teacher teacher, Lesson lesson);
+        Task<Lesson> GetLessonAsync(Guid userId, string name, string category, string grade);
     }
 }

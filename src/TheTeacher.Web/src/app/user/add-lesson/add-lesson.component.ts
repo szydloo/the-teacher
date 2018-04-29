@@ -11,7 +11,7 @@ import { LessonService } from '../lesson.service';
     styleUrls: ['./add-lesson.component.css']
 })
 export class AddLessonComponent implements OnInit {
-    title : string = "Add Lessons you want to teach.";
+    title : string = "Add Subjects you want to teach.";
     addLessonForm: FormGroup;
     successMessage: string;
     addLessonSuccess: boolean = false;
@@ -55,7 +55,7 @@ export class AddLessonComponent implements OnInit {
     }
 
     handleError(err: any) {
-        console.error(JSON.stringify(err));
+        console.error("here " + JSON.stringify(err));
     }
 
     addLesson() {
@@ -64,13 +64,17 @@ export class AddLessonComponent implements OnInit {
         command.name = this.addLessonForm.get('subject.name').value;
         command.grade = this.addLessonForm.get('grade').value;
         command.pricePerHour = this.addLessonForm.get('pricePerHour').value;
-        console.log(JSON.stringify(command));
-        this.lessonService.addLesson(command).subscribe(() => this.onAddSuccess(), (err) => this.onAddFailure() )
+        
+        this.lessonService.addLesson(command).subscribe(() => this.onAddSuccess(), (err) => this.onAddFailure(err) )
     }
-    onAddFailure() {
+    onAddFailure(err: any) {
         this.addLessonSuccess = false;
         this.addLessonError = true;
-        this.successMessage = "Unexpected error please try again later."
+        if(err.error.message != null) {
+            this.errorMessage = err.error.message;
+        } else {
+            this.errorMessage = "Unexpected error please try again later.";
+        }
     }
 
     onAddSuccess() {
