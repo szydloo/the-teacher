@@ -10,6 +10,7 @@ import { Jwt } from '../models/security/jwt';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ServiceErrorCodes } from '../exception/service-error-codes';
 import { LoginUserCommand } from '../models/commands/user/login-user-command';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     errorMessage = '';
 
     constructor(private fb: FormBuilder, private loginService: LoginService, private securityService: SecurityService,
-                private router: Router, private route: ActivatedRoute) {
+                private router: Router, private route: ActivatedRoute, private cookieService: CookieService) {
 
     }
 
@@ -61,9 +62,9 @@ export class LoginComponent implements OnInit {
 
     setCurrentSecObject(jwt: Jwt) {
         const userAuth: UserAuth = new UserAuth();
+
         if (jwt.token.length > 0 && jwt != null) {
             const decodedToken: any = JWT(jwt.token);
-            console.log(decodedToken);
 
             userAuth.isAuthenticated = true;
             userAuth.token = jwt.token;
@@ -73,7 +74,9 @@ export class LoginComponent implements OnInit {
 
             // userAuth.role = JWT(jwt.token).role
             Object.assign(this.securityService.securityObject, userAuth);
-            localStorage.setItem('bearerToken', this.securityService.securityObject.token);
+
+            // localStorage.setItem('bearerToken', this.securityService.securityObject.token);
+            this.cookieService.set('auth',jwt.token);
 
             this.redirectToPage();
         }
