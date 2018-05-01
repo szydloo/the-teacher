@@ -7,15 +7,15 @@
 </div>
 <div class="container-fluid">
     <div class="row justify-content-around">
-        <div class="col-lg-6 col-md-12">
+        <div class="col-lg-6 col-md-10">
             <app-personal-info></app-personal-info>
         </div>
-        <div class="col-lg-4 col-md-12">
+        <div class="col-lg-4 col-md-10">
             <app-change-password></app-change-password>
         </div>
     </div>
     <div class="row  justify-content-around">
-        <div class="col-lg-5 col-md-12">
+        <div class="col-lg-5 col-md-10">
             <div *ngIf="!securityObject.isTeacher">
                 <app-register-teacher></app-register-teacher>
             </div>
@@ -23,7 +23,7 @@
                 <app-add-lesson></app-add-lesson>
             </div>
         </div>
-        <div class="col-lg-6 col-md-12">
+        <div class="col-lg-6 col-md-10">
             <div *ngIf="securityObject.isTeacher">
                 <app-lesson-list></app-lesson-list>
             </div>

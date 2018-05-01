@@ -1,12 +1,13 @@
+<div class="offset-md-4 col-md-4">
 <app-login></app-login>
+</div>
 
 <br>
-<div class="card offset-md-4 col-md-4">
-    <div class="card-header">
-        <div class="card-title">
-            <br>
-            <h3>{{pageTitle}}</h3>
-        </div>
+<div class="offset-md-4 col-md-4">
+<div class="card container">
+    <div class="card-header row">
+        <br>
+        <h3  class="card-title">{{pageTitle}}</h3>
     </div>
     <div class="card-body">
         <form novalidate [formGroup]="signUpForm" (ngSubmit)="saveUser()">
@@ -83,5 +84,7 @@
             </div>
         </form>
     </div>
+</div>
+
 </div>
 {{signUpForm.invalid}}
