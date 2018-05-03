@@ -28,14 +28,5 @@ namespace TheTeacher.Infrastructure.Extensions
             return teacher;
         }
 
-        public static async Task<Teacher> GetOrFailAsync(this ITeacherRepository teacherRepository, string fullname)
-        {
-            var teacher = await teacherRepository.GetAsync(fullname);
-            if(teacher == null)
-            {
-                throw new ServiceException(ServiceErrorCodes.TeacherNotFound, $"Teacher with fullname: '{fullname}' does not exist."); 
-            }
-            return teacher;
-        }
     }
 }

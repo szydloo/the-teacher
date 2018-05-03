@@ -34,7 +34,7 @@ namespace TheTeacher.Tests.Services
             var id = Guid.NewGuid();
             var tId = Guid.NewGuid();
             var tcs = new TaskCompletionSource<Teacher>();
-            tcs.SetResult(new Teacher(tId, new User(id,"email@email.com","test","test","test","user"),new Address("testStreet","testCity","testZipcode","testCountry"),"TestTest"));
+            tcs.SetResult(new Teacher(tId, new User(id,"email@email.com","test","test","test","user")));
             teacherRepositoryMock.Setup( x => x.GetAsync(It.IsAny<Guid>())).Returns(tcs.Task);
 
             var tcs2 = new TaskCompletionSource<SubjectDto>();
@@ -63,9 +63,8 @@ namespace TheTeacher.Tests.Services
             var t1Id = Guid.NewGuid();
             var t2Id = Guid.NewGuid();
             
-            var t1 = new Teacher(t1Id, new User(id,"email@email.com","test","test","test","user"),new Address("testStreet","testCity","testZipcode","testCountry"),"TestTest");
-            var t2 = new Teacher(t2Id, new User(id2,"email2@email.com","test2","test2","test2","user"),new Address("testStreet2","testCity2","testZipcode2","testCountry2"),"TestTest");
-            
+            var t1 = new Teacher(t1Id, new User(id,"email@email.com","test","test","test","user"));
+            var t2 = new Teacher(t2Id, new User(id2,"email2@email.com","test2","test2","test2","user"));            
             var tcs = new TaskCompletionSource<IEnumerable<Teacher>>();
             tcs.SetResult(new HashSet<Teacher>
                 {

@@ -20,9 +20,6 @@ namespace TheTeacher.Infrastructure.Repositories
         public async Task<Teacher> GetAsync(Guid userId)
         => await Teachers.AsQueryable().FirstOrDefaultAsync(x => x.UserID == userId);
 
-        public async Task<Teacher> GetAsync(string fullname)
-        => await Teachers.AsQueryable().FirstOrDefaultAsync(x => x.Fullname == fullname); 
-
         public async Task<IEnumerable<Teacher>> GetAllAsync()
         => await Teachers.AsQueryable().ToListAsync(); 
 

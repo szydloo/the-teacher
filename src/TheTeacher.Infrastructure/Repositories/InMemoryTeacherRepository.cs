@@ -22,9 +22,6 @@ namespace TheTeacher.Infrastructure.Repositories
         public async Task<Teacher> GetAsync(Guid userId)
         => await Task.FromResult(_teachers.SingleOrDefault(x => x.UserID == userId));
 
-        public async Task<Teacher> GetAsync(string username)
-        => await Task.FromResult(_teachers.SingleOrDefault(x => x.Fullname == username));
-
         public async Task RemoveAsync(Guid userId)
         {
             var user = await GetAsync(userId);

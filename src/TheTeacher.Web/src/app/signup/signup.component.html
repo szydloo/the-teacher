@@ -39,8 +39,7 @@
                     <div class="form-group">
                         <label class="control-label" for="comfirmEmailId">Confirm Email</label>
                         <div>
-                            <input class="form-control" formControlName="confirmEmail" type="text" id="comfirmEmailId" placeholder="Confirm Email (required)"
-                            />
+                            <input class="form-control" formControlName="confirmEmail" type="text" id="comfirmEmailId" placeholder="Confirm Email (required)"/>
                         </div>
                     </div>
                     <div class="text-danger" *ngIf="signUpForm.get('emailGroup').errors?.notEqual && signUpForm.get('emailGroup.confirmEmail').touched">Email and Confirm Email do not Match</div>

@@ -22,7 +22,7 @@ export class ChangePasswordComponent implements OnInit {
     changePasswordSuccess: boolean = false;
     successMessage: string;
 
-    constructor(private fb: FormBuilder, private securityService: SecurityService, private userService: UserService) { }
+constructor(private fb: FormBuilder, private securityService: SecurityService, private userService: UserService) { }
 
     ngOnInit() {
         this.editPasswordForm = this.fb.group({

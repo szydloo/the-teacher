@@ -16,7 +16,8 @@ namespace TheTeacher.Infrastructure.Handlers.Teacher
 
         public async Task HandleAsync(UpdateTeacher command)
         {
-            await _teacherService.UpdateAddressAsync(command.UserId, command.Address);
+            // await _teacherService.UpdateAddressAsync(command.UserId);
+            await Task.CompletedTask;
         }
     }
 }

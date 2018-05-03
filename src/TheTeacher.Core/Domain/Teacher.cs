@@ -14,8 +14,6 @@ namespace TheTeacher.Core.Domain
         // Set of lesson types this teacher is willing to tutor
         public ISet<Lesson> Lessons = new HashSet<Lesson>();
         public Guid UserID { get; protected set; }
-        public string Fullname { get; protected set; }
-        public Address Address { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
 
@@ -23,12 +21,10 @@ namespace TheTeacher.Core.Domain
         {   
         }
 
-        public Teacher(Guid id, User user, Address address, string fullname)
+        public Teacher(Guid id, User user)
         {
             Id = id;
             UserID = user.Id;
-            SetAddress(address); 
-            SetFullName(fullname);
             UpdatedAt = DateTime.UtcNow;
             CreatedAt = DateTime.UtcNow;
         }
@@ -39,7 +35,6 @@ namespace TheTeacher.Core.Domain
             {
                 throw new DomainException(DomainErrorCodes.InvalidName, $"Name cannot be empty.");
             }
-            Fullname = fullname;
             UpdatedAt = DateTime.UtcNow;
         }
 
@@ -51,7 +46,6 @@ namespace TheTeacher.Core.Domain
                 throw new DomainException(DomainErrorCodes.InvalidAddress, $"Address cannot be empty");
             }
             
-            Address = address;
             UpdatedAt = DateTime.UtcNow;
         }
 

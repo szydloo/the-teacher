@@ -11,10 +11,10 @@ namespace TheTeacher.Core.Domain
         public string Username { get; protected set; }
         public string Password { get; protected set; }
         public string Salt { get; protected set; }
-        public string Fullname { get; protected set; }
         public string Role { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
+        public PersonalDetails Details { get; protected set; }
         
         protected User()
         {

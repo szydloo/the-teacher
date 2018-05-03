@@ -1,0 +1,113 @@
+<br>
+<div class="card container">
+    <div class="card-header row">
+        <div class="container">
+            <h3 class="card-title offset-md-1 row">{{title}}</h3>
+            <pre *ngIf="subtitle">{{subtitle}}</pre>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <form novalidate [formGroup]="editPersonalInfo" (ngSubmit)="submitPersonalInfo()">
+                <div class="row form-group">
+                    <!-- First Name -->
+                    <div class="col-lg-2 col-md-2">
+                        <label class="myLabel control-label">First Name</label>
+                    </div>
+                    <div class="col-lg-4 col-md-10">
+                        <input formControlName="firstName" class="form-control" type="text" />
+                    </div>
+                    <!-- Last Name -->
+                    <div class="col-lg-2 col-md-2">
+                        <label class="myLabel control-label">Last Name</label>
+                    </div>
+                    <div class="col-lg-4 col-md-10">
+                        <input formControlName="lastName" class="form-control" type="text" />
+                    </div>
+                </div>
+                <!-- Date of Birth -->
+                <div class="row form-group">
+                    <div class="col-lg-2 col-md-2">
+                        <label class="myLabel control-label" for="dateOfBirth">Date of Birth</label>
+                    </div>
+                    <div class="col-lg-10 col-md-10">
+                        <input formControlName="dateOfBirth" class="form-control" id="dateOfBirth" type="text" bsDatepicker [bsConfig]="datePickerConfig"
+                        />
+                    </div>
+                </div>
+                <!-- Address -->
+                <div class="row form-group">
+                    <h5 class="offset-md-1">Address</h5>
+                </div>
+                <div formGroupName="address">
+                    <div class="row form-group">
+                        <div class="col-lg-2 col-md-2">
+                            <label class="myLabel control-label">Street</label>
+                        </div>
+                        <div class="col-lg-10 col-md-10">
+                            <input class="form-control" formControlName="street" type="text" />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <!-- Zipcode -->
+                        <div class="col-lg-2 col-md-2">
+                            <label class="myLabel control-label">Zipcode</label>
+                        </div>
+                        <div class="col-lg-2 col-md-10">
+                            <input formControlName="zipcode" class="form-control" type="text" />
+                        </div>
+                        <!-- Last Name -->
+                        <div class="col-lg-1 col-md-2">
+                            <label class="myLabel control-label">City</label>
+                        </div>
+                        <div class="col-lg-7 col-md-10">
+                            <input formControlName="city" class="form-control" type="text" />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-2 col-md-2">
+                            <label class="myLabel control-label">Country</label>
+                        </div>
+                        <div class="col-lg-10 col-md-10">
+                            <input class="form-control" formControlName="country" type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <h5 class="offset-md-1">Education</h5>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-2 col-md-2">
+                        <label class="myLabel control-label" for="universityId">University</label>
+                    </div>
+                    <div class="col-lg-10 col-md-10">
+                        <input formControlName="university" class="form-control" id="universityId" type="text" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-2 col-md-2">
+                        <label class="control-label" for="fieldOfStudyId">Field Of Study</label>
+                    </div>
+                    <div class="col-lg-6 col-md-10">
+                        <input formControlName="fieldOfStudy" class="form-control" id="fieldOfStudyId" type="text" />
+                    </div>
+                    <div class="col-lg-1 col-md-2">
+                        <label class="myLabel control-label" for="titleId">Title</label>
+                    </div>
+                    <div class="col-lg-3 col-md-10">
+                        <input formControlName="title" class="form-control" id="titleId" type="text" />
+                    </div>
+                </div>
+                <div>
+                    <span *ngIf="editError" style="color:red">{{editErrorMessage}}</span>
+                    <span *ngIf="editSuccess" style="color:green">{{editSuccessMessage}}</span>
+                </div>
+                <div class="offset-lg-4">
+                    <button type="submit" class="btn btn-primary">Edit Personal Info</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{editPersonalInfo.value | json}}

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatCheckboxModule } from '@angular/material';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 
 import { UserService } from './user.service';
 import { UserProfileComponent } from './user-profile.component';
@@ -14,6 +15,7 @@ import { SubjectProviderService } from './add-lesson/subject-provider.service';
 import { LessonService } from './lesson.service';
 import { LessonListComponent } from './lesson-list/lesson-list/lesson-list.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
+import { PersonalInfoEditComponent } from './personal-info-edit/personal-info-edit.component';
 
 @NgModule({
   imports: [
@@ -21,8 +23,9 @@ import { PersonalInfoComponent } from './personal-info/personal-info.component';
     ReactiveFormsModule,
     BrowserModule,
     MatCheckboxModule,
+    BsDatepickerModule.forRoot()
   ],
-  declarations: [UserProfileComponent, ChangePasswordComponent, RegisterTeacherComponent, AddLessonComponent, LessonListComponent, PersonalInfoComponent],
+  declarations: [UserProfileComponent, ChangePasswordComponent, RegisterTeacherComponent, AddLessonComponent, LessonListComponent, PersonalInfoComponent, PersonalInfoEditComponent],
   providers: [UserService, SubjectProviderService, LessonService]
 })
 export class UserModule { }

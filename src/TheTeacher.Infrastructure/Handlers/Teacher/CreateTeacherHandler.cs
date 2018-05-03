@@ -16,7 +16,7 @@ namespace TheTeacher.Infrastructure.Handlers.Teacher
         }
         public async Task HandleAsync(CreateTeacher command)
         {
-            await _teacherService.CreateAsync(Guid.NewGuid(),command.UserId, command.Street, command.City, command.Zipcode, command.Country, command.Fullname);
+            await _teacherService.CreateAsync(Guid.NewGuid(),command.UserId);
         }
     }
 }
