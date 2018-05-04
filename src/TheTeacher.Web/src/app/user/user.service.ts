@@ -24,6 +24,12 @@ export class UserService {
                     .catch(this.handleError);
     }
 
+    getUser(userId: string): Observable<User> {
+        this.url += userId; 
+        return this.client.get<User>(this.url)
+                    .catch(this.handleError)
+    }
+
     saveUser(registerUser: RegisterUserCommand): Observable<HttpResponse<RegisterUserCommand>> {
         const body = JSON.stringify(registerUser);
 

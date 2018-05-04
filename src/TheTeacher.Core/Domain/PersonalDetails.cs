@@ -1,4 +1,5 @@
 using System;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace TheTeacher.Core.Domain
 {
@@ -12,7 +13,5 @@ namespace TheTeacher.Core.Domain
         public string FieldOfStudy { get; set; }        
         public string Title { get; set; }        
         public string ImageFilePath { get; set; }
-        public byte[] Image { get; set; }
-        
     }
 }

@@ -16,6 +16,7 @@ import { LessonService } from './lesson.service';
 import { LessonListComponent } from './lesson-list/lesson-list/lesson-list.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { PersonalInfoEditComponent } from './personal-info-edit/personal-info-edit.component';
+import { PersonalDetailsServiceService } from './personal-details-service.service';
 
 @NgModule({
   imports: [
@@ -26,6 +27,6 @@ import { PersonalInfoEditComponent } from './personal-info-edit/personal-info-ed
     BsDatepickerModule.forRoot()
   ],
   declarations: [UserProfileComponent, ChangePasswordComponent, RegisterTeacherComponent, AddLessonComponent, LessonListComponent, PersonalInfoComponent, PersonalInfoEditComponent],
-  providers: [UserService, SubjectProviderService, LessonService]
+  providers: [UserService, SubjectProviderService, LessonService, PersonalDetailsServiceService]
 })
 export class UserModule { }

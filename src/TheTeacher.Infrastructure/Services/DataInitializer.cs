@@ -33,12 +33,14 @@ namespace TheTeacher.Infrastructure.Services
                 Guid userId = Guid.NewGuid();
                 
                 await _userService.RegisterAsync(userId,$"test{i}@email.com",$"secret{i}",$"username{i}", "user");
+                var user = _userService.GetAsync(userId);
             }
             for(int i = 1; i <= 3; i++)
             {
                 Guid userIdADmin = Guid.NewGuid();
                 
                 await _userService.RegisterAsync(userIdADmin, $"testadmin{i}@email.com", $"secretAdmin", $"usernameAdmin{i}", "admin");
+                
             }
             for(int i = 11; i <= 30; i++)
             {

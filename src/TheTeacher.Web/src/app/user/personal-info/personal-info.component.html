@@ -1,10 +1,101 @@
 <div class="card container">
     <div class="card-header row">
         <div class="container">
-            <h3 class="card-title offset-md-1 row">Fill your personal details</h3>
-            <pre>This is what's being displayed when user enters your profile</pre>
+            <div class="row align-items-start">
+                <span class="offset-lg-1"><h3 class="card-title">Fill your personal details</h3></span>
+                <span class="offset-lg-5"><i class="fas fa-flag fa-user-edit" (click)="editPersonalInfo()"></i></span>
+            </div>
+            <p>This is what's being displayed when user enters your profile</p>
         </div>
     </div>
     <div class="card-body">
+        <div class="container">
+            <div class="row form-group">
+                <!-- First Name -->
+                <div class="col-lg-2 col-md-2">
+                    <label class="myLabel control-label">First Name</label>
+                </div>
+                <div class="col-lg-4 col-md-10">
+                    {{usersPersonalDetails.firstName}}
+                </div>
+                <!-- Last Name -->
+                <div class="col-lg-2 col-md-2">
+                    <label class="myLabel control-label">Last Name</label>
+                </div>
+                <div class="col-lg-4 col-md-10">
+                    {{usersPersonalDetails.lastName}}
+                </div>
+            </div>
+            <!-- Date of Birth -->
+            <div class="row form-group">
+                <div class="col-lg-2 col-md-2">
+                    <label class="myLabel control-label" for="dateOfBirth">Date of Birth</label>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                    {{usersPersonalDetails.dateOfBirth | date}}
+                </div>
+            </div>
+            <!-- Address -->
+            <div class="row form-group">
+                <h5 class="offset-md-1">Address</h5>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-2 col-md-2">
+                    <label class="myLabel control-label">Street</label>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                    {{usersPersonalDetails.address.street}}
+                </div>
+            </div>
+            <div class="row form-group">
+                <!-- Zipcode -->
+                <div class="col-lg-2 col-md-2">
+                    <label class="myLabel control-label">Zipcode</label>
+                </div>
+                <div class="col-lg-2 col-md-10">
+                    {{usersPersonalDetails.address.zipcode}}
+                </div>
+                <!-- Last Name -->
+                <div class="col-lg-1 col-md-2">
+                    <label class="myLabel control-label">City</label>
+                </div>
+                <div class="col-lg-7 col-md-10">
+                    {{usersPersonalDetails.address.city}}
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-2 col-md-2">
+                    <label class="myLabel control-label">Country</label>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                    {{usersPersonalDetails.address.country}}
+                </div>
+            </div>
+            <div class="row form-group">
+                <h5 class="offset-md-1">Education</h5>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-2 col-md-2">
+                    <label class="myLabel control-label" for="universityId">University</label>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                    {{usersPersonalDetails.university}}
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-2 col-md-2">
+                    <label class="control-label" for="fieldOfStudyId">Field Of Study</label>
+                </div>
+                <div class="col-lg-6 col-md-10">
+                    {{usersPersonalDetails.fieldOfStudy}}
+                </div>
+                <div class="col-lg-1 col-md-2">
+                    <label class="myLabel control-label" for="titleId">Title</label>
+                </div>
+                <div class="col-lg-3 col-md-10">
+                    {{usersPersonalDetails.title}}
+                </div>
+            </div>
+        </div>
     </div>
 </div>

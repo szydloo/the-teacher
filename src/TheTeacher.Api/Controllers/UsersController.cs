@@ -39,6 +39,17 @@ namespace TheTeacher.Api.Controllers
             else return Json(user);
         }
 
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> Get(Guid userId)
+        {
+            var user = await _userService.GetAsync(userId);
+            if(user == null)
+            {
+                return NotFound();
+            }
+            else return Json(user);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateUser command)
         {

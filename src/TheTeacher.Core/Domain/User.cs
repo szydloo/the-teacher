@@ -14,7 +14,7 @@ namespace TheTeacher.Core.Domain
         public string Role { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
-        public PersonalDetails Details { get; protected set; }
+        public PersonalDetails Details { get; set; }
         
         protected User()
         {
@@ -30,6 +30,7 @@ namespace TheTeacher.Core.Domain
             SetRole(role);
             UpdatedAt = DateTime.UtcNow;
             CreatedAt = DateTime.UtcNow;
+            Details = new PersonalDetails();
         }
 
         private void SetRole(string role)
