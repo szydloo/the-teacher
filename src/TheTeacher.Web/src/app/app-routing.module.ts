@@ -8,19 +8,19 @@ import { AuthGuard } from './security/auth.guard';
 import { UserProfileComponent } from './user/user-profile.component';
 import { AlertFilledFormsGuard } from './signup/alert-filled-forms.guard';
 import { PersonalInfoEditComponent } from './user/personal-info-edit/personal-info-edit.component';
+import { PersonalDetailsResolver } from './user/personal-details-resolver.service';
 
 const routes: Routes = [
     { path: 'signup', component: SignupComponent, canDeactivate: [AlertFilledFormsGuard]},
     { path: 'teachers', component: TeacherListComponent, canActivate: [AuthGuard] }, 
-    { 
+    {
         path: 'profile',
         component: UserProfileComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        resolve: {personalDetails: PersonalDetailsResolver}
     }, 
-    { path: 'profile/edit', component: PersonalInfoEditComponent, canActivate: [AuthGuard] },
     { path: 'home', component: HomeComponent},
     { path: '**',  pathMatch: 'full', redirectTo: 'home'},
-
 ];
 
 @NgModule({

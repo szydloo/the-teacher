@@ -1,13 +1,13 @@
+import { Address } from "./address";
+
 export class PersonalDetails {
     firstName: string = "";
     lastName: string = "";
     dateOfBirth: Date = new Date(1999,0,1);
-    address: {
-        street: string;
-        zipcode: string;
-        city: string;
-        country: string;
-    } 
+    address: Address;
+    university: string;
+    title: string;
+    fieldOfStudy: string;
 
     constructor() {
         

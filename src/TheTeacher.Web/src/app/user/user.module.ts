@@ -16,17 +16,28 @@ import { LessonService } from './lesson.service';
 import { LessonListComponent } from './lesson-list/lesson-list/lesson-list.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { PersonalInfoEditComponent } from './personal-info-edit/personal-info-edit.component';
-import { PersonalDetailsServiceService } from './personal-details-service.service';
+import { RouterModule } from '@angular/router';
+import { AuthGuard } from '../security/auth.guard';
+import { PersonalDetailsResolver } from './personal-details-resolver.service';
+import { PersonalDetailsService } from './personal-details.service';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     BrowserModule,
+    RouterModule.forChild([
+        { 
+            path: 'edit', 
+            component: PersonalInfoEditComponent, 
+            canActivate: [AuthGuard], 
+            resolve: { personalDetails: PersonalDetailsResolver } 
+        },
+    ]),
     MatCheckboxModule,
     BsDatepickerModule.forRoot()
   ],
   declarations: [UserProfileComponent, ChangePasswordComponent, RegisterTeacherComponent, AddLessonComponent, LessonListComponent, PersonalInfoComponent, PersonalInfoEditComponent],
-  providers: [UserService, SubjectProviderService, LessonService, PersonalDetailsServiceService]
+  providers: [UserService, SubjectProviderService, LessonService, PersonalDetailsResolver, PersonalDetailsService]
 })
 export class UserModule { }

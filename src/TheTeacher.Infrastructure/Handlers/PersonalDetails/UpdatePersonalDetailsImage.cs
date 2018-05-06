@@ -7,8 +7,8 @@ namespace TheTeacher.Infrastructure.Handlers.PersonalDetails
 {
     public class UpdatePersonalDetailsImageHandler : ICommandHandler<UpdatePersonalDetailsImage>
     {
-        private readonly PersonalDetailsService _personalDetailsService;
-        public UpdatePersonalDetailsImageHandler(PersonalDetailsService personalDetailsService)
+        private readonly IPersonalDetailsService _personalDetailsService;
+        public UpdatePersonalDetailsImageHandler(IPersonalDetailsService personalDetailsService)
         {
             _personalDetailsService = personalDetailsService;
         }

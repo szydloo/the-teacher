@@ -97,7 +97,7 @@ namespace TheTeacher.Infrastructure.Services
             }
             var newSalt = _encrypter.GetSalt();            
             var newHashedPasword = _encrypter.GetHash(newPassword, newSalt);
-            await _userRepository.UpdateAsync(userId, newHashedPasword, newSalt);
+            await _userRepository.UpdatePasswordAsync(userId, newHashedPasword, newSalt);
         }
 
     }

@@ -25,8 +25,8 @@ export class UserService {
     }
 
     getUser(userId: string): Observable<User> {
-        this.url += userId; 
-        return this.client.get<User>(this.url)
+        let getUserUrl = this.url + userId;
+        return this.client.get<User>(getUserUrl)
                     .catch(this.handleError)
     }
 

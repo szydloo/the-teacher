@@ -6,7 +6,7 @@ using TheTeacher.Infrastructure.Repositories;
 
 namespace TheTeacher.Infrastructure.Services
 {
-    public class PersonalDetailsService : IService
+    public class PersonalDetailsService : IPersonalDetailsService
     {
         private readonly IUserRepository _userRepository;
 
@@ -17,11 +17,13 @@ namespace TheTeacher.Infrastructure.Services
 
         public async Task UpdateImageAsync(Guid userId, byte[] image)
         {
-            
         }
 
-        public async Task UpdatePersonalInfoAsync(Guid userId, Address address, int? age, string firstName, string lastName, string university, string fieldOfStudy, string title)
+        public async Task UpdatePersonalInfoAsync(Guid userId, Address address, DateTime dateOfBirth, string firstName, string lastName, string university, string fieldOfStudy, string title)
         {
+            var user = await _userRepository.GetAsync(userId);
+
+            await _userRepository.UpdatePersonalDetailsAsync(userId, new PersonalDetails(firstName,lastName,dateOfBirth,address,university,fieldOfStudy,title));
         }
     }
 }

@@ -7,15 +7,16 @@ namespace TheTeacher.Infrastructure.Handlers.PersonalDetails
 {
     public class UpdatePersonalDetailsHandler : ICommandHandler<UpdatePersonalDetailsInfo>
     {
-        private readonly PersonalDetailsService _personalDetailsService;
+        private readonly IPersonalDetailsService _personalDetailsService;
         
-        public UpdatePersonalDetailsHandler(PersonalDetailsService personalDetailsService) 
+        public UpdatePersonalDetailsHandler(IPersonalDetailsService personalDetailsService) 
         {
+            _personalDetailsService = personalDetailsService;
         }
 
         public async Task HandleAsync(UpdatePersonalDetailsInfo command)
         {
-            await _personalDetailsService.UpdatePersonalInfoAsync(command.UserId, command.Address, command.Age, command.FirstName, command.LastName, command.University, command.FieldOfStudy, command.Title);
+            await _personalDetailsService.UpdatePersonalInfoAsync(command.UserId, command.Address, command.DateOfBirth, command.FirstName, command.LastName, command.University, command.FieldOfStudy, command.Title);
         }
     }
 }

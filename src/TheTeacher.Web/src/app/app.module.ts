@@ -27,7 +27,6 @@ import { TeacherListComponent } from './teacher/teacher-list.component';
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule,
         UserModule,
         TeacherModule,
         HttpClientModule,
@@ -35,6 +34,7 @@ import { TeacherListComponent } from './teacher/teacher-list.component';
         SignupLoginModule,
         BrowserAnimationsModule,
         HttpRequestInterceptorTokenModule,
+        AppRoutingModule,
     ],
     providers: [SecurityService, AuthGuard, TeacherService, CookieService],
     bootstrap: [AppComponent]

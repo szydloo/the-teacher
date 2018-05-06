@@ -6,20 +6,24 @@ using TheTeacher.Infrastructure.Commands.PersonalDetails;
 
 namespace TheTeacher.Api.Controllers
 {
-    public class PersonalDeatailsController : ApiControllerBase
+    public class PersonalDetailsController : ApiControllerBase
     {
-        private readonly UserService _userService;
-        public PersonalDeatailsController(ICommandDispatcher commandDispatcher, UserService userService) : base(commandDispatcher)
+        private readonly IUserService _userService;
+        public PersonalDetailsController(ICommandDispatcher commandDispatcher, IUserService userService) : base(commandDispatcher)
         {
             _userService = userService;
         }
 
+        [HttpPut]
+        [Route("info")]
         public async Task<IActionResult> Put([FromBody]UpdatePersonalDetailsInfo command)
         {
             await DispatchAsync(command);
             return Ok();
         }
 
+        [HttpPut]
+        [Route("image")]
         public async Task<IActionResult> Put([FromBody]UpdatePersonalDetailsImage command)
         {
             await DispatchAsync(command);

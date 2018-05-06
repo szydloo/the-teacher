@@ -28,21 +28,23 @@ namespace TheTeacher.Api.Controllers
             return Json(users);
         }
         
-        [HttpGet("{email}")]
-        public async Task<IActionResult> Get(string email)
-        {
-            var user = await _userService.GetAsync(email);
-            if(user == null)
-            {
-                return NotFound();
-            }
-            else return Json(user);
-        }
+        // [HttpGet("/email/{email}")]
+        // public async Task<IActionResult> Get(string email)
+        // {
+        //     var user = await _userService.GetAsync(email);
+        //     if(user == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     else return Json(user);
+        // }
 
+        [Authorize]
         [HttpGet("{userId}")]
-        public async Task<IActionResult> Get(Guid userId)
+        public async Task<IActionResult> Get(string userId)
         {
-            var user = await _userService.GetAsync(userId);
+            var guidUserId = Guid.Parse(userId);
+            var user = await _userService.GetAsync(guidUserId);
             if(user == null)
             {
                 return NotFound();

@@ -13,5 +13,21 @@ namespace TheTeacher.Core.Domain
         public string FieldOfStudy { get; set; }        
         public string Title { get; set; }        
         public string ImageFilePath { get; set; }
+
+        public PersonalDetails()
+        {
+        }
+
+        public PersonalDetails(string firstName, string lastName, DateTime dateOfBirth, Address address,
+            string university, string fieldOfStudy, string title)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dateOfBirth;
+            Address = address;
+            University = university;
+            FieldOfStudy = fieldOfStudy;
+            Title = title;
+        }
     }
 }

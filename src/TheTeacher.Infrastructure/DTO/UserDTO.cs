@@ -10,6 +10,6 @@ namespace TheTeacher.Infrastructure.Dto
         public string Username { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
-        public PersonalDetails Details {get; set; }
+        public PersonalDetails Details { get; set; }
     }
 }
