@@ -8,6 +8,7 @@ export class PersonalDetails {
     university: string;
     title: string;
     fieldOfStudy: string;
+    
 
     constructor() {
         

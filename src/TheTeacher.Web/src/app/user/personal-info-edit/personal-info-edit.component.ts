@@ -5,6 +5,7 @@ import { PersonalDetailsService } from '../personal-details.service';
 import { UpdatePersonalDetailsInfo } from '../commands/update-personal-details-info.command';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PersonalDetails } from '../../models/personal-details';
+import { UpdateImage } from '../commands/update-image.command';
 
 @Component({
     selector: 'app-personal-info-edit',
@@ -12,10 +13,16 @@ import { PersonalDetails } from '../../models/personal-details';
     styleUrls: ['./personal-info-edit.component.css']
 })
 export class PersonalInfoEditComponent implements OnInit {
+    editError: boolean;
+    editSuccess: boolean;
+    editErrorMessage: string;
+    editSuccessMessage: string;
     title: string = "Edit your personal info";
     editPersonalInfo: FormGroup;
+    editImage: FormGroup;
     datePickerConfig: Partial<BsDatepickerConfig>;
     personalDetails: PersonalDetails = new PersonalDetails();
+    image: Uint8Array;
 
 
     constructor(private fb: FormBuilder, private personalDetailsService: PersonalDetailsService, 
@@ -25,17 +32,21 @@ export class PersonalInfoEditComponent implements OnInit {
             { 
                 containerClass: 'theme-dark-blue',
                 showWeekNumbers: false,
-                dateInputFormat: 'DD/MM/YYYY'
+                dateInputFormat: 'YYYY-MM-DD'
             });
      }
 
     ngOnInit() {
         this.personalDetails = this.route.snapshot.data['personalDetails'];
+        this.image = this.route.snapshot.data['image'];
+        
+        // Change date format for sync with datepicker
+        let myDate = this.personalDetails.dateOfBirth.toString().substr(0,10);
 
         this.editPersonalInfo = this.fb.group({
             firstName: [this.personalDetails.firstName ],
             lastName: [this.personalDetails.lastName],
-            dateOfBirth: [this.personalDetails.dateOfBirth ],
+            dateOfBirth: [myDate ],
             address: this.fb.group({
                 street: [this.personalDetails.address.street],
                 zipcode: [this.personalDetails.address.zipcode],
@@ -45,7 +56,10 @@ export class PersonalInfoEditComponent implements OnInit {
             university: [this.personalDetails.university],
             fieldOfStudy: [this.personalDetails.fieldOfStudy],
             title: [this.personalDetails.title],
+        })
 
+        this.editImage = this.fb.group({
+            image: [null],
         })
     }
 
@@ -69,9 +83,9 @@ export class PersonalInfoEditComponent implements OnInit {
     }
 
     onSuccessUpdate(data: any) {
-        console.log(data);
-        // TODO: router navigate to profile
-        this.router.navigate(['profile']);
+        setTimeout(() => {
+            this.router.navigate(['profile']), 5000;
+        })
     }
 
     handleError(err: any) {

@@ -14,6 +14,6 @@ namespace TheTeacher.Infrastructure.Repositories
         Task AddAsync(User user);
         Task UpdatePasswordAsync(Guid userId, string newPassword, string newSalt); 
         Task UpdatePersonalDetailsAsync(Guid userId, PersonalDetails newPersonalDetails);
-        
+        Task UpdateImagePathAsync(Guid userId, string newImgFilePath);
     }
 }

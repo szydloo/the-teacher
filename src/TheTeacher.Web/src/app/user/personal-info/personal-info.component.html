@@ -2,8 +2,12 @@
     <div class="card-header row">
         <div class="container">
             <div class="row align-items-start">
-                <span class="offset-1"><h3 class="card-title">Personal details</h3></span>
-                <span class="offset-7"><i class="fas fa-flag fa-user-edit" (click)="editPersonalInfo()"></i></span>
+                <span class="offset-1">
+                    <h3 class="card-title">Personal details</h3>
+                </span>
+                <span class="offset-7">
+                    <i class="fas fa-flag fa-user-edit" (click)="editPersonalInfo()"></i>
+                </span>
             </div>
             <p>This is what's being displayed when user enters your profile</p>
         </div>
@@ -11,28 +15,33 @@
     <div class="card-body">
         <div *ngIf="usersPersonalDetails" class="container">
             <div class="row form-group">
+                <img [profile-image]="userId" style="width: 100px">
                 <!-- First Name -->
-                <div class="col-lg-2 col-md-2">
-                    <label class="myLabel control-label">First Name</label>
-                </div>
-                <div class="col-lg-4 col-md-10">
-                    {{usersPersonalDetails.firstName}}
-                </div>
-                <!-- Last Name -->
-                <div class="col-lg-2 col-md-2">
-                    <label class="myLabel control-label">Last Name</label>
-                </div>
-                <div class="col-lg-4 col-md-10">
-                    {{usersPersonalDetails.lastName}}
-                </div>
-            </div>
-            <!-- Date of Birth -->
-            <div class="row form-group">
-                <div class="col-lg-2 col-md-2">
-                    <label class="myLabel control-label" for="dateOfBirth">Date of Birth</label>
-                </div>
-                <div class="col-lg-10 col-md-10">
-                    {{usersPersonalDetails.dateOfBirth | date}}
+                <div class="offset-1 col-lg-8">
+                    <div class="row form-group">
+                        <div class="col-lg-3">
+                            <label class="myLabel control-label">First Name</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <b>{{usersPersonalDetails.firstName}}</b>
+                        </div>
+                        <!-- Last Name -->
+                        <div class="col-lg-3">
+                            <label class="myLabel control-label">Last Name</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <b>{{usersPersonalDetails.lastName}}</b>
+                        </div>
+                    </div>
+                    <!-- Date of Birth -->
+                    <div class="row form-group">
+                        <div class="col-lg-3 col-md-2">
+                            <label class="myLabel control-label" for="dateOfBirth">Date of Birth</label>
+                        </div>
+                        <div class="col-lg-9 col-md-10">
+                            <b>{{usersPersonalDetails.dateOfBirth | date}}</b>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Address -->
@@ -44,7 +53,7 @@
                     <label class="myLabel control-label">Street</label>
                 </div>
                 <div class="col-lg-10 col-md-10">
-                    {{usersPersonalDetails.address.street}}
+                    <b>{{usersPersonalDetails.address.street}}</b>
                 </div>
             </div>
             <div class="row form-group">
@@ -53,14 +62,14 @@
                     <label class="myLabel control-label">Zipcode</label>
                 </div>
                 <div class="col-lg-2 col-md-10">
-                    {{usersPersonalDetails.address.zipcode}}
+                    <b>{{usersPersonalDetails.address.zipcode}}</b>
                 </div>
                 <!-- Last Name -->
                 <div class="col-lg-1 col-md-2">
                     <label class="myLabel control-label">City</label>
                 </div>
                 <div class="col-lg-7 col-md-10">
-                    {{usersPersonalDetails.address.city}}
+                    <b>{{usersPersonalDetails.address.city}}</b>
                 </div>
             </div>
             <div class="row form-group">
@@ -68,7 +77,7 @@
                     <label class="myLabel control-label">Country</label>
                 </div>
                 <div class="col-lg-10 col-md-10">
-                    {{usersPersonalDetails.address.country}}
+                    <b>{{usersPersonalDetails.address.country}}</b>
                 </div>
             </div>
             <div class="row form-group">
@@ -79,7 +88,7 @@
                     <label class="myLabel control-label" for="universityId">University</label>
                 </div>
                 <div class="col-lg-10 col-md-10">
-                    {{usersPersonalDetails.university}}
+                    <b>{{usersPersonalDetails.university}}</b>
                 </div>
             </div>
             <div class="row form-group">
@@ -87,13 +96,13 @@
                     <label class="control-label" for="fieldOfStudyId">Field Of Study</label>
                 </div>
                 <div class="col-lg-6 col-md-10">
-                    {{usersPersonalDetails.fieldOfStudy}}
+                    <b>{{usersPersonalDetails.fieldOfStudy}}</b>
                 </div>
                 <div class="col-lg-1 col-md-2">
                     <label class="myLabel control-label" for="titleId">Title</label>
                 </div>
                 <div class="col-lg-3 col-md-10">
-                    {{usersPersonalDetails.title}}
+                    <b>{{usersPersonalDetails.title}}</b>
                 </div>
             </div>
         </div>

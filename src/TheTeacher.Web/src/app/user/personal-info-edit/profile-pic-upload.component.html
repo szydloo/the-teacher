@@ -1,0 +1,8 @@
+<div class="row">
+    <h4 class="offset-1 myLabel">Update Profile Pic</h4>
+    <br>
+    <div class="offset-1">
+        <input type="file" accept="image/*" (change)="onUpload($event.target.files)">
+    </div>
+    <button class="btn btn-secondary" (click)="saveImage()">Save Image</button>
+</div>

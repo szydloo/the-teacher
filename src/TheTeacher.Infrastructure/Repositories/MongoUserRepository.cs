@@ -48,6 +48,14 @@ namespace TheTeacher.Infrastructure.Repositories
             await Users.UpdateOneAsync(u => u.Id == userId, modificationUpdate);
         }
 
+        public async Task UpdateImagePathAsync(Guid userId, string newImgFilePath)
+        {
+            var modificationUpdate = Builders<User>.Update
+                .Set(u => u.Details.ImageFilePath, newImgFilePath);
+
+            await Users.UpdateOneAsync(u => u.Id == userId, modificationUpdate);
+        }
+
         private IMongoCollection<User> Users => _database.GetCollection<User>("users");
             
     }

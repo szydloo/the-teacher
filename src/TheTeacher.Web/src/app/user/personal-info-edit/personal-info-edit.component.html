@@ -8,6 +8,10 @@
     </div>
     <div class="card-body">
         <div class="container">
+            <app-profile-pic-upload></app-profile-pic-upload>
+        </div>
+        <br>
+        <div class="container">
             <form novalidate [formGroup]="editPersonalInfo" (ngSubmit)="submitPersonalInfo()">
                 <div class="row form-group">
                     <!-- First Name -->

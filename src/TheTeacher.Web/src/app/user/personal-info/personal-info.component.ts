@@ -11,14 +11,16 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PersonalInfoComponent implements OnInit {
     usersPersonalDetails: PersonalDetails;
+    userId: string;
 
     constructor(private userService: UserService, 
             private securityService: SecurityService, 
             private router: Router,
-            private route: ActivatedRoute) { }
+            private route: ActivatedRoute
+            ) { }
 
     ngOnInit() {
-        let userId = this.securityService.securityObject.userId;
+        this.userId = this.securityService.securityObject.userId;
 
         this.usersPersonalDetails = this.route.snapshot.data['personalDetails'];
     }
