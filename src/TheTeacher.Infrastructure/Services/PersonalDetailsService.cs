@@ -19,7 +19,7 @@ namespace TheTeacher.Infrastructure.Services
             _filesSettings = filesSettings;
         }
 
-        // TODO Encode bytes into Base64 string for less trafic on client -> api
+        // TODO Encode bytes into Base64
         public async Task UpdateImageAsync(Guid userId, byte[] image)
         {
             var user = await _userRepository.GetAsync(userId);
@@ -28,10 +28,11 @@ namespace TheTeacher.Infrastructure.Services
                 throw new ServiceException(ServiceErrorCodes.UserAlreadyExists, $"User with id: '{userId}' does not exist.");
             }
 
-// TODO fix _filesSettings.DefaultPath 
-            string path = "/TTFiles/" + userId; 
+            // TODO: fix _filesSettings.DefaultPath 
+            string path = "\\TTFiles\\" + userId; 
             Directory.CreateDirectory(path);
             path = Path.Combine(path, "profilePic.jpeg");
+
             if(user.Details.ImageFilePath == null) 
             { 
                 await UpdateFilePathAsync(userId, path);
@@ -40,7 +41,6 @@ namespace TheTeacher.Infrastructure.Services
             using(var fs = new FileStream(path, FileMode.OpenOrCreate))
             {
                 await fs.WriteAsync(image, 0, image.Length);
-
             }
         }
 
@@ -49,7 +49,8 @@ namespace TheTeacher.Infrastructure.Services
             await _userRepository.UpdateImagePathAsync(userId, filePath);
         }
 
-        public async Task<byte[]> GetImageAsync(Guid userId)
+        // Returns image bytes encoded into Base64 st
+        public async Task<string> GetImageAsync(Guid userId)
         {
             var user = await _userRepository.GetAsync(userId);
             byte[] result = null;
@@ -66,7 +67,7 @@ namespace TheTeacher.Infrastructure.Services
                     await fs.ReadAsync(result, 0, (int)fs.Length);
                 }
             }
-            return result;
+            return Convert.ToBase64String(result);
         }
 
         public async Task UpdatePersonalInfoAsync(Guid userId, Address address, DateTime dateOfBirth, string firstName, string lastName, string university, string fieldOfStudy, string title)

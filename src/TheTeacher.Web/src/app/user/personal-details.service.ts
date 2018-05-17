@@ -18,7 +18,7 @@ export class PersonalDetailsService {
     constructor(private client: HttpClient) {
     }
 
-    getImage(userId: string): Observable<Uint8Array> {
+    getImage(userId: string): Observable<any> {
         return this.client.get(this.url + "image/" + userId)
                         .catch((err) => this.handleError(err));
     }

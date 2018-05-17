@@ -15,7 +15,7 @@
     <div class="card-body">
         <div *ngIf="usersPersonalDetails" class="container">
             <div class="row form-group">
-                <img [profile-image]="userId" style="width: 100px">
+                <img *ngIf="imageBase64 != undefined" [src]="imagePath" style="width: 125px; height: 150px">
                 <!-- First Name -->
                 <div class="offset-1 col-lg-8">
                     <div class="row form-group">

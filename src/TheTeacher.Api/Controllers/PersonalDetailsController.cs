@@ -58,14 +58,14 @@ namespace TheTeacher.Api.Controllers
         [Route("image/{userId}")]
         public async Task<IActionResult> Get(string userId)
         {
-            var imageBytes = await _personalDetails.GetImageAsync(Guid.Parse(userId));
+            var imageBase64String = await _personalDetails.GetImageAsync(Guid.Parse(userId));
 
-            if(imageBytes == null) 
+            if(imageBase64String == null) 
             {
                 return NotFound();
             }
-
-            return StatusCode(StatusCodes.Status200OK, Convert.ToBase64String(imageBytes));
+            
+            return StatusCode(StatusCodes.Status200OK, Json(imageBase64String));
         }
     }
 }
