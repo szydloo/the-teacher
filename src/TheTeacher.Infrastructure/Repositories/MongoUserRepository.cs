@@ -43,8 +43,12 @@ namespace TheTeacher.Infrastructure.Repositories
         public async Task UpdatePersonalDetailsAsync(Guid userId, PersonalDetails newPersonalDetails) 
         {
             var modificationUpdate = Builders<User>.Update
-                .Set(u => u.Details, newPersonalDetails);
-
+                .Set(u => u.Details.Address, newPersonalDetails.Address)
+                .Set(u => u.Details.DateOfBirth, newPersonalDetails.DateOfBirth)
+                .Set(u => u.Details.University, newPersonalDetails.University)
+                .Set(u => u.Details.FieldOfStudy, newPersonalDetails.FieldOfStudy)
+                .Set(u => u.Details.Title, newPersonalDetails.Title);
+                
             await Users.UpdateOneAsync(u => u.Id == userId, modificationUpdate);
         }
 

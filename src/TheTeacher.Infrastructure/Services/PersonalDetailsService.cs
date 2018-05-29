@@ -33,10 +33,7 @@ namespace TheTeacher.Infrastructure.Services
             Directory.CreateDirectory(path);
             path = Path.Combine(path, "profilePic.jpeg");
 
-            if(user.Details.ImageFilePath == null) 
-            { 
-                await UpdateFilePathAsync(userId, path);
-            }
+            await UpdateFilePathAsync(userId, path);
 
             using(var fs = new FileStream(path, FileMode.OpenOrCreate))
             {
