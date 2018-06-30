@@ -10,6 +10,7 @@ namespace TheTeacher.Infrastructure.Repositories
         Task<User> GetAsync(Guid userId);
         Task<User> GetAsync(string email);
         Task<IEnumerable<User>> GetAllAsync();
+        Task<IEnumerable<User>> GetUsersForIdsListAsync(IEnumerable<Guid> userIds);
         Task RemoveAsync(Guid userId);
         Task AddAsync(User user);
         Task UpdatePasswordAsync(Guid userId, string newPassword, string newSalt); 

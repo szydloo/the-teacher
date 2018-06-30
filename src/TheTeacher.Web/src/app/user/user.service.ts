@@ -25,9 +25,17 @@ export class UserService {
     }
 
     getUser(userId: string): Observable<User> {
-        let getUserUrl = this.url + userId;
+        const getUserUrl = this.url + userId;
         return this.client.get<User>(getUserUrl)
                     .catch(this.handleError)
+    }
+
+    getUsersForIdsList(guids: string[]): Observable<User[]> {
+        const getUsersUrl = this.url + 'UsersForIds';
+        const body = guids;
+
+        return this.client.post<User[]>(getUsersUrl, body, this.options)
+                            .catch(this.handleError);
     }
 
     saveUser(registerUser: RegisterUserCommand): Observable<HttpResponse<RegisterUserCommand>> {
@@ -45,7 +53,6 @@ export class UserService {
     }
 
     handleError(err: HttpResponse<any>) {
-        
         return Observable.throw(err);
     }
 }

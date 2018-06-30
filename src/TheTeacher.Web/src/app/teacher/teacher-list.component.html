@@ -1,4 +1,4 @@
-<br>
+<!-- <br>
 <br>
 <div class="card">
     <div class="card-header">
@@ -52,7 +52,33 @@
             </tbody>
         </table>
     </div>
-</div>
+</div> -->
+test
+<mat-table [dataSource]="dataSource">
+  <!-- Name Column -->
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let tes"> {{ tes.email }} </td>
+    </ng-container>
+<!-- 
+     DateOfBirth Column 
+    <ng-container matColumnDef="dateOfBirth">
+        <th mat-header-cell *matHeaderCellDef> Date Of Birth </th>
+        <td mat-cell *matCellDef="let teacherGridModel"> {{ teacherGridModel.details.dateOfBirth }} </td>
+    </ng-container>
 
+     DateOfBirth Column 
+    <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let teacherGridModel"> {{ teacherGridModel.details.title }} </td>
+    </ng-container>
 
-<button type="button" class="btn btn-primary" (click)="navigateToRegisterTeacherForm()">Register as a Teacher</button>
+     DateOfBirth Column 
+    <ng-container matColumnDef="fieldOfStudy">
+        <th mat-header-cell *matHeaderCellDef> Field Of Study </th>
+        <td mat-cell *matCellDef="let teacherGridModel"> {{ teacherGridModel.details.fieldOfStudy }} </td>
+    </ng-container> -->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</mat-table>

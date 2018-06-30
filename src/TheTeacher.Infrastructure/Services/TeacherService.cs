@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using TheTeacher.Core.Domain;
@@ -31,7 +32,30 @@ namespace TheTeacher.Infrastructure.Services
 
             return _mapper.Map<TeacherDto>(teacher);
         }
+
+        public async Task<IEnumerable<TeacherDto>> GetTeachersForUsersIdsAsync(IEnumerable<Guid> userIds)
+        {
+            var teachers = await _teacherRepository.GetTeachersForUsersIds(userIds);
+            
+            return _mapper.Map<IEnumerable<TeacherDto>>(teachers);
+        }
         
+        public async Task<IEnumerable<TeacherGridModelItemDto>> GetTeachersGridModelAsync()
+        {
+            var teachersWithLessons = (await _teacherRepository.GetAllAsync()).ToList().Where(x => x.Lessons != null || x.Lessons.Count > 0);
+            var users = await _userRepository.GetUsersForIdsListAsync(teachersWithLessons.Select(x => x.UserID));
+            var gridModel = new List<TeacherGridModelItemDto>();
+
+            foreach(var user in users) 
+            {
+                var tempTeacher = teachersWithLessons.Where(x => x.UserID == user.Id).FirstOrDefault();
+                var t = _mapper.Map<Teacher, TeacherGridModelItemDto>(tempTeacher);
+
+                gridModel.Add(_mapper.Map<User, TeacherGridModelItemDto>(user, t));
+            }
+
+            return gridModel;
+        }
         public async Task<bool> IsTeacher(Guid userId)
         {
             var teacher = await _teacherRepository.GetAsync(userId);

@@ -23,6 +23,9 @@ namespace TheTeacher.Infrastructure.Repositories
         public async Task<IEnumerable<Teacher>> GetAllAsync()
         => await Teachers.AsQueryable().ToListAsync(); 
 
+        public async Task<IEnumerable<Teacher>> GetTeachersForUsersIds(IEnumerable<Guid> userIds)
+        => await Teachers.AsQueryable().Where(x => userIds.Contains(x.UserID)).ToListAsync();
+
         public async Task AddAsync(Teacher teacher)
         => await Teachers.InsertOneAsync(teacher);
 
@@ -45,6 +48,8 @@ namespace TheTeacher.Infrastructure.Repositories
             var lesson = teacher.GetLessons().ToList().FirstOrDefault(x => x.Subject.Name == name && x.Subject.Category == category && x.Grade == grade);
             return lesson;
         }
+
+
 
         private IMongoCollection<Teacher> Teachers => _database.GetCollection<Teacher>("teachers");
 

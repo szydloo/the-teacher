@@ -9,7 +9,6 @@ export class PersonalDetails {
     title: string;
     fieldOfStudy: string;
     
-
     constructor() {
         
         this.address = { street: "", zipcode: "", city: "", country: ""};

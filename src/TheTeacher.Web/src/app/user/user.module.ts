@@ -22,6 +22,7 @@ import { PersonalDetailsResolver } from './personal-details-resolver.service';
 import { PersonalDetailsService } from './personal-details.service';
 import { ProfileImageDirective } from './profile-image.directive';
 import { ProfilePicUploadComponent } from './personal-info-edit/profile-pic-upload.component';
+import { } from '@angular/material'
 
 @NgModule({
   imports: [

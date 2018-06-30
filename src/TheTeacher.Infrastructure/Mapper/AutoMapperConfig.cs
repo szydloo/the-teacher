@@ -14,6 +14,8 @@ namespace TheTeacher.Infrastructure.Mapper
                 cfg.CreateMap<TeacherDto,Teacher>();
                 cfg.CreateMap<SubjectDto,Subject>();
                 cfg.CreateMap<TimeRangeDto,TimeRange>();
+                cfg.CreateMap<Teacher,TeacherGridModelItemDto>();
+                cfg.CreateMap<User,TeacherGridModelItemDto>();
             })
             .CreateMapper();
     }

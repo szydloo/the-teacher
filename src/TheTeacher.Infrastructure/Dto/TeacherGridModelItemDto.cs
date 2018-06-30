@@ -1,14 +1,12 @@
-using System;
 using System.Collections.Generic;
-using Itenso.TimePeriod;
 using TheTeacher.Core.Domain;
 
 namespace TheTeacher.Infrastructure.Dto
 {
-    public class TeacherDto
+    public class TeacherGridModelItemDto
     {
-        public Guid UserID { get; set; }
-        public Guid Id { get; set; }
+        public string Email { get; set; }
+        public PersonalDetails Details { get; set; }
         public ISet<Lesson> Lessons { get; set; }
     }
 }

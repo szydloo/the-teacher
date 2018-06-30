@@ -40,6 +40,13 @@ namespace TheTeacher.Infrastructure.Services
             return _mapper.Map<UserDto>(user);
         }
 
+        public async Task<IEnumerable<UserDto>> GetUsersForIdsList(IEnumerable<Guid> userIds)
+        {
+            var users = await _userRepository.GetUsersForIdsListAsync(userIds);
+
+            return _mapper.Map<IEnumerable<UserDto>>(users);
+        }
+
         public async Task LoginAsync(string email, string password)
         {
             var user = await _userRepository.GetAsync(email);
@@ -99,6 +106,5 @@ namespace TheTeacher.Infrastructure.Services
             var newHashedPasword = _encrypter.GetHash(newPassword, newSalt);
             await _userRepository.UpdatePasswordAsync(userId, newHashedPasword, newSalt);
         }
-
     }
 }

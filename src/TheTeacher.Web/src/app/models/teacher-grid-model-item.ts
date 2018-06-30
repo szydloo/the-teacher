@@ -1,9 +1,8 @@
 import { PersonalDetails } from "./personal-details";
+import { Lesson } from "./lesson";
 
-export interface User {
+export class TeacherGridModelItem {
     email: string;
-    username: string;
-    password: string;
-    role: string;
     details: PersonalDetails;
+    lessons: Lesson[];
 }

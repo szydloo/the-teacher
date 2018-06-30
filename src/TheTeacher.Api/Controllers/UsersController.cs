@@ -8,6 +8,8 @@ using TheTeacher.Infrastructure.Commands;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using NLog;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace TheTeacher.Api.Controllers
 {
@@ -38,6 +40,17 @@ namespace TheTeacher.Api.Controllers
         //     }
         //     else return Json(user);
         // }
+
+        [HttpPost("UsersForIds")]
+        public async Task<IActionResult> Post([FromBody] IList<Guid> usersGuids)
+        {
+            var users = await _userService.GetUsersForIdsList(usersGuids);
+            if(users == null)
+            {
+                return NotFound();
+            }
+            else return Json(users);
+        }
 
         [Authorize]
         [HttpGet("{userId}")]

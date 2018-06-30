@@ -9,6 +9,8 @@ namespace TheTeacher.Infrastructure.Services
     {
         Task<UserDto> GetAsync(string email);
         Task<UserDto> GetAsync(Guid userId);
+
+        Task<IEnumerable<UserDto>> GetUsersForIdsList(IEnumerable<Guid> userIds);
         Task RegisterAsync(Guid id, string email, string password, string username, string role);        
         Task LoginAsync(string email, string password);
         Task<IEnumerable<UserDto>> BrowseAsync();        

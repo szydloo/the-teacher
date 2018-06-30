@@ -9,6 +9,8 @@ namespace TheTeacher.Infrastructure.Repositories
     {
         Task<Teacher> GetAsync(Guid userId);
         Task<IEnumerable<Teacher>> GetAllAsync();
+
+        Task<IEnumerable<Teacher>> GetTeachersForUsersIds(IEnumerable<Guid> userIds);
         Task RemoveAsync(Guid userId);
         Task AddAsync(Teacher teacher);
         Task UpdateAsync(Teacher teacher);

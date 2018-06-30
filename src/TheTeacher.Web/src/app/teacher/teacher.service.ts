@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaderResponse, HttpHeaders, HttpRes
 
 import { Teacher } from '../models/teacher';
 import { RegisterTeacherCommand } from '../models/commands/teacher/register-teacher';
+import { TeacherGridModelItem } from '../models/teacher-grid-model-item';
 
 
 @Injectable()
@@ -16,6 +17,13 @@ export class TeacherService {
     getTeachers(): Observable<Teacher[]> {
         return this._client.get<Teacher[]>(this.url)
                     .catch(this.handleError);
+    }
+    
+    getTearchersGridModel(): Observable<TeacherGridModelItem[]> {
+        let urlGrid = this.url + 'GetTeachersGridModel';
+
+        return this._client.get<TeacherGridModelItem[]>(urlGrid)
+                            .catch(this.handleError);
     }
 
     saveTeacher(registerTeacher: RegisterTeacherCommand): Observable<HttpResponse<any>> {

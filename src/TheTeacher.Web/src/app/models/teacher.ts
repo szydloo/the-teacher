@@ -1,9 +1,8 @@
 import { Lesson } from './lesson';
 
 
-export class Teacher {
+export interface Teacher {
     id: string;
+    userID: string;
     lessons: Lesson[];
-    address: string;
-    fullname: string;
 }

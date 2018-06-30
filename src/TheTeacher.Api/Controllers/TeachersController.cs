@@ -38,6 +38,14 @@ namespace TheTeacher.Api.Controllers
             return Json(teacher);
         }
 
+        [HttpGet("GetTeachersGridModel")]
+        public async Task<IActionResult> GetTeachersGridModel() 
+        {
+            var teachersGridModel = await _teacherService.GetTeachersGridModelAsync();
+
+            return Json(teachersGridModel);
+        }
+
         [Authorize] 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateTeacher command)
@@ -55,5 +63,6 @@ namespace TheTeacher.Api.Controllers
         }
         
 
+        
     }
 }
