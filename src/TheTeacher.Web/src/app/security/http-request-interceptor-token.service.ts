@@ -1,5 +1,5 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { SecurityService } from './security.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';

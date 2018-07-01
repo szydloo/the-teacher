@@ -1,5 +1,6 @@
+import {throwError as observableThrowError,  Observable} from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpErrorResponse, HttpHeaderResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Subject } from '../../models/subject';
 
@@ -12,11 +13,11 @@ export class SubjectProviderService {
 
     browseSubjects(): Observable<Subject[]> {
         return this._client.get<Subject[]>(this.url)
-                            .catch(this.handleError);
+                            .pipe(catchError(this.handleError));
     }
 
     handleError(err: HttpResponse<any>) {
         
-        return Observable.throw(err);
+        return observableThrowError(err);
     }
 }

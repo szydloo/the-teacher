@@ -1,14 +1,11 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpResponse, HttpHeaders } from '@angular/common/http';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 import { Jwt } from '../models/security/jwt';
 import { LoginUserCommand } from '../models/commands/user/login-user-command';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class LoginService {
@@ -23,11 +20,12 @@ export class LoginService {
         };
 
         return this.client.post<Jwt>(this.url, body, options)
-                        .catch(this.handleError);
+                        .pipe(catchError(this.handleError));
+
     }
 
-    private handleError(err: HttpResponse<any>): ErrorObservable {
-        return Observable.throw(err);
+    private handleError(err: HttpResponse<any>) {
+        return observableThrowError(err);
     }
 
 }

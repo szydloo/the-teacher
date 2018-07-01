@@ -1,6 +1,7 @@
 import { Directive, OnInit, Input} from '@angular/core';
 import { DomSanitizer} from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Directive({
   selector: '[profile-image]',
@@ -19,7 +20,7 @@ export class ProfileImageDirective implements OnInit {
 
     ngOnInit() {        
         this.httpClient.get(this.url + this.profileId)
-        .map(image => image.toString())
+        .pipe(map(image => image.toString()))
         .subscribe(
             data => {
             this.imageData = 'data:image/jpeg;base64,' + data;

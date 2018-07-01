@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataSource, CollectionViewer } from '@angular/cdk/collections';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 import { TeacherService } from './teacher.service';
 import { Teacher } from '../models/teacher';
@@ -38,7 +38,7 @@ export class TeacherDataSource extends DataSource<any> {
 
     connect(): Observable<any> {
 
-        return Observable.of({email: 'awdawd@awd.com'});
+        return of({email: 'awdawd@awd.com'});
         // this._teacherService.getTearchersGridModel();
     }
     disconnect(collectionViewer: CollectionViewer): void {

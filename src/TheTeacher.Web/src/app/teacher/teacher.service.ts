@@ -1,5 +1,6 @@
+import { throwError as observableThrowError,  Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpErrorResponse, HttpHeaderResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { Teacher } from '../models/teacher';
@@ -16,25 +17,25 @@ export class TeacherService {
 
     getTeachers(): Observable<Teacher[]> {
         return this._client.get<Teacher[]>(this.url)
-                    .catch(this.handleError);
+                        .pipe(catchError(this.handleError));
     }
     
     getTearchersGridModel(): Observable<TeacherGridModelItem[]> {
         let urlGrid = this.url + 'GetTeachersGridModel';
 
         return this._client.get<TeacherGridModelItem[]>(urlGrid)
-                            .catch(this.handleError);
+                        .pipe(catchError(this.handleError));
     }
 
-    saveTeacher(registerTeacher: RegisterTeacherCommand): Observable<HttpResponse<any>> {
+    saveTeacher(registerTeacher: RegisterTeacherCommand): Observable<any> {
         const body = JSON.stringify(registerTeacher);
 
         return this._client.post(this.url, body, this.options)
-                            .catch(this.handleError);
+                            .pipe(catchError(this.handleError));
     }
 
     handleError(err: HttpResponse<any>) {
         
-        return Observable.throw(err);
+        return observableThrowError(err);
     }
 }

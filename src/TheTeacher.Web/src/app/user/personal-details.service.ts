@@ -1,12 +1,10 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpResponse, HttpHeaders } from '@angular/common/http';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
 import { UpdatePersonalDetailsInfo } from './commands/update-personal-details-info.command';
 import { UpdateImage } from './commands/update-image.command';
+import { catchError, map } from 'rxjs/operators';
 
 
 
@@ -20,15 +18,15 @@ export class PersonalDetailsService {
 
     getImage(userId: string): Observable<any> {
         return this.client.get(this.url + "image/" + userId)
-                        .catch((err) => this.handleError(err));
+                        .pipe(catchError((err) => this.handleError(err)));
     }
 
-    updatePersonalDetailsInfo(command: UpdatePersonalDetailsInfo): Observable<HttpResponse<UpdatePersonalDetailsInfo>> {
+    updatePersonalDetailsInfo(command: UpdatePersonalDetailsInfo): Observable<UpdatePersonalDetailsInfo> {
         let body = JSON.stringify(command);
         let infoUrl = "";
         infoUrl = this.url + "info";
-        return this.client.put(infoUrl, body, this.options)
-                    .catch((err) => this.handleError(err));
+        return this.client.put<UpdatePersonalDetailsInfo>(infoUrl, body, this.options)
+                    .pipe(catchError((err) => this.handleError(err)));
     }
 
     updateImage(fileToUpload: File) : Observable<boolean> {
@@ -40,14 +38,13 @@ export class PersonalDetailsService {
         let updateUrl = "";
         updateUrl = this.url + "image";
         
-        return this.client.put(updateUrl, formData,)
-                        .map(() => { return true; })
-                        .catch((err) => this.handleError(err));
+        return this.client.put<boolean>(updateUrl, formData,)
+                        .pipe(map(() => { return true; }), catchError((err) => this.handleError(err)));
     }
 
     handleError(err: HttpResponse<any>) {
         
-        return Observable.throw(err);
+        return observableThrowError(err);
     }
 }
 

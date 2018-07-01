@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import 'rxjs/add/operator/debounceTime';
+import { debounceTime } from 'rxjs/operators';
 
 import { SecurityService } from '../../security/security.service';
 import { UserService } from '../user.service';
@@ -34,7 +34,7 @@ constructor(private fb: FormBuilder, private securityService: SecurityService, p
         });
         
         const confPasswordControl = this.editPasswordForm.get('passwordGroup.confirmPassword')
-                                                            .valueChanges.debounceTime(1000).subscribe(() => this.timeToCheck = true);
+                                                            .valueChanges.pipe(debounceTime(1000)).subscribe(() => this.timeToCheck = true);
     }
 
     changePassword() {
